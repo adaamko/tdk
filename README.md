@@ -1,1 +1,1 @@
-# tdk
+# TDK dolgozat.
