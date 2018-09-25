@@ -19,22 +19,20 @@ sentences, then we can define the whole process as one complex graph transformat
 
 %--------------------------------------------------------------------------------------
 % machine comprehension
-Explicit representations of natural language semantics
-are rarely used in state of the art systems
+Representations of natural language semantics
+are rarely used explicitly in state of the art systems
 for popular semantics tasks such as measuring semantic
-similarity or machine comprehension. These systems rely on
-word embeddings
-as the sole representation of word meaning.
+similarity or machine comprehension. These systems mostly use word embeddings as representation of word meaning.
 
 In this paper we use graphical representations as simple but powerful tools for recognizing entailment and we describe a method using semantic parsing system \texttt{4lang} (Recski:2016) and applying it on
-he 2018 Semeval Task \textit{Machine comprehension using commonsense
+the 2018 Semeval Task \textit{Machine comprehension using commonsense
 knowledge}. This task 
 requires participants
 to train systems that can choose the correct
 answer to simple multiple choice questions
 based on short passages describing simple chains
 of events. Data for both training and testing is extracted
-from the MCScript dataset (Ostermann
+from the \texttt{MCScript} dataset (Ostermann
 et al., 2018). The top two systems, \texttt{HFL-RC} (Chen
 et al., 2018) and \texttt{Yuanfudao}
 achieved accuracy scores of $84.15\%$ and $83.95\%$
@@ -46,9 +44,9 @@ First we will present a strong baseline on this task using only semantic graphs 
 a description of a state-of-the art system \texttt{Yuanfudao} (Wang et al., 2018) and our experiments with it where
 %--------------------------------------------------------------------------------------
 % rendszer, amivel foglalkoztunk
-we used semantic graphs for augmentation, since the source code is publicly
+we used our baseline as an extra feature for improving the neural network. The choice of the system was obvious, because the source code is publicly
 available
-and since it already employs successfully
+and it already employs successfully
 a knowledge base representing semantic
 relationships among pairs of words \textit{ConceptNet}.
 Our results
