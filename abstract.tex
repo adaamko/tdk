@@ -2,9 +2,24 @@
 % Abstract in hungarian
 %----------------------------------------------------------------------------
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
+%--------------------------------------------------------------------------------------
+% semantic parsing, graftranszformacio altalaban
+A szemantikus elemző fő feladata, hogy automatikusan épít szemantikai reprezentációt a bemenet alapján, s így modellezhetjük a nyers szöveg jelentéstartalmát.
+Amennyiben a jelentést fogalmak irányított gráfjaként modellezzük és felépíthetjük ezeket szintaktikai fákból, melyek a mondatok struktúráját ábrázolják, akkor az egész folyamat definiálható, mint egy komplex gráftranszformáció.
 
+%--------------------------------------------------------------------------------------
+% machine comprehension
+A természetes nyelv szemantikájának reprezentációját ritkán használják explicite a state-of-the art rendszerekben népszerű szemantikai feladatokra, mint a szemantikai hasonlóság mérése, vagy a gépi szövegértés. Ezek a rendszerek többnyire szó embeddingeket használnak a szavak jelentésének ábrázolására.
+Ebben a dolgozatban mi gráf reprezentációkat és transzformációkat használunk, mint egyszerű ám hatékony eszközök az oksági viszony felismerésére, valamint leírunk egy módszert a \texttt{4lang} szemantikus elemzőrendszer (Recski:2016) használatára a 2018-as Semeval Task \textit{Machine comprehension using commonsense knowledge} kapcsán. Ez a feladat azt kívánja a résztvevőktől, hogy olyan rendszereket tanítsanak fel, amelyek ki tudják választani a megfelelő választ az egyszerű, több válaszlehetőséget kínáló kérdéseknél rövid eseményleíró szövegek elolvasása után. A tanító és teszt adat az \texttt{MCScript} adathalmaz (Ostermann et al., 2018) részhalmazából lett kinyerve.
+A két legjobb rendszer, \texttt{HFL-RC} (Chen et al., 2018) és \texttt{Yuanfudao} egyenként $84,15\%$ és $83,95\%$ pontosságot ért el a teszt adaton.
 
-
+%--------------------------------------------------------------------------------------
+% baseline
+Először bemutatunk egy hatékony baselinet ezen a feladaton csupán a szemantikus gráfok és a köztük lévő hasonlóságok felhasználásával. Ezt követően leírjuk a \texttt{Yuanfudao} (Wang et al., 2018) state-of-the art rendszert és az ezzel végzett kísérletezéseinket, amelyek során
+%--------------------------------------------------------------------------------------
+% rendszer, amivel foglalkoztunk
+a baselineunkat extra featureként felhasználva javítottunk a neurális hálón. A rendszer kiválasztása magától értetődő volt, mivel a forráskód nyilvánosan elérhető és már sikeresen alkalmazott tudás alapú reprezentációt a szópárok közötti szemantikai kapcsolatokra, a \textit{ConceptNet}et.
+Eredményeink azt mutatják, hogy ezzel a módosítással $0,5\%$ százalékpont növekedés érhető el és a \textit{ConceptNet} helyettesíthető a mi szemantikus modellünkkel.
 \vfill
 
 %----------------------------------------------------------------------------
@@ -14,29 +29,14 @@
 %--------------------------------------------------------------------------------------
 % semantic parsing, graftranszformacio altalaban
 The main task of semantic parsing is to automatically build semantic representation from the input, so we can model the meaning
-of raw texts. If we model meaning as directed graphs of concept and we can build them from syntax trees that represents the structure of 
+of raw texts. If we model meaning as directed graphs of concept and we can build them from syntax trees that represent the structure of 
 sentences, then we can define the whole process as one complex graph transformation.
 
 %--------------------------------------------------------------------------------------
 % machine comprehension
-Representations of natural language semantics
-are rarely used explicitly in state of the art systems
-for popular semantics tasks such as measuring semantic
-similarity or machine comprehension. These systems mostly use word embeddings as representation of word meaning.
+Representations of natural language semantics are rarely used explicitly in state-of-the art systems for popular semantics tasks such as measuring semantic similarity or machine comprehension. These systems mostly use word embeddings as representation of word meaning.
 
-In this paper we use graphical representations and transformations as simple but powerful tools for recognizing entailment and we describe a method using semantic parsing system \texttt{4lang} (Recski:2016) and applying it on
-the 2018 Semeval Task \textit{Machine comprehension using commonsense
-knowledge}. This task 
-requires participants
-to train systems that can choose the correct
-answer to simple multiple choice questions
-based on short passages describing simple chains
-of events. Data for both training and testing is extracted
-from the \texttt{MCScript} dataset (Ostermann
-et al., 2018). The top two systems, \texttt{HFL-RC} (Chen
-et al., 2018) and \texttt{Yuanfudao}
-achieved accuracy scores of $84.15\%$ and $83.95\%$
-on the test data, respectively.
+In this paper we use graphical representations and transformations as simple but powerful tools for recognizing entailment and we describe a method using semantic parsing system \texttt{4lang} (Recski:2016) and applying it on the 2018 Semeval Task \textit{Machine comprehension using commonsense knowledge}. This task requires participants to train systems that can choose the correct answer to simple multiple choice questions based on short passages describing simple chains of events. Data for both training and testing is extracted from the \texttt{MCScript} dataset (Ostermann et al., 2018). The top two systems, \texttt{HFL-RC} (Chen et al., 2018) and \texttt{Yuanfudao} achieved accuracy scores of $84.15\%$ and $83.95\%$ on the test data, respectively.
 
 %--------------------------------------------------------------------------------------
 % baseline
@@ -44,13 +44,7 @@ First we will present a strong baseline on this task using only semantic graphs 
 a description of a state-of-the art system \texttt{Yuanfudao} (Wang et al., 2018) and our experiments with it where
 %--------------------------------------------------------------------------------------
 % rendszer, amivel foglalkoztunk
-we used our baseline as an extra feature for improving the neural network. The choice of the system was obvious, because the source code is publicly
-available
-and it already employs successfully
-a knowledge base representing semantic
-relationships among pairs of words \textit{ConceptNet}.
-Our results
-suggest that these features achieve a .5
-percentage point improvement, and the \textit{ConceptNet} could be replaced by our semantic model.
+we used our baseline as an extra feature for improving the neural network. The choice of the system was obvious, because the source code is publicly available and it already employs successfully a knowledge base representing semantic relationships among pairs of words, \textit{ConceptNet}.
+Our results suggest that these features achieve a .5 percentage point improvement, and the \textit{ConceptNet} could be replaced by our semantic model.
 \vfill
 
