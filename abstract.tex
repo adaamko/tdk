@@ -4,12 +4,15 @@
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
 %--------------------------------------------------------------------------------------
 % semantic parsing, graftranszformacio altalaban
-A szemantikus elemző fő feladata, hogy automatikusan épít szemantikai reprezentációt a bemenet alapján, s így modellezhetjük a nyers szöveg jelentéstartalmát.
-Amennyiben a jelentést fogalmak irányított gráfjaként modellezzük és felépíthetjük ezeket szintaktikai fákból, melyek a mondatok struktúráját ábrázolják, akkor az egész folyamat definiálható, mint egy komplex gráftranszformáció.
+A szemantikai elemzés célja, hogy természetes nyelvi adathoz
+készíthessünk szemantikai reprezentációt, így tudjuk modellezni a szöveg jelentését. Ha a nyelvi
+jelentést fogalmak irányított gráfjaival reprezentáljuk, ezeket pedig a mondat szintaktikai
+szerkezetét reprezentáló fákból kell előállítanunk, akkor a teljes feladat egyetlen komplex gráftranszformációként
+definiálható.
 
 %--------------------------------------------------------------------------------------
 % machine comprehension
-A természetes nyelv szemantikájának reprezentációját ritkán használják explicite a state-of-the art rendszerekben népszerű szemantikai feladatokra, mint a szemantikai hasonlóság mérése, vagy a gépi szövegértés. Ezek a rendszerek többnyire szó embeddingeket használnak a szavak jelentésének ábrázolására.
+A természetes nyelv szemantikájának reprezentációját ritkán használják közvetlenül a state-of-the art rendszerekben népszerű szemantikai feladatokra, mint a szemantikai hasonlóság mérése, vagy a gépi szövegértés. Ezek a rendszerek többnyire szó embeddingeket használnak a szavak jelentésének ábrázolására.
 Ebben a dolgozatban mi gráf reprezentációkat és transzformációkat használunk, mint egyszerű ám hatékony eszközök az oksági viszony felismerésére, valamint leírunk egy módszert a \texttt{4lang} szemantikus elemzőrendszer (Recski:2016) használatára a 2018-as Semeval Task \textit{Machine comprehension using commonsense knowledge} kapcsán. Ez a feladat azt kívánja a résztvevőktől, hogy olyan rendszereket tanítsanak fel, amelyek ki tudják választani a megfelelő választ az egyszerű, több válaszlehetőséget kínáló kérdéseknél rövid eseményleíró szövegek elolvasása után. A tanító és teszt adat az \texttt{MCScript} adathalmaz (Ostermann et al., 2018) részhalmazából lett kinyerve.
 A két legjobb rendszer, \texttt{HFL-RC} (Chen et al., 2018) és \texttt{Yuanfudao} egyenként $84,15\%$ és $83,95\%$ pontosságot ért el a teszt adaton.
 
