@@ -4,25 +4,24 @@
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
 %--------------------------------------------------------------------------------------
 % semantic parsing, graftranszformacio altalaban
-A szemantikai elemzés célja, hogy természetes nyelvi adathoz
-készíthessünk szemantikai reprezentációt, így tudjuk modellezni a szöveg jelentését. Ha a nyelvi
-jelentést fogalmak irányított gráfjaival reprezentáljuk, ezeket pedig a mondat szintaktikai
-szerkezetét reprezentáló fákból kell előállítanunk, akkor a teljes feladat egyetlen komplex gráftranszformációként
-definiálható.
+A szemantikai elemzés célja, hogy természetes nyelvi adathoz készíthessünk szemantikai reprezentációt, 
+így tudjuk modellezni a szoveg jelentését. Ha a nyelvi jelentést fogalmak irányított gráfjaival reprezentáljuk,
+ezeket pedig a mondat szintaktikai szerkezetét reprezentáló fákból kell előállítanunk, akkor a teljes feladat egyetlen komplex
+gráf-transzformációként definiálható.
 
-%--------------------------------------------------------------------------------------
-% machine comprehension
-A természetes nyelv szemantikájának reprezentációját ritkán használják közvetlenül a state-of-the art rendszerekben népszerű szemantikai feladatokra, mint a szemantikai hasonlóság mérése, vagy a gépi szövegértés. Ezek a rendszerek többnyire szó embeddingeket használnak a szavak jelentésének ábrázolására.
-Ebben a dolgozatban mi gráf reprezentációkat és transzformációkat használunk, mint egyszerű ám hatékony eszközök az oksági viszony felismerésére, valamint leírunk egy módszert a \texttt{4lang} szemantikus elemzőrendszer (Recski:2016) használatára a 2018-as Semeval Task \textit{Machine comprehension using commonsense knowledge} kapcsán. Ez a feladat azt kívánja a résztvevőktől, hogy olyan rendszereket tanítsanak fel, amelyek ki tudják választani a megfelelő választ az egyszerű, több válaszlehetőséget kínáló kérdéseknél rövid eseményleíró szövegek elolvasása után. A tanító és teszt adat az \texttt{MCScript} adathalmaz (Ostermann et al., 2018) részhalmazából lett kinyerve.
-A két legjobb rendszer, \texttt{HFL-RC} (Chen et al., 2018) és \texttt{Yuanfudao} egyenként $84,15\%$ és $83,95\%$ pontosságot ért el a teszt adaton.
+A népszerű szemantikai feladatokra, mint a szemantikai hasonlóság mérése, vagy a gépi szövegértés, ritkán használják a természetes
+nyelv szemantikájának a reprezentációját, főleg a state-of-the art rendszerekben. Ezek a rendszerek többnyire szó embeddingeket használnak a szavak jelentésének
+ábrázolására, amik a szavak jelentését legfeljebb néhány száz dimenziós valós vektorként ábrázolják.
 
-%--------------------------------------------------------------------------------------
-% baseline
-Először bemutatunk egy hatékony baselinet ezen a feladaton csupán a szemantikus gráfok és a köztük lévő hasonlóságok felhasználásával. Ezt követően leírjuk a \texttt{Yuanfudao} (Wang et al., 2018) state-of-the art rendszert és az ezzel végzett kísérletezéseinket, amelyek során
-%--------------------------------------------------------------------------------------
-% rendszer, amivel foglalkoztunk
-a baselineunkat extra featureként felhasználva javítottunk a neurális hálón. A rendszer kiválasztása magától értetődő volt, mivel a forráskód nyilvánosan elérhető és már sikeresen alkalmazott tudás alapú reprezentációt a szópárok közötti szemantikai kapcsolatokra, a \textit{ConceptNet}et.
-Eredményeink azt mutatják, hogy ezzel a módosítással $0,5\%$ százalékpont növekedés érhető el és a \textit{ConceptNet} helyettesíthető a mi szemantikus modellünkkel.
+Ebben a dolgozatban mi gráf-reprezentációkat és ezek transzformációit használjuk, mint egyszerű, ám hatékony
+eszközök a következmény viszony felismerésére, valamint leírunk egy módszert a \texttt{4lang} szemantikus elemzőrendszer\cite{Recski:2016d} használatára a 2018-as \textit{Semeval Task Machine comprehension using commonsense knowledge}\footnote{\url{https://competitions.codalab.org/competitions/17184}} kapcsán.
+Ez a feladat azt kívánja a résztvevőktől, hogy olyan rendszereket tanítsanak fel, amelyek ki tudják választani a megfelelő választ az egyszerűbb, több válaszlehetőséget kínáló
+kérdéseknél rövid eseményleíró szövegek elolvasása után. A tanító és teszt adat az \texttt{MCSript}\cite{Ostermann:2018} adathalmaz részhalmazából lett kinyerve. A két legjobb rendszer, \texttt{HFL-RC}\cite{Chen:2018} és Yuanfudao\cite{Wang:2018} rendre 84,15\% és 83,95\% pontosságot ért el a teszt adaton.
+
+Először bemutatunk egy hatékony baseline-t ezen a feladaton csupán a szemantikus gráfok és a köztük lévő hasonlóságok felhasználásával. Ezt követően leírjuk a Yuanfudao state-of-the art
+rendszert és az ezzel végzett kísérletezéseinket, amelyek során a baseline-unkat extra feature-ként felhasználva javítottunk a rendszer pontosságán.
+Ennek a kiválasztása magától értetődő volt, mivel a forráskód nyilvánosan elérhető, és már sikeresen alkalmazott tudás alapú reprezentációt a szópárok közötti szemantikai kapcsolatokra,
+a \textit{ConceptNet}-et. Eredményeink azt mutatják, hogy ezzel a módosítással \texttt{0.5} százalékpont növekedés érhető el, és a \textit{ConceptNet} helyettesíthető a mi szemantikus modellünkkel. 
 \vfill
 
 %----------------------------------------------------------------------------
