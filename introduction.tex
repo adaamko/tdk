@@ -1,0 +1,56 @@
+%----------------------------------------------------------------------------
+\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
+%----------------------------------------------------------------------------
+\section{Natural Language Processing}
+While computers can be easily programmed to understand structured data, such as tables and spreadsheets, it can be rather challenging for them
+to understand human communication. Because there is a vast difference in the magnitude of the unstructured data compared to the structured ones, there is a high demand
+for tools, that can deal with raw text. Thats where NLP comes in. It contains high variety of tools, that we have to use, when we need to deal with natural input.
+
+Every day, we come into contact with human communication, we say a lot of words to other people, and they try to interpret them even when the context of the saying 
+isn't necesseraily complete. The listeners can use their common knowledge to fill the needed information. We resolve ambiguities, misunderstanding, and can even understand words 
+we have never heard before just from the context of the communication.
+Even though these tasks are trivial for us, for a computer it can be really hard.
+
+%--------------------------------------------------------------------------------------
+% egyszer� multtol jelenig bevezeto
+The interest in NLP research began in the 1950s, the early phase was mainly focused on ML (Machine Translation), because after the World War II, people
+recognised the importance of the translation from one language to another, and hoped to do it automatically.
+However ML is still a very difficult nowadays, so these researches discovered early the main challenges of the syntactic and semantic parsing.
+As time passed, researches embraced new areas of NLP as more advanced technology and knowledge became available. Now that we live in a world where
+computers and smartphones, collecting data became incredibly easy, as a result, statistical NLP drew attention because these models thrives off big data neural, but one cannot ignore 
+simple rule based methods, which can also be very powerful method, especially using them as a hybrid model with statistical methods.
+%--------------------------------------------------------------------------------------
+% r�vid nlp pipeline
+
+Building NLP applications requires many levels of analysis.
+The typical pipeline structured as follows:
+\begin{itemize}
+	\item First we need to tokenize our input text, which means breaking up the text into meaningful elements, especially into words
+    \item After we tokenized our text, we need word analysis called \texttt{morphology}, which is concerned with the structure of words.
+    \item Part of speech explains how a word is used in a sentence, and tagging is a process marking words to its particular part of speech.
+    \item The main task of syntactic parsing is to analyze the grammatical structure of a sentence. Given a set of words, a parser forms units (subjects, verbs, etc..) according to some grammatical formalism.
+    there are two main type of syntactic parsers:
+    \begin{itemize}
+        \item Consituency parsers produce trees, that represents the grammatical structure.
+        \item Dependency parsers are the more popular nowadays. They represent the structure of a sentence as a dependency tree.
+    \end{itemize}
+    \item At this point we have various ways to analyze a text, but without modeling its \texttt{meaning}. Semantic is the study of meaning, and semantic parsing is a task to find a representation and assign it to the text. This task will be the main topic of my work.
+\end{itemize}
+
+%--------------------------------------------------------------------------------------
+% semantic parsing bevezeto + modszerek + alkalmazasok jelenleg
+\section{Computational semantics}
+We use the word semantics in our ordinary language, when we want to discuss the meaning or an interpretation of a group of words within the boundaries of a certain context.
+So we say that the semantics is the study of meaning, and if we talk about NLP it usually refers to the meaning of linguistic utterances.
+The semantics of an utterance is closely connected to many scientific fields, such as philosophy, logic or knowledge representation.
+Applications covered in this course so far are all possible without any explicit representation of what certain linguistic structures mean.
+Even complex processes like machine translation can be ignorant of what each word, phrase or sentence means, i.e. what information it conveys to speakers of the language.
+Many applications, even complex ones can be ignorant of what the words, sentences mean, like syntactic parsing, or even machine translation. Other tasks rely heavily on semantics, they are the biggest tasks, where semantic technologies need to be used.
+\begin{itemize}
+  \item \textbf{Question answering} is the process of generating meaningful answers to the user's question, using some kind of knowledge.
+  \item \textbf{Recognizing entailment} is whether a statement implies another or not, it is closely connected to \textbf{machine comprehension}, which is the main focus of our work.
+  \item \textbf{Personal assistants} such as Apple Siri or Alexa, they are heavily widespread nowadays, and every one of us has one with their phone.
+  \item \textbf{Chatbots} are systems, that could somewhat carry a human-like conversation.
+\end{itemize}
+
+
