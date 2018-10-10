@@ -15,7 +15,7 @@
 %\usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{anysize}
-\usepackage[magyar,english]{babel}
+\usepackage[magyar]{babel}
 \usepackage{sectsty}
 \usepackage{setspace}  % Ettol a tablazatok, abrak, labjegyzetek maradnak 1-es sorkozzel!
 \usepackage[hang]{caption}
@@ -25,11 +25,10 @@
 % Main variables
 %--------------------------------------------------------------------------------------
 \newcommand{\vikszerzo}{Kovács Ádám}
-\newcommand{\vikszerzos}{Gémes Andrea Kinga}
 \newcommand{\vikkonzulens}{Dr.~Recski Gábor}
 \newcommand{\vikcim}{Semantic parsing with graph transformations}
 \newcommand{\viktanszek}{Department of Automation and Applied Informatics}
-\newcommand{\vikdoktipus}{Scienfitic Students' Assosiactions report}
+\newcommand{\vikdoktipus}{Master's Thesis}
 \newcommand{\vikdepartmentr}{Kovács Ádám}
 
 %--------------------------------------------------------------------------------------
@@ -108,13 +107,14 @@
 \DeclareMathOperator{\rot}{rot}
 \definecolor{lightgray}{rgb}{0.95,0.95,0.95}
 
-\author{\vikszerzo \and \vikszerzos}
+\author{\vikszerzo}
 \title{\viktitle}
 \includeonly{
 	titlepage,%
 	declaration,%
 	abstract,%
 	introduction,%
+	Yuanfudao-system, %
 	chapter1,%
 	chapter2,%
 	chapter3,%
@@ -138,26 +138,22 @@ aboveskip=10pt}
 %--------------------------------------------------------------------------------------
 \begin{document}
 \singlespacing
-\include{guideline}
-\include{project}
 
 \pagenumbering{arabic}
 \onehalfspacing
-\include{titlepage}
-\tableofcontents\vfill
+%\tableofcontents\vfill
 \include{abstract}
 \include{introduction}
+\include{Yuanfudao-system}
 
 %\listoffigures\addcontentsline{toc}{chapter}{?br?k jegyz?ke}
 %\listoftables\addcontentsline{toc}{chapter}{T?bl?zatok jegyz?ke}
 
+
 %\bibliography{mybib}
 %\addcontentsline{toc}{chapter}{Irodalomjegyz?k}
-\bibliography{mybib}
-\addcontentsline{toc}{chapter}{References}
 \bibliographystyle{plain}
-
-\include{appendices}
 
 \label{page:last}
 \end{document}
+
