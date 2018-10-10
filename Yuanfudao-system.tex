@@ -30,7 +30,13 @@ An overview of the original system is reproduced in Figure~\ref{fig:dnn}.
 	\caption{Structure of the original network \cite[p.2]{Wang:2018}}
 	\label{fig:dnn}
 \end{figure*}
-This system is a deep learning neural network consisting of six different layer types. First the inputs generated in the preprocessing phase go through three embedding layers, each corresponding to the passage, question and answer respectively. There are also pos-embedding, ner-embedding and rel-embedding layers. The pos embedding gets the passage's and the question's pos tags as its input, the ner embedding layer gets the passage's ner tags and the rel embedding gets the relationship vectors generated using the \textit{ConceptNet}.
+This system is a deep learning neural network consisting of six different layer types. First the inputs generated in the preprocessing phase go through three embedding layers, each corresponding to the passage, question and answer respectively. There are also pos-embedding, ner-embedding and rel-embedding layers. The pos embedding gets the passage's and the question's pos tags as its input, the ner embedding layer gets the passage's ner tags and the relation embedding gets the relationship vectors generated using the \textit{ConceptNet}.
 
-The word embeddings' outputs are paired up (passage-question, answer-question, answer-passage) and go through a so called \textit{sequence attention layer}.
-The system uses dropouts after the embedding layers to avoid over-fitting.
+The word embeddings' outputs are paired up (passage-question, answer-question, answer-passage) and go through a so called \textit{sequence attention layer}. The \textit{sequence attention layer} at its core uses the bmm function in pytorch which performs a batch matrix-matrix product of the input matrices. This way it "matches" the two inputs together.
+
+The system uses dropouts after the embedding and \textit{sequence attention layer} layers to avoid over-fitting.
+
+These layers are followed by three \textit{stacked bidirectional rnn layer}, each corresponding to the passage, question and answer respectively. It differs from the standard bidirectional rnn layer in one aspect: it can concatenate the hidden states of the rnn. Their inputs are sort of self explanatory. The passage's \textit{stacked bidirectional rnn layer} gets the passage's word embedding layer, the output of the \textit{sequence attention layer} for the passage-question input pair, the passage's pos and ner embedding layers, the word frequency tensor created with the wikiword package, and the two relation embedding layer's output. The question's \textit{stacked bidirectional rnn layer} expects the question's word and pos embedding outputs on its input. The answer's \textit{stacked bidirectional rnn layer's} inputs are the answer's word embedding output and  the output of the \textit{sequence attention layer} for the answer-question and the answer-question input pairs.
+
+This layer implicitly uses a dropout rate for regularization.
+
