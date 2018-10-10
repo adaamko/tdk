@@ -13,12 +13,12 @@ Even though these tasks are trivial for us, for a computer it can be really hard
 
 %--------------------------------------------------------------------------------------
 % egyszer� multtol jelenig bevezeto
-The interest in NLP research began in the 1950s, the early phase was mainly focused on ML (Machine Translation), because after the World War II, people
+The interest in NLP research began in the 1950s, the early phase was mainly focused on MT (Machine Translation), because after the World War II, people
 recognised the importance of the translation from one language to another, and hoped to do it automatically.
-However ML is still a very difficult nowadays, so these researches discovered early the main challenges of the syntactic and semantic parsing.
+However MT is still a very difficult nowadays, so these researches discovered early the main challenges of the syntactic and semantic parsing.
 As time passed, researches embraced new areas of NLP as more advanced technology and knowledge became available. Now that we live in a world where
-computers and smartphones, collecting data became incredibly easy, as a result, statistical NLP drew attention because these models thrives off big data neural, but one cannot ignore 
-simple rule based methods, which can also be very powerful method, especially using them as a hybrid model with statistical methods.
+computers and smartphones, collecting data became incredibly easy, as a result, statistical NLP drew attention because these models thrive off big data, but one cannot ignore 
+simple rule based methods, which can also be a very powerful method, especially using them as a hybrid model with statistical methods.
 %--------------------------------------------------------------------------------------
 % r�vid nlp pipeline
 
@@ -29,7 +29,7 @@ The typical pipeline structured as follows:
     \item After we tokenized our text, we need word analysis called \texttt{morphology}, which is concerned with the structure of words.
     \item Part of speech explains how a word is used in a sentence, and tagging is a process marking words to its particular part of speech.
     \item The main task of syntactic parsing is to analyze the grammatical structure of a sentence. Given a set of words, a parser forms units (subjects, verbs, etc..) according to some grammatical formalism.
-    there are two main type of syntactic parsers:
+    There are two main type of syntactic parsers:
     \begin{itemize}
         \item Consituency parsers produce trees, that represents the grammatical structure.
         \item Dependency parsers are the more popular nowadays. They represent the structure of a sentence as a dependency tree.
@@ -44,8 +44,8 @@ We use the word semantics in our ordinary language, when we want to discuss the 
 So we say that the semantics is the study of meaning, and if we talk about NLP it usually refers to the meaning of linguistic utterances.
 The semantics of an utterance is closely connected to many scientific fields, such as philosophy, logic or knowledge representation.
 Applications covered in this course so far are all possible without any explicit representation of what certain linguistic structures mean.
-Even complex processes like machine translation can be ignorant of what each word, phrase or sentence means, i.e. what information it conveys to speakers of the language.
-Many applications, even complex ones can be ignorant of what the words, sentences mean, like syntactic parsing, or even machine translation. Other tasks rely heavily on semantics, they are the biggest tasks, where semantic technologies need to be used.
+Even complex processes like syntactic parsing, or even machine translation can be ignorant of what each word, phrase or sentence means, i.e. what information it conveys to speakers of the language.
+Other tasks rely heavily on semantics, they are the biggest tasks, where semantic technologies need to be used.
 \begin{itemize}
   \item \textbf{Question answering} is the process of generating meaningful answers to the user's question, using some kind of knowledge.
   \item \textbf{Recognizing entailment} is whether a statement implies another or not, it is closely connected to \textbf{machine comprehension}, which is the main focus of our work.
