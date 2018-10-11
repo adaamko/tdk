@@ -25,10 +25,11 @@
 % Main variables
 %--------------------------------------------------------------------------------------
 \newcommand{\vikszerzo}{Kovács Ádám}
+\newcommand{\vikszerzos}{Gémes Andrea Kinga}
 \newcommand{\vikkonzulens}{Dr.~Recski Gábor}
 \newcommand{\vikcim}{Semantic parsing with graph transformations}
 \newcommand{\viktanszek}{Department of Automation and Applied Informatics}
-\newcommand{\vikdoktipus}{Master's Thesis}
+\newcommand{\vikdoktipus}{Scientific Student’s Assosiactions Report}
 \newcommand{\vikdepartmentr}{Kovács Ádám}
 
 %--------------------------------------------------------------------------------------
@@ -141,8 +142,9 @@ aboveskip=10pt}
 
 \pagenumbering{arabic}
 \onehalfspacing
-%\tableofcontents\vfill
+\include{titlepage}
 \include{abstract}
+\tableofcontents\vfill
 \include{introduction}
 \include{Yuanfudao-system}
 
@@ -150,8 +152,8 @@ aboveskip=10pt}
 %\listoftables\addcontentsline{toc}{chapter}{T?bl?zatok jegyz?ke}
 
 
-%\bibliography{mybib}
-%\addcontentsline{toc}{chapter}{Irodalomjegyz?k}
+\bibliography{mybib}
+\addcontentsline{toc}{chapter}{Irodalomjegyzék}
 \bibliographystyle{plain}
 
 \label{page:last}
