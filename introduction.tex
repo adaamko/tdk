@@ -1,5 +1,6 @@
 %----------------------------------------------------------------------------
 \chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
+\label{sec:Introdu}
 %----------------------------------------------------------------------------
 \section{Natural Language Processing}
 While computers can be easily programmed to understand structured data, such as tables and spreadsheets, it can be rather challenging for them
@@ -37,20 +38,39 @@ The typical pipeline structured as follows:
     \item At this point we have various ways to analyze a text, but without modeling its \texttt{meaning}. Semantic is the study of meaning, and semantic parsing is a task to find a representation and assign it to the text. This task will be the main topic of my work.
 \end{itemize}
 
-%--------------------------------------------------------------------------------------
-% semantic parsing bevezeto + modszerek + alkalmazasok jelenleg
-\section{Computational semantics}
-We use the word semantics in our ordinary language, when we want to discuss the meaning or an interpretation of a group of words within the boundaries of a certain context.
-So we say that the semantics is the study of meaning, and if we talk about NLP it usually refers to the meaning of linguistic utterances.
-The semantics of an utterance is closely connected to many scientific fields, such as philosophy, logic or knowledge representation.
-Applications covered in this course so far are all possible without any explicit representation of what certain linguistic structures mean.
-Even complex processes like syntactic parsing, or even machine translation can be ignorant of what each word, phrase or sentence means, i.e. what information it conveys to speakers of the language.
-Other tasks rely heavily on semantics, they are the biggest tasks, where semantic technologies need to be used.
+%-------------------------------------------------------------
+\section{Objectives}
+The main focus of this study is computational semantics. Our research includes building explicit representations of natural language semantics, because in today's state of the art systems for popular semantics tasks such as measuring semantic similarity or machine comprehension they are rarely present. Virtually all systems
+competing at popular challenges (e.g. \cite{Cer:2017,Collados:2017}) rely on word embeddings as the sole representation of word meaning. Recently \cite{Recski:2016c} has presented a method using graphical representations of natural language text that improved over the state of the art on the task of
+measuring semantic similarity of pairs of English words. In this paper
+we use similar graphs as simple but powerful tools for measuring textual
+entailment. Our task includes defining new methods for measuring graph similarities, giving us a tool for building strong baseline methods. Our work was based upon measuring our models through state-of-the art systems on the 2018 Semeval Task \textit{Machine comprehension using commonsense knowledge}.
+
+\section{Results}
+We present a novel method for recognizing entailment using semantic
+graphs and apply it to the 2018 Semeval task on Machine
+Comprehension (MC).
+Concept graphs are built automatically from MC texts, questions, and answers,
+using the semantic parsing system \texttt{4lang} \cite{Recski:2016d}.
+First we present a highly automated process of building concept graphs from raw text, after
+a strong baseline method using only these graphs is presented achieving an accuracy score of $68.3\%$,
+followed by an enhancement of a state-of-the-art system
+\cite{Wang:2018}, where we then proceeded to use the metric underlying our baseline as an
+additional feature. Preliminary results suggest that these features
+achieve a .5 percentage point improvement over the original system.
+ 
+
+
+\section{References}
+The code of our system is available on Github\footnote{\url{https://github.com/adaamko/4lang}}. The code was implemented by the authors of this thesis based upon the 4lang system, which was implemented by the supervisor of this thesis, Gábor Recski.
+
+\section{Structure}
+The structure of the thesis is the following:
 \begin{itemize}
-  \item \textbf{Question answering} is the process of generating meaningful answers to the user's question, using some kind of knowledge.
-  \item \textbf{Recognizing entailment} is whether a statement implies another or not, it is closely connected to \textbf{machine comprehension}, which is the main focus of our work.
-  \item \textbf{Personal assistants} such as Apple Siri or Alexa, they are heavily widespread nowadays, and every one of us has one with their phone.
-  \item \textbf{Chatbots} are systems, that could somewhat carry a human-like conversation.
+	\item \textbf{Chapter 1} describes the short history and motivation of the NLP applications, it also gives a short summary about the objectives of the thesis, and our results.
+	\item \textbf{Chapter 2} presents a short introduction into computational semantics, and discusses the main approaches.
+	\item \textbf{Chapter 3} briefly explains the semantic parsing system \textbf{4lang}, and our process of automating the building of concept graphs, and the baseline approach.
+	\item \textbf{Chapter 4} gives an introduction into deep learning, focusing on the NLP tasks.
+	\item \textbf{Chapter 5} presents our experiments and results with the state-of-the art system \textbf{Yuanfudao}.
+	\item \textbf{Chapter 6} summarizes our contributions and describes our ongoing/future work. It briefly discusses our plans for the follow-up, that was beyond the scope of this work.
 \end{itemize}
-
-
