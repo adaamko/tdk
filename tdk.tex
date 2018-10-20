@@ -25,7 +25,7 @@
 % Main variables
 %--------------------------------------------------------------------------------------
 \newcommand{\vikszerzo}{Kovács Ádám}
-\newcommand{\vikszerzos}{Gémes Andrea Kinga}
+\newcommand{\vikszerzos}{Gémes Kinga Andrea}
 \newcommand{\vikkonzulens}{Dr.~Recski Gábor}
 \newcommand{\vikcim}{Semantic parsing with graph transformations}
 \newcommand{\viktanszek}{Department of Automation and Applied Informatics}
@@ -52,6 +52,9 @@
 \setcounter{secnumdepth}{2}
 \singlespacing
 \frenchspacing
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{4}
 
 %--------------------------------------------------------------------------------------
 %	Setup hyperref package
@@ -94,6 +97,7 @@
 %	Some new commands and declarations
 %--------------------------------------------------------------------------------------
 \newcommand{\code}[1]{{\upshape\ttfamily\scriptsize\indent #1}}
+\usepackage[section]{placeins}
 
 % define references
 \newcommand{\figref}[1]{\ref{fig:#1}.}
@@ -115,6 +119,7 @@
 	declaration,%
 	abstract,%
 	introduction,%
+	deep-neural,%
 	Yuanfudao-system, %
 	chapter1,%
 	chapter2,%
@@ -146,6 +151,7 @@ aboveskip=10pt}
 \include{abstract}
 \tableofcontents\vfill
 \include{introduction}
+\include{deep-neural}
 \include{Yuanfudao-system}
 
 %\listoffigures\addcontentsline{toc}{chapter}{?br?k jegyz?ke}
