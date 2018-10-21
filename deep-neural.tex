@@ -1,4 +1,5 @@
-\chapter*{Deep learning neural networks}\addcontentsline{toc}{chapter}{Deep learning neural networks}
+\chapter{Deep learning neural networks}
+\label{chap:deep}
 \section{Context}
 Deep learning neural networks gained popularity again in recent years, after the AI winter ended. Since then neural networks became part of the everyday life, we hear about artificial intelligence being used in smart phones to enhance images quality or recognize certain settings and take a picture accordingly. AI is also being used in cancer research and other fields of bioinformatics, and personal assistants became extremely popular.
 
@@ -29,6 +30,7 @@ The layers of the neural network consist of these perceptrons. A simple structur
 	\caption{A simple feed forward neural network.}
 	\label{fig:neural_net}
 \end{figure*}
+
 This neural network consists of feed-forward layers, which means that every perceptron in each layer connects to every perceptron in the previous and the next layer. Each connection has a weight value attached to it. The output of this network is constructed as follows:
 \[output = \sum activationFunction(\sum(input * weight_1 + bias_1)) * weight_2 + bias_2\]
 Here the activation function is a function that the hidden layer's output passes through. It is used to add non-linearity to the network. This will be crucial in the backpropagation step.
@@ -56,10 +58,65 @@ There are multiple types of activation functions in deep learning, the most comm
 \end{figure*}
 \subsection{Backpropagation}
 In the Feed forward section we mentioned the bias and weight parameters. In this section we will describe the method of fine tuning these parameters so the neural network will be better at prediction.
+To do this we will need to first calculate the loss of the network. This means that we compare expected output and the calculated output (we can do this because we are doing supervised learning). There are multiple types of loss functions like squared loss used at regression problems and cross entropy at classification problems. Right now we will need the later which we can get by taking the negative natural logarithm of the \(P(output|layerInput, parameters)\) probability.
+Let's use the following notation :
+
+\(output = y\)
+
+\(output's \text{ i}th \text{ } value = y_i\)
+
+\(layerInput = x\)
+
+\(layerInput's \text{ i}th \text{ } value = x_i\)
+
+\(activationFunction = \sigma\)
+
+\(parameters = w\)
+
+And the parameters are the vector of the weights concatenated with the bias.
+The negative natural logarithm of \(P(output|layerInput, parameters)\) is:
+\[Loss = -\ln P(y|x, w) = \sum_{i=1}^{|classes|}y_i\ln \sigma(w^Tx_i)+(1 - y_i)\ln (1 - \sigma(w^Tx_i))\]
+In a simple two class classification where we only have one output (0 or 1) it simplifies to:
+\[Loss = -\ln P(y|x, w) = y_i\ln \sigma(w^Tx_i)+(1 - y_i)\ln (1 - \sigma(w^Tx_i))\]
+After we calculated this, we are ready for the error backpropagation. Let's calculate the gradient of this Loss by the parameters.
+\[\Delta_w Loss = -\sum_{i=1}^{|classes|}(y_i - \sigma(w^Tx_i))x_i\]
+Now all we have to do is to use this n every layer backwards.
+\[\Delta_x Loss = \sum_{k} \frac{\delta Loss}{\delta w^k}\frac{\delta w^k}{\delta x}\]
+\[\frac{\delta w^k}{\delta x} = \sigma'(activated)*previousLayer\]
+where:
+\[activated = \sigma(x * previousLayer)\]
+Once we calculated this delta for every layer, all we have left to do is to update the parameters.
+\[w \leftarrow w - \eta * \Delta_x Loss\]
+
+Where \(\eta\) is the learning rate, that we can set.
+
 \section{Natural Language Processing with Deep learning}
 As mentioned above the kind of layers used in Natural Language Processing are mostly recurrent neural network layers and attention layers.
 \subsection{Recurrent Neural Networks}
+In a simple feed forward neural network, the information only moves in one direction: from the input layer to the output layer. On the other hand recurrent neural networks have a so called short term memory. This internal memory allows the network to "remember" what it had learned before. This is illustrated at Figure~\ref{fig:recurrent_net}.
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{recurrent_neural_network.jpg}
+	\caption{A recurrent neural network.}
+	\label{fig:recurrent_net}
+\end{figure*}
+
+The backpropagation is also slightly different in this case, it's called backpropagation through time, you need to "unroll" the network (see at Figure~\ref{fig:unrolled}), and use the backpropagation starting from the right timestamps. Each timestamp's backpropagation could be understood as backpropagation on a separate feed forward neural network. 
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{unrolled.jpg}
+	\caption{Unrolled recurrent neural network.}
+	\label{fig:unrolled}
+\end{figure*}
+
+The gradient vanishing or explosion can be a problem with this RNN.
 \subsubsection{Long-Short Term Memory}
+Long-short term memory networks ar the extension of the previously discussed recurrent neural network. The main difference is that it also has an internal long term memory. It is implemented with three gates:
+\begin{itemize}
+	\item \textbf{input gate}: determines whether to let new input in
+	\item \textbf{forget gate}: determines whether to forget an input because it's not relevant anymore
+	\item \textbf{output gate}: determines whether to let the input impact the output with the current timestamp
+\end{itemize}
 \subsubsection{Gated recurrent unit}
 \subsection{Attention}
-The Attention mechanism was first described in (Bahdanau, 2015) and was used for machine translation. Since then it became a widely used tool in natural language processing. The idea behind this mechanism is that when the neural network predicts the output, it only uses parts of the given input instead of the full input. That is where the most relevant informations are concentrated and this mechanism only pays \textit{attention} to these parts.
+The Attention mechanism was first described in \cite{Bahdanau:2015} and was used for machine translation. Since then it became a widely used tool in natural language processing. The idea behind this mechanism is that when the neural network predicts the output, it only uses parts of the given input instead of the full input. That is where the most relevant informations are concentrated and this mechanism only pays \textit{attention} to these parts.
