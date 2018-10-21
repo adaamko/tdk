@@ -78,12 +78,49 @@ The two \textit{linear sequence attention layer's} and the \textit{bilinear sequ
 \end{figure}
 
 The averaged passage output is passed though a \textit{linear feed forward layer} than multiplied by the answer's averaged output. The question's averaged output is passed though an other \textit{linear feed forward layer} than multiplied by the answer's averaged output. At the end its all summed and sigmoid function used at its output. The output in this case is whether the answer was correct to the given question or not. This last section is at Figure~\ref{fig:output}.
-\begin{figure}[h!]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=0.5]{TriAN_output.jpg}
 	\caption{Structure of the output of the network.}
 	\label{fig:output}
 \end{figure}
+
+\subsection{Learning rate}
+\begin{minipage}{\linewidth}
+Without the recommended pretraining (Figure~\ref{fig:learning_curve}):
+\begin{itemize}
+	\item Max dev accuracy: $82.7\%$ reached in the 26th epoch
+	\item Train accuracy: $97.7\%$ reached in the 26th epoch
+	\item Max train accuracy: $99.8\%$ reached in the 50th epoch
+	\item Last dev accuracy: $81.9\%$
+	\item Average dev accuracy after ten epochs: $81.9\%$
+\end{itemize}
+\end{minipage}
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{learning_curve.jpg}
+	\caption{Learning curve without pretraining.}
+	\label{fig:learning_curve}
+\end{figure}
+
+\begin{minipage}{\linewidth}
+With the recommended pretraining(Figure~\ref{fig:learning_curve2}):
+\begin{itemize}
+	\item Max dev accuracy: $82.5\%$ reached in the 38th epoch
+	\item Train accuracy: $99\%$ reached in the 38th epoch
+	\item Max train accuracy: $99.7\%$ reached in the 50th epoch
+	\item Last dev accuracy: $82.2\%$
+	\item Average dev accuracy after ten epochs: $81.9\%$
+\end{itemize}
+\end{minipage}
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{learning_curve2.jpg}
+	\caption{Learning curve with pretraining.}
+	\label{fig:learning_curve2}
+\end{figure}
+
+As you can see there is no significant difference between the learning curve with or without pretraining.
 
 \section{Modifications}
 We modified the preprocessing part of the system to incorporate the similarity calculating method from Chapter ~\ref{chap:4lang}. The most straightforward way of incorporating our metric into the system is by creating vectors similar to those representing \textit{ConceptNet} relations between words of a passage and words in each answer candidate. Since these vectors represent
