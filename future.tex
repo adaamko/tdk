@@ -1,0 +1,29 @@
+\chapter{Conclusion and future work}
+\label{chap:yuanfudao}
+
+\subsection{Summary}
+This thesis proposes a novel method for recognizing entailment using semantic
+graphs and apply it to the 2018 Semeval task on Machine
+Comprehension (MC). First, a brief overview of the field of natural language processing is given focusing on real life applications, that are in need of the NLP technologies. Then the topic of computational semantics was discussed in details, focusing on one-two major tasks, like question-answering or information retrieval. After that the formalism of 4lang was presented with examples, and the method of expansion was discussed. After simple yet a strong baseline method was presented for measuring
+textual entailment and its application to the comprehension task, followed by an introduction to the field of deep learning. Finally the last chapter reports the results of applying the baseline method
+to the MC task and also of using it as an extra feature in the neural network
+based \texttt{Yuanfudao} system.
+
+\subsection{Future work}
+Our results are quite promising, but
+further experiments are required to explore whether our enhancements can
+improve the top-ranking system that also employs
+pretraining and an ensemble of multiple models.
+We also plan to incorporate sentence-level support
+into the system as a more direct application of our
+baseline. 
+
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[height=0.5\textwidth]{figures/mypoorabs}
+	\caption{Example of the \textit{"abstract"} method}
+	\label{fig:mypoorabs}
+\end{figure*}
+
+We also have some experiments with defining new additional rules added to the \textbf{4lang} parser, that could potentially be giving us a more abstract and simpler definitions than the \textit{expansion} method. Let us look back the sentence "My poor wife" and the expanded graph shown in Figure \ref{fig:mypoorexpanded}. In this example if we look at the edge \textbf{wife $\xrightarrow0$ woman} we can make an assumption that within the boundaries of the sentence we can use the concept \textbf{woman} instead of the concept \textbf{wife}. Using this simple rule we can reduce our graph to a simpler definition shown in Figure \ref{fig:mypoorabs}.
