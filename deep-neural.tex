@@ -117,6 +117,34 @@ Long-short term memory networks ar the extension of the previously discussed rec
 	\item \textbf{forget gate}: determines whether to forget an input because it's not relevant anymore
 	\item \textbf{output gate}: determines whether to let the input impact the output with the current timestamp
 \end{itemize}
+These gates are analog and their value ranges from 0 to 1 with the sigmoid function. A simplified depiction can be seen at Figure~\ref{fig:lstm}.
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.2]{lstm.jpg}
+	\caption{A long-short term memory network's gates.\\Image from Wikipedia}
+	\label{fig:lstm}
+\end{figure*}
+
+The sigmoid function allows this structure to be able to learn, meaning that we can use the backpropagation method described above.
+
 \subsubsection{Gated recurrent unit}
+Gated recurrent units are also a type of RNN and have a similar structure (Figure~\ref{fig:gru}) to the long-short term memory network, but has been shown to exhibit better performance on smaller datasets, than the LSTM.
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{gru.jpg}
+	\caption{A gated recurrent unit's gates.\\Image from Wikipedia}
+	\label{fig:gru}
+\end{figure*}
+
+It has four main building blocks:
+\begin{itemize}
+	\item \textbf{update gate}: the gate gets the x[t] and the h[t-1] as its input and z[t] is the output on the image
+	\item \textbf{reset gate}: the gate gets the x[t] and the h[t-1] as its input and r[t] is the output on the image
+	\item \textbf{current memory content}: the gate gets the x[t], the h[t-1] and the r[t] as its input and \^{h}[t] is the output on the image
+	\item \textbf{final memory at current time step}: the h[t] on the image
+\end{itemize}
+
+Gated recurrent units are mostly used on the field of speech recognition and music modeling while the LSTM is more relevant on the field of natural language processing.
+
 \subsection{Attention}
 The Attention mechanism was first described in \cite{Bahdanau:2015} and was used for machine translation. Since then it became a widely used tool in natural language processing. The idea behind this mechanism is that when the neural network predicts the output, it only uses parts of the given input instead of the full input. That is where the most relevant informations are concentrated and this mechanism only pays \textit{attention} to these parts.
