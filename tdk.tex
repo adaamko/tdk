@@ -9,6 +9,10 @@
 \usepackage{enumerate}
 \usepackage[thmmarks]{ntheorem}
 \usepackage{graphics}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xytree}
+\usepackage{tikz-dependency}
 \usepackage{epsfig}
 \usepackage{listings}
 \usepackage{color}
@@ -31,6 +35,10 @@
 \newcommand{\viktanszek}{Department of Automation and Applied Informatics}
 \newcommand{\vikdoktipus}{Scientific Student’s Assosiactions Report}
 \newcommand{\vikdepartmentr}{Kovács Ádám}
+\newcommand{\edge}[3]{\texttt{#1}~$\xrightarrow#2$~\texttt{#3}}
+\newcommand{\twoedges}[4]{\texttt{#1}~$\overset{#2}{\underset{#3}{\rightleftharpoons}}$~\texttt{#4}}
+\newcommand{\bin}[3]{
+	\texttt{#2}~$\xleftarrow1$~\texttt{#1}~$\xrightarrow2$~\texttt{#3}}
 
 %--------------------------------------------------------------------------------------
 % Page layout setup
