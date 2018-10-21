@@ -198,3 +198,27 @@ Gated recurrent units are mostly used on the field of speech recognition and mus
 
 \subsection{Attention}
 The Attention mechanism was first described in \cite{Bahdanau:2015} and was used for machine translation. Since then it became a widely used tool in natural language processing. The idea behind this mechanism is that when the neural network predicts the output, it only uses parts of the given input instead of the full input. That is where the most relevant informations are concentrated and this mechanism only pays \textit{attention} to these parts.
+
+Usually in the "sequence-to-sequence" tasks like MT there are two main parts of the model an encoder and a decoder. The encoder is responsible for creating a so called context-vector from the input sequence. This context-vector has a fixed length and it serves as the representation of the sequence inside the model. The decoder then decodes this context-vector to a sequence again, in the case of the machine translation this sequence is in a different language. A depiction can be seen at Figure~\ref{fig:seq_to_seq}.
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.4]{seq_to_seq.jpg}
+	\caption{A sequence-to-sequence model with encoder and decoder.}
+	\label{fig:seq_to_seq}
+\end{figure*}
+
+The attention mechanism described in \cite{Bahdanau:2015} was used in the decoder part of this model, the encoder functions the same way. The paper explicitly stated that this attention mechanism relieves the encoder from having to encode every sequence to a fixed length context vector. In this case we have a context vector for every word of the expected output. These context-vectors are the weighted sums of the encoder's states (\textit{annotations}).
+\[c_i = \sum_{j=1}^{t} \alpha_ij h_j\]
+Where \(\alpha\) parameter is calculated like the following:
+\[\alpha_ij = \frac{exp(e_{ij})}{\sum_{k=1}^{t} e_{ik}} \]
+and \(e_{ij}\) is its energy
+\[e_{ij} = a(s_{i-i}, h_j)\]
+This is an \textit{alignment model} that scores how well the input around \textit{j} and the output around \textit{i} match. This \textit{alignment model} is a feed forward neural network that is trained simultaneously with the other components of the system.
+The decoder uses the previous state's output and its assigned context-vector when calculating its own target.
+\[s_i = f(s_{i-1}, y_{i-1}, c_i)\]
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.4]{attention.jpg}
+	\caption{A sequence-to-sequence model with encoder-decoder and attention.}
+	\label{fig:attention}
+\end{figure*}
