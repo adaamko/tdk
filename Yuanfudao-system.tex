@@ -1,5 +1,6 @@
-\chapter*{Yuanfudao system}\addcontentsline{toc}{chapter}{Yuanfudao system}
-On the 2018 Semeval Task \textit{Machine comprehension using commonsense knowledge} competition the \texttt{Yuanfudao} (Wang et al., 2018) system reached second place with $83.95\%$ accuracy on the test data.
+\chapter{Yuanfudao system}
+\label{chap:yuanfudao}
+On the 2018 Semeval Task \textit{Machine comprehension using commonsense knowledge} competition the \texttt{Yuanfudao} \cite{Wang:2018} system reached second place with $83.95\%$ accuracy on the test data.
 
 % Yuanfudao introduction
 \section{The original system}
@@ -22,42 +23,46 @@ This system processes the input data as follows:
 
 % Conceptnet
 
-The \textit{ConceptNet} is a major part of the \texttt{Yuanfudao} system, as it was shown in the original paper (Wang et al., 2018). This metric is to show the possible relationship between two words. These relations could be "RelatedTo", "IsA", "Synonym", "PartOf" etc. The preprocessor compares the words in the passage with the words in the "query" (question or answer) and stores only one of the matches per word, if there were any.
+The \textit{ConceptNet} is a major part of the \texttt{Yuanfudao} system, as it was shown in the original paper \cite{Wang:2018}. This metric is to show the possible relationship between two words. These relations could be "RelatedTo", "IsA", "Synonym", "PartOf" etc. The preprocessor compares the words in the passage with the words in the "query" (question or answer) and stores only one of the matches per word, if there were any.
 
 An overview of the original system is reproduced in Figure~\ref{fig:dnn}.
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{TriAN.jpg}
-	\caption{Structure of the original network \cite[p.2]{Wang:2018}}
+	\caption{Structure of the original network \cite{Wang:2018}}
 	\label{fig:dnn}
-\end{figure*}
-This system is a deep learning neural network consisting of six different layer types.
+\end{figure}
+This system is a deep learning neural network consisting of multiple layer types.
+
+% System description
 
 First the inputs generated in the preprocessing phase go through three embedding layers, each corresponding to the passage, question and answer respectively. There are also pos-embedding, ner-embedding and rel-embedding layers. The pos embedding gets the passage's and the question's pos tags as its input, the ner embedding layer gets the passage's ner tags and the relation embedding gets the relationship vectors generated using the \textit{ConceptNet}. This input embedding layer is shown in Figure~\ref{fig:embedding}.
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{TriAN_embeddings.jpg}
 	\caption{Structure of the input embedding layers.}
 	\label{fig:embedding}
-\end{figure*}
+\end{figure}
+
 The word embeddings' outputs are paired up (passage-question, answer-question, answer-passage) and go through a so called \textit{sequence attention matching layer}.
 The \textit{sequence attention matching layer} at its core uses the bmm function in \texttt{pytorch} which performs a batch matrix-matrix product of the input matrices.
 This way it "matches" the two inputs together. This is shown in Figure~\ref{fig:attention_match}.
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{TriAN_attention_match.jpg}
 	\caption{Structure of the \textit{sequence attention matching layers}.}
 	\label{fig:attention_match}
-\end{figure*}
+\end{figure}
+
 The system uses dropouts after the embedding and \textit{sequence attention matching layer} layers to avoid over-fitting.
 
 These layers are followed by three \textit{stacked bidirectional RNN layer}, each corresponding to the passage, question and answer respectively. It differs from the standard bidirectional RNN layer in one aspect: it can concatenate the hidden states of the RNN. By default the type of the RNN is LSTM, but it can also be GRU. Their inputs are sort of self explanatory. The passage's \textit{stacked bidirectional RNN layer} gets the passage's word embedding layer, the output of the \textit{sequence attention matching layer} for the passage-question input pair, the passage's pos and ner embedding layers, the word frequency tensor created with the \texttt{wikiword} library, and the two relation embedding layer's output. The question's \textit{stacked bidirectional RNN layer} expects the question's word and pos embedding outputs on its input. The answer's \textit{stacked bidirectional RNN layer's} inputs are the answer's word embedding output and  the output of the \textit{sequence attention matching layer} for the answer-question and the answer-question input pairs. These RNN layers are shown in the Figure~\ref{fig:rnn}.
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.35]{TriAN_rnn.jpg}
+	\includegraphics[scale=0.25]{TriAN_rnn.jpg}
 	\caption{Structure of the \textit{stacked bidirectional RNN layers}.}
 	\label{fig:rnn}
-\end{figure*}
+\end{figure}
 This layer implicitly uses a dropout rate for regularization.
 
 The question's and the answer's \textit{stacked bidirectional RNN layer's} outputs are used in two \textit{linear sequence attention layers}, or better known as \textit{self-attention layers over a sequence} for the question and the answer respectively. This layer is basically a linear layer slightly modified, so the infinite outputs are masked and it uses a softmax function at its output.
@@ -65,22 +70,23 @@ The question's and the answer's \textit{stacked bidirectional RNN layer's} outpu
 The passage's \textit{stacked bidirectional RNN layer's} output is used differently. The system passes it and the question's \textit{stacked bidirectional RNN layer's} output to a \textit{bilinear sequence attention layer}, which is similarly to the \textit{sequence attention matching layer} uses the bmm function as its core function.
 
 The two \textit{linear sequence attention layer's} and the \textit{bilinear sequence attention layer's} output is passed through a weighted averaging function with their respective \textit{stacked bidirectional RNN layer's} output. This part of the network is shown in Figure~\ref{fig:sequence_attention}.
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{TriAN_sequence_attention.jpg}
-	\caption{Structure of the sequence attention layer and the following weighted average function.}
+	\caption{Structure of the sequence attention layer\\and the following weighted average function.}
 	\label{fig:sequence_attention}
-\end{figure*}
+\end{figure}
+
 The averaged passage output is passed though a \textit{linear feed forward layer} than multiplied by the answer's averaged output. The question's averaged output is passed though an other \textit{linear feed forward layer} than multiplied by the answer's averaged output. At the end its all summed and sigmoid function used at its output. The output in this case is whether the answer was correct to the given question or not. This last section is at Figure~\ref{fig:output}.
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{TriAN_output.jpg}
 	\caption{Structure of the output of the network.}
 	\label{fig:output}
-\end{figure*}
+\end{figure}
 
 \section{Modifications}
-We modified the preprocessing part of the system to incorporate the similarity calculating method from the previous chapter. The most straightforward way of incorporating our metric into the system is by creating vectors similar to those representing \textit{ConceptNet} relations between words of a passage and words in each answer candidate. Since these vectors represent
+We modified the preprocessing part of the system to incorporate the similarity calculating method from Chapter ~\ref{chap:4lang}. The most straightforward way of incorporating our metric into the system is by creating vectors similar to those representing \textit{ConceptNet} relations between words of a passage and words in each answer candidate. Since these vectors represent
 word-to-word relationships, we measure the support between pairs of \texttt{4lang} definition graphs, and for each word in the passage we take the maximum support score over all words of the answer candidate. Elements of a vector for a passage $P$ and a possible answer $A$ are hence defined as:
 
 \[S^{(P, A)}_i = \max_{A_j \in A} S(P_i, A_j)\]
@@ -95,28 +101,28 @@ Elements of a vector for a question $Q$ and an answer $A$ are defined as:
 
 We used these new input vectors as the input of a new \texttt{4lang} embedding layer that functions similarly to the other embedding layers. It is shown at Figure~\ref{fig:4lang_embedding}. The input of this layer is 101 dimensional, since the similarities are on a scale to 0 to 100.
 
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{4lang_embedding.jpg}
 	\caption{\texttt{4lang} embedding layer.}
 	\label{fig:4lang_embedding}
-\end{figure*}
+\end{figure}
 
 The outputs of this layer is passed to the RNN layers. This is depicted at Figure~\ref{fig:rnn_4lang}.
 
-\begin{figure*}[!htb]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.35]{TriAN_rnn_with_4lang.jpg}
+	\includegraphics[scale=0.25]{TriAN_rnn_with_4lang.jpg}
 	\caption{Structure of the modified \textit{stacked bidirectional RNN layers}.}
 	\label{fig:rnn_4lang}
-\end{figure*}
+\end{figure}
 
 Since we also wanted to see how the system changes if we replace \textit{ConceptNet} relations with our metric, we also trained systems without \textit{ConceptNet} rel embeddings.
 
 \section{The results}
-The original \texttt{Yuanfudao} (Wang et al., 2018) publication said its system was able to reach $83.95\%$ accuracy on the test data. We were only able to reproduce a $80.3\%$ accuracy on the test set and $82.5\%$ on the development set with the recommended pretraining on the \texttt{RACE} \cite{Lai:2017} dataset. We will take these results as our bases of the comparison.
+The original \texttt{Yuanfudao} \cite{Wang:2018} publication said its system was able to reach $83.95\%$ accuracy on the test data. We were only able to reproduce a $80.3\%$ accuracy on the test set and $82.5\%$ on the development set with the recommended pretraining on the \texttt{RACE} \cite{Lai:2017} dataset. We will take these results as our bases of the comparison.
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{ | l | c | r | }
 		\hline

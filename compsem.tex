@@ -1,6 +1,6 @@
 %----------------------------------------------------------------------------
-\chapter*{Computational Semantics}\addcontentsline{toc}{chapter}{Computational Semantics}
-\label{sec:compsem}
+\chapter{Computational Semantics}
+\label{chap:compsem}
 %----------------------------------------------------------------------------
 We use the word semantics in our ordinary language, when we want to discuss the meaning or an interpretation of a group of words within the boundaries of a certain context.
 So we say that the semantics is the study of meaning, and if we talk about NLP it usually refers to the meaning of linguistic utterances.
@@ -47,12 +47,13 @@ We can classify the common approaches as follows:
 
 By sentiment analysis we mean the automated process of understanding an opinion about a given subject, also called opinion mining. We try to extract all kind of opinions, such as emotions or attitudes about every kind of topics, e.g about movies, holidays, or video games. There are simpler versions, where the attitude of a text is only classifed as negative or positive, and there are more complex versions, where we can detect the target of the opinion as well.
 
-\begin{figure*}[h]
+\begin{figure*}[h!]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/sentiment}
 	\caption{Sentiment analysis example}
 	\label{fig:sen}
 \end{figure*}
+
 Most commonly used methods:
 \begin{itemize}
 	\item \textbf{Rule-based}
@@ -64,7 +65,7 @@ Most commonly used methods:
 Question answering might be considered one of the oldest tasks in NLP or in AI in general with machine translation. With recent uprising products like Siri, Alexa, or Watson, it is still one of the most researched area.
 If we build a question answering system, we need to take into consideration, that such system needs to handle factoid questions as well as complex request \cite{Ralph:2017}. If we want to process a factoid question such as \textit{What is the population of Europe?}, there is a clear criterion that we can define so the kind of a phrase that answers the question is clear, unlike non-factoid questions, where there may be many answers that satisfies the criterions, and sometimes it is unclear how many.
 
-\begin{figure*}[h]
+\begin{figure*}[h!]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/qagoogle}
 	\caption{Question answering with google}
@@ -81,7 +82,7 @@ IR based solutions is one of the major ones (e.g Google [\ref{fig:qa}], Watson).
 	\item ranking answers
 \end{itemize}
 
-\begin{figure*}[h]
+\begin{figure*}[h!]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/ie}
 	\caption{Question processing system example \cite{IEsystem}}
@@ -102,7 +103,7 @@ Lets have a look at these two sentences \textit{"The cat is walking in the bedro
 
 These word embeddings used in basically all state-of-the art systems related to natural language processing applications. Mikolov \cite{Mikolov:2013c} showed that words embeddings can be applied for vector operations, like addition or subtraction, and these operations often result in meaningful representation. Lets look at the example of vector("King") - vector("Man") + vector("Woman") \ref{fig:vecs} which results in vector("Queen"). While the usage of word embeddings brought an important breakthrough in modelling word meaning, applying them for bigger linguistics units like phrases, sentences or even whole text remained a difficult challenge even for nowadays. One of the biggest reasons for this is the additive aspect of these models: if we model A B C expression with vector v(A) + v(B) + v(C), then we represent "John killed Bill" and "Bill killed John" sentences in the same way. 
 
-\begin{figure*}[h]
+\begin{figure*}[h!]
 	\centering
 	\includegraphics[width=0.7\textwidth]{figures/vecs}
 	\caption{Vector addition example}
@@ -126,7 +127,7 @@ Nodes of AMR graphs can be represented various ways. Each node in the graph repr
 	
 \end{itemize}
 
-\begin{figure*}[h]
+\begin{figure*}[h!]
 	\centering
 	\includegraphics[height=0.4\textwidth]{figures/amr}
 	\caption{Example sentence and representations}
@@ -135,7 +136,7 @@ Nodes of AMR graphs can be represented various ways. Each node in the graph repr
 
 In this thesis we use the semantic parser 4lang \cite{Recski:2015b}, and unlike 4lang, AMR handles wider range of phenomenas, mostly typical of English, and AMR is not interlingua, it is heavily biased towards English \cite{Palmer:2005}, while 4lang can deal with multiple language.
 
-\begin{figure*}[h]
+\begin{figure*}[h!]
 	\centering
 	\includegraphics[width=0.3\textwidth]{figures/4langboy}
 	\caption{Example sentence and representations in 4lang}
