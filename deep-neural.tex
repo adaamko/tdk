@@ -88,7 +88,57 @@ where:
 Once we calculated this delta for every layer, all we have left to do is to update the parameters.
 \[w \leftarrow w - \eta * \Delta_x Loss\]
 
-Where \(\eta\) is the learning rate, that we can set.
+Where \(\eta\) is the learning rate, that we can set. This an important parameter, because if we set it too low, our network will learn really slowly, and it will probably stuck in a local minimum. But setting it too high has its dangers too, since we can jump over the global optimum and the network will never stabilize.
+
+\subsubsection{Optimization}
+The goal of optimization is to overcome the following problems:
+\begin{itemize}
+	\item Local minimum
+	\item Setting the learning rate
+	\item Setting the batch size
+\end{itemize}
+
+We have touched on the first two briefly before, but setting the batch size is also very important. We give the training data to the network in batch-es, and we iterate through them multiple times (depending on the epoch). The loops length is the number of epochs we take.
+
+Methods used for optimizing:
+\begin{itemize}
+	\item \textbf{Stochastic gradient descent}
+	\item \textbf{Momentum}
+	\item \textbf{Adaptive learning rate}
+	\item \textbf{Adam} (Adaptive learning rate and momentum)
+\end{itemize}
+
+\paragraph*{Stochastic gradient descent}
+\[g \leftarrow \frac{1}{batchSize}\Delta_w \sum_{i=1}^{batchSize}Loss(\Phi_w(x_i), y_i)\]
+Where \(\Phi\) is the network itself.
+\[w \leftarrow w - \eta g\]
+
+\paragraph*{Momentum}
+\[g \leftarrow \alpha g + \frac{1}{batchSize}\Delta_w \sum_{i=1}^{batchSize}Loss(\Phi_w(x_i), y_i)\]
+Where \(\alpha\) is a parameter we can set.
+\[w \leftarrow w - \eta g\]
+
+\paragraph*{Adaptive learning rate}
+\[g \leftarrow \frac{1}{batchSize}\Delta_w \sum_{i=1}^{batchSize}Loss(\Phi_w(x_i), y_i)\]
+\[r \leftarrow r + g^2\]
+Where r is a parameter thats initial value can be set.
+\[w \leftarrow w - \frac{\eta}{\sqrt{r}} g\]
+
+\paragraph*{Adam}
+\[g \leftarrow \frac{1}{batchSize}\Delta_w \sum_{i=1}^{batchSize}Loss(\Phi_w(x_i), y_i)\]
+\[r \leftarrow \varphi_r r + (1 - \varphi_r) g^2\]
+\[s \leftarrow \varphi_s s + (1 - \varphi_s) g\]
+Where s is a parameter thats initial value can be set and \(\varphi\) is a parameter.
+\[w \leftarrow w - \frac{\eta s}{\sqrt{r}} g\]
+
+\subsubsection{Regularization}
+The goal of regularization is to avoid over-fitting. Over-fitting happens when our neural network produces good results on the training set's dedicated subset, the development or validation set, but it can't predict the expected outputs properly on a new dataset for example the test set. It happens very often, so machine learning experts developed a couple functions to avoid this phenomenon.
+\begin{itemize}
+	\item \textbf{Weight decay}: It uses a parameter to make sure that the previously learned weight won't influence the new one too much. \(w \leftarrow (1 - \eta \alpha)w - \eta \Delta_w Loss\)
+	\item \textbf{Dropout}: It randomly "drops out" weights for an epoch, so they won't over-fit
+	\item \textbf{Early stopping}: It stops the learning if the results on the development set haven't shown any progress in the last couple of epochs.
+	\item \textbf{Noise injection}: It injects noise into the training set.
+\end{itemize}
 
 \section{Natural Language Processing with Deep learning}
 As mentioned above the kind of layers used in Natural Language Processing are mostly recurrent neural network layers and attention layers.
