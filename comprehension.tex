@@ -1,0 +1,93 @@
+\chapter{Machine Comprehension}
+\label{chap:comprehension}
+The 2018 Semeval Task \textit{Machine comprehension using commonsense
+	knowledge}\footnote{\url{https://competitions.codalab.org/competitions/17184}}
+requires participants to train systems that can choose the
+correct answer to simple multiple choice questions based on short
+passages describing simple chains of events. Data for both training and
+testing is extracted from the \texttt{MCScript} dataset
+\cite{Ostermann:2018}. Some questions can only be
+answered using commonsense knowledge, and are
+explicitly labeled as such. For example, one passage might describe a
+story of a gardener planting a tree, and one of the questions would
+subsequently ask whether the gardener used his hands or a shovel to dig
+a hole for the tree, even though the answer to this question is not
+present in the passage. The top two systems, \texttt{HFL-RC}
+\cite{Chen:2018} and
+\texttt{Yuanfudao} \cite{Wang:2018} achieved accuracy scores of
+$84.15\%$ and $83.95\%$ on the test data, respectively. In our experiments we used
+semantic graphs to augment the \texttt{Yuanfudao} system, since its source
+code is publicly
+available\footnote{\url{https://github.com/intfloat/commonsense-rc}} and since it already employs successfully a
+knowledge base representing semantic relationships among pairs of words.
+
+\subsection{Comprehension, entailment, and knowledge bases}
+
+In the next section we shall present a simple method for measuring
+\textit{support}, the continuous counterpart of \textit{entailment},
+based on graphical representations of meaning, and use this metric in a
+baseline for machine comprehension and to improve a state of the art
+MC system.
+Although explicit representations of semantics are rarely used for this purpose,
+in recent years there have been several attempts at leveraging lexical
+ontologies in machine comprehension, and the approach of using textual
+entailment as an intermediary task is also not new. \cite{Wang:2016}
+achieves competitive results on the \texttt{MCTest} dataset
+\cite{Richardson:2013} by generating
+answer candidates and ranking them using a separate RTE system, which is
+trained on the Stanford Natural Language Inference (SNLI) dataset
+\cite{Bowman:2015}
+but also relies on an explicit measure of lexical overlap between sentence
+pairs. Other recent systems are various extensions of a baseline
+proposed by \cite{Richardson:2013} that measures a weighted overlap
+between pairs of bag-of-words representations, e.g. \cite{Wang:2015b}
+applies the frame
+semantic parser of \cite{Das:2010} and includes features representing
+overlap between bag-of-frame and bag-of-argument representations.
+Finally, the \texttt{Yuanfudao} system presented in this section is the most
+recent example of enhancing the performance of an MC system using a lexical
+knowledge base: ablation studies show that their top-ranking accuracy score of
+$83.84\%$ drops to $82.78\%$ if \texttt{ConceptNet}-based features are removed.
+
+\section{Method}
+\label{sec:method}
+
+We define a simple metric between pairs of \texttt{4lang} graphs that
+we intend to use for measuring entailment between a paragraph and a
+sentence. We shall define the degree to which some graph $G_1$
+\textit{supports} another graph $G_2$ as the ratio of edges in $G_2$
+that are also present in $G_1$:
+
+\[ S(G_1, G_2) =\frac{|E(G_1)\cap E(G_2)|}{|E(G_2)|}\]
+
+Two (directed) edges are identical iff their source
+and target nodes and their label are all identical. Based on early
+findings we used only \textit{expanded} \texttt{4lang} graphs (see
+Section~\ref{chap:4lang}) for measuring support. 
+To create a simple baseline solution for the Machine Comprehension task,
+we compare answer candidates to each question by comparing the degree of
+support for each in the passage, based on the \texttt{4lang} representations of
+each piece of text. For wh-questions we can create representations of
+each answer by merging the question graph's wh-node with the graph of
+each answer graph (see Figure~\ref{fig:merge}). Our baseline method will simply
+pick the answer candidate with the higher support score.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{figures/merge}
+	\caption{Merged graph of answer candidate \textit{"John"} for the
+		question \textit{Who did it?}}
+	\label{fig:merge}
+\end{figure}
+
+\subsection{Experiments}
+\label{sec:exp}
+
+We tested the baseline mehod described in the previous section on a
+subset of all queations in the train section of the MC dataset:
+wh-questions that were not
+categorized as ``common-sense''. Of this subset of 5,375 questions (of a
+total of 9,731), our
+method correctly answers 3,671, achieving an accuracy score of $68.3\%$.
+We then proceeded to use the metric underlying our baseline as an
+additional feature in the \texttt{Yuanfudao} system.
