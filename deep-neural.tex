@@ -216,9 +216,28 @@ and \(e_{ij}\) is its energy
 This is an \textit{alignment model} that scores how well the input around \textit{j} and the output around \textit{i} match. This \textit{alignment model} is a feed forward neural network that is trained simultaneously with the other components of the system.
 The decoder uses the previous state's output and its assigned context-vector when calculating its own target.
 \[s_i = f(s_{i-1}, y_{i-1}, c_i)\]
+The attention based model is at Figure~\ref{fig:attention}.
 \begin{figure*}[!htb]
 	\centering
 	\includegraphics[scale=0.4]{attention.jpg}
 	\caption{A sequence-to-sequence model with encoder-decoder and attention.}
 	\label{fig:attention}
 \end{figure*}
+
+A big advantage of using this mechanism is the ability to interpret our model. These days it's more important than ever to be able to tell why does the network predict what it predicts, and thanks to the attention mechanism we are able to say that (in a purely attention-based network). One example is shown at Figure~\ref{fig:interpretation}.
+
+\begin{figure*}[!htb]
+	\centering
+	\includegraphics[scale=0.4]{interpretation.jpg}
+	\caption{An interpretation of a french to english translation.\\Image from \cite{Bahdanau:2015}.}
+	\label{fig:interpretation}
+\end{figure*}
+
+\begin{minipage}{\linewidth}
+	Since its first description in \cite{Bahdanau:2015} the attention mechanism has been used for:
+	\begin{itemize}
+		\item \textbf{Image description}: a convolutional neural network translates the image to the context vectors and the decoder creates a description for it.
+		\item \textbf{Grammar representation}: in this case the decoder builds a grammatical representation for the input.
+		\item \textbf{Machine comprehension tasks}: question answering based on a previously read text. 
+	\end{itemize}
+\end{minipage}
