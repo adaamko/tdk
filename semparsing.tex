@@ -3,7 +3,7 @@
 \label{chap:semanticparsing}
 %----------------------------------------------------------------------------
 
-In this chapter we first introduce applications, that use semantic models as an essential knowledge for their process. After, the theory and problems of semantic representation is discussed, and we briefly present the upside and downside of such representations. After that we go into details about distributional and graph based models, introducing the semantic parsing system \textbf{4lang}, which is the main focus of our work.
+In this chapter we first introduce applications, that use semantic models as an essential knowledge for their process. After, the theory and problems of semantic representation is discussed, and we briefly present the upside and downside of such representations. After that we go into details about distributional and graph based models, introducing the semantic parsing system \textbf{4lang}, which is the main focus of our work, and our micro-services built around it to highly automate the process of building concept graphs from raw input.
 
 When we use the word semantics, we usually refer to the interpretation of a linguistics unit (e.g. words, phrases, sentences, or whole texts) within the boundaries of a certain context. The study of semantics is closely connected to many scientific fields such as philosophy, logic or biology. While many NLP task like syntactic parsing, part-of-speech tagging, or even machine translation can be ignorant of the meaning of units, of what information they hold, there are also many other tasks that rely heavily on semantics.
 
@@ -30,9 +30,11 @@ Graph based solutions otherhand have high level of interpretability, but automat
 \section{Distributional model}
 In the field of natural language processing one way of encoding semantic meaning is to use distributional models. In these models, two words are similar if they appear in the same context, and model semantic meaning as real-valued vectors. These vectors need to be constructed from a training data, and we can calculate similarity as cosine distance between the vectors.
 
-Lets have a look at these two sentences \textit{"The cat is walking in the bedroom"} and \textit{"A dog was running in a room"}. Words \textit{"dog"} and \textit{"cat"} have a similar semantic meaning, so if they are represented by vectors, and their cosine distance from each other is small, than we can vary the sentences \textit{"The dog is walking in the bedroom"} and \textit{"A cat was running in a room"} \cite{Bengio:2003}. The intuition is that these models want to obtain the meaning from the words around it \cite{Jurafsky:2018}, and because \textit{"dog"} and \textit{"cat"} are close in vector space, they most likely will appear in the same context. This intuition helps us generalize sentences. These meanings are represented by vectors, called embeddings. One of the first models build around these intuitions was introduced by Bengio \cite{Bengio:2003}. 
+Lets have a look at these two sentences \textit{"The cat is walking in the bedroom"} and \textit{"A dog was running in a room"}. Words \textit{"dog"} and \textit{"cat"} have a similar semantic meaning, so if they are represented by vectors, and their cosine distance from each other is small, than we can vary the sentences \textit{"The dog is walking in the bedroom"} and \textit{"A cat was running in a room"} \cite{Bengio:2003}. These models take surrounding words into account and want to obtain the meaning from them\cite{Jurafsky:2018}, and because \textit{"dog"} and \textit{"cat"} are close in vector space, they most likely will appear in the same context. This intuition helps us generalize sentences. These meanings are represented by vectors, called embeddings. One of the first models build around these intuitions was introduced by Bengio \cite{Bengio:2003}. 
 
-These word embeddings used in basically all state-of-the art systems related to natural language processing applications. Mikolov \cite{Mikolov:2013c} showed that words embeddings can be applied for vector operations, like addition or subtraction, and these operations often result in meaningful representation. Lets look at the example of vector("King") - vector("Man") + vector("Woman") \ref{fig:vecs} which results in vector("Queen"). While the usage of word embeddings brought an important breakthrough in modelling word meaning, applying them for bigger linguistics units like phrases, sentences or even whole text remained a difficult challenge even for nowadays. One of the biggest reasons for this is the additive aspect of these models: if we model A B C expression with vector v(A) + v(B) + v(C), then we represent "John killed Bill" and "Bill killed John" sentences in the same way. 
+These word embeddings used in basically all state-of-the art systems related to natural language processing applications. Mikolov \cite{Mikolov:2013c} showed that words embeddings can be applied for vector operations, like addition or subtraction, and these operations often result in meaningful representation. If we have example words "\textit{King}", "\textit{Man}", "\textit{Woman}", then the vector("King") - vector("Man") + vector("Woman") \ref{fig:vecs} will most likely result in vector that is close to vector("Queen") in the embedding space.
+
+ While the usage of word embeddings brought an important breakthrough in modelling word meaning, applying them for bigger linguistics units like phrases, sentences or even whole text remained a difficult challenge even for nowadays. One of the biggest reasons for this is the additive aspect of these models: if we model A B C expression with vector v(A) + v(B) + v(C), then we represent "John killed Bill" and "Bill killed John" sentences in the same way. 
 
 \begin{figure*}[h!]
 	\centering
@@ -41,9 +43,9 @@ These word embeddings used in basically all state-of-the art systems related to 
 	\label{fig:vecs}
 \end{figure*}
 
-The other issue is that we know very little about the structure of a multi dimensional real-value vector (for embeddings it can be from 300 up to 1000 dimension), so this makes it very hard to understand why and when they work. So while most state-of-the art systems use word embeddings as a sole representation of meaning, and while it can be useful to encode meaning as vectors, so it can create connection from language specific and non-language specific data, we cannot deny the importance of having other semantics representations, such as graph-based ones. 
+The other issue is that we know very little about the structure of a multi dimensional real-value vectors (for embeddings it can be from 300 up to 1000 dimension), so this makes it very hard to understand their structure, and exactly in what scenario they work, and the reason when they don't. So while most state-of-the art systems use word embeddings as a sole representation of meaning, and while it can be useful to encode meaning as vectors, so it can create connection from language specific and non-language specific data, we cannot deny the importance of having other semantics representations, such as graph-based ones. 
 
-In the majority of our work, we researched graph-based solutions, where we model the meaning of linguistics unit with graphs, and the whole process can be defined with graph transformations. Next I will briefly introduce graph based formalism starting with Abstract Meaning Representations (AMR) followed by the introduction of the \textbf{4lang} formalism, which will be the focus of the work, and I will go into the details in the next chapter.
+In the majority of our work, we researched graph-based solutions, where we model the meaning of linguistics unit with graphs, and the whole process can be defined with graph transformations. Next I will briefly introduce graph based formalism starting with Abstract Meaning Representations (AMR) followed by the introduction of the \textbf{4lang} formalism, which will be the focus of the work, and I will go into the details in the next section.
 
 \section{Abstract Meaning Representations}
 Abstract Meaning Representation (AMR) was introduced by Banarescu\cite{Banarescu:2013} for representing the meaning of linguistic structures. They represent meaning as labeled, directed, acyclic graphs, that can be used to capture the meaning of whole sentences, so if two sentences are similar in meaning, they should be represented by similar graphs. In the past few years, we have seen multiple works related to AMR graphs, like an AMR-annotated corpus\cite{Banarescu:2013}, or multi-sentence AMR corpus \cite{OGorman2018AMRBT}, and various parsing applications \cite{DAC:2017} \cite{Vanderwende:2015}.
@@ -65,7 +67,7 @@ Nodes of AMR graphs can be represented various ways. Each node in the graph repr
 	\label{fig:amr}
 \end{figure*}
 
-In this thesis we use the semantic parser 4lang \cite{Recski:2015b}, and unlike 4lang, AMR handles wider range of phenomenas, mostly typical of English, and AMR is not interlingua, it is heavily biased towards English \cite{Palmer:2005}, while 4lang can deal with multiple language.
+In this thesis we use the semantic parser 4lang \cite{Recski:2015b}, and unlike 4lang, AMR handles wider range of phenomenas, mostly typical of English, and AMR is not interlingua, it is heavily biased towards English \cite{Palmer:2005}, while 4lang can be configured to handle multiple language.
 
 \begin{figure*}[h!]
 	\centering
@@ -80,12 +82,12 @@ In the next section, I will go into details about the 4lang formalism, and the p
 \section{4lang}
 \label{sec:4lang}
 %---
-The \textbf{4lang} system is in the main focus of our work, in this section we will discuss the formalism and possible applications. \textbf{4lang} also means the manually built dictionary of mapping more than 2000 words to graphs, this dictionary is described in \cite{Kornai:2013}. After discussing the main formalism of 4lang, we will demonstrate our baseline for the machine comprehension task.
+The \textbf{4lang} system is in the main focus of our work, in this section we will discuss the formalism and possible applications. \textbf{4lang} also means the manually built dictionary of mapping more than 2000 words to graphs, this dictionary is described in \cite{Kornai:2013}. After discussing the main formalism of \textbf{4lang}, we will demonstrate our highly automated process of building concept graphs, that was achieved by wrapping \textbf{4lang} functionality in micro-services building a REST-API, followed by our baseline for the machine comprehension task.
 
 \subsection{The formalism}
 The \texttt{4lang} system of semantic representation \cite{Kornai:2015a}
 represents the meaning of linguistic units (both words and phrases)
-as directed graphs of syntax-independent concepts. Every node of a 4lang graph is a concept, which means that they are not taken as words, and they don't have any grammatical functions, like part-of-speech, voice, tense, etc.\cite{Recski:2016}.
+as directed graphs of syntax-independent concepts. Every node of a \textbf{4lang} graph is a concept, which means that they are not taken as words, and they don't have any grammatical functions, like part-of-speech, voice, tense, etc.\cite{Recski:2016}.
 Since these concepts have no grammatical attributes and no event structure, e.g.
 the phrases \textit{water freezes} and \textit{frozen water} would both be
 represented as \textit{water}~$\xrightarrow0$~\textit{freeze}. This also means that 4lang defines a many-to-one relation between the words and concepts. 
@@ -113,11 +115,11 @@ definitions have been created automatically from definitions of
 monolingual dictionaries such as Longman, using the
 \texttt{dict\_to\_4lang} tool \cite{Recski:2016d}.
 
-The open-source 4lang pipeline\footnote{\url{https://github.com/kornai/4lang}}
+The open-source \textbf{4lang} pipeline\footnote{\url{https://github.com/kornai/4lang}}
 contains tools for generating
 directed graphs from raw text by mapping dependency edges in the output of the
 Stanford parser \cite{deMarneffe:2006} to \texttt{4lang} subgraphs over
-concepts corresponding to each word of the original sentence. The Standford parser builds a dependency tree from the raw text that captures the syntactical relations between the linguistics units. 4lang graph construction involves mapping from these relations to 4lang semantics graphs, assigning the dependencies to 4lang subgraphs. The mapping is presented in Table \ref{table:mapping}, and an example is shown for sentence \textit{"I like swimming"} in Figure \ref{fig:swimmingdep}, where we can see the dependency tree coming out of the Standford parser, and the corresponding 4lang graph is present in Figure \ref{fig:swimming}, where the mapping from the dependency tree to \textbf{4lang} graph is done. 
+concepts corresponding to each word of the original sentence. The Stanford parser builds a dependency tree from the raw text that captures the syntactical relations between the linguistics units. \textbf{4lang} graph construction involves mapping from these relations to \textbf{4lang} semantics graphs, assigning the dependencies to \textbf{4lang} subgraphs. The mapping is presented in Table \ref{table:mapping}, and an example is shown for sentence \textit{"I like swimming"} in Figure \ref{fig:swimmingdep}, where we can see the dependency tree coming out of the Standford parser, and the corresponding 4lang graph is present in Figure \ref{fig:swimming}, where the mapping from the dependency tree to \textbf{4lang} graph is done. 
 
 \begin{table}
 	\centering
@@ -182,9 +184,9 @@ concepts corresponding to each word of the original sentence. The Standford pars
 \subsection{Expansion}
 Optionally, the \texttt{4lang} system allows us to \textit{expand}
 graphs, a process which unifies the graph with the definition graphs of
-each concept. The implementation is written in the \textbf{dict\_to\_4lang} module, that extends the functionality of the discussed \textbf{text\_to\_4lang} pipeline with dictionaries. 4lang takes advantage of this, and implements the expansion step, which essentially is joining the definitions graphs to the main graph. This allow us to build a larger graph, that contains more information, and allow us to model the text better by simply adding the definition of words.
+each concept. The implementation is written in the \textbf{dict\_to\_4lang} module, that extends the functionality of the discussed \textbf{text\_to\_4lang} pipeline with dictionaries. \textbf{4lang} takes advantage of this, and implements the expansion step, which essentially is joining the definitions graphs to the main graph. This allow us to build a larger graph, that contains more information, and allow us to model the text better by simply adding the definition of words.
 
-Let us look at the example sentence \textit{"My poor wife"}, that results the graph shown in Figure \ref{fig:mypoor}. If we are ready to make an assumption that taking word definitions into account results us a better model, and with this method we can have higher similarites between graphs whose sentences are also similar, than looking at the word poor definition is: \textit{having very little money and not many possessions}, we can build a definition graph and essentially join the two graphs together doing this for every word in the sentence resulting in a merged graph Figure \ref{fig:mypoorexpanded}. If we look at the graph, it is clear that the expanded graph gives us much more accurat context and definition. Our work was build around the expanded graph, and we will se that how better it actually performs on a real task. This will be the main topic of the next chapter.
+Let us look at the example sentence \textit{"My poor wife"}, that results the graph shown in Figure \ref{fig:mypoor}. If we are ready to make an assumption that taking word definitions into account results us a better model, and with this method we can have higher similarites between graphs whose sentences are also similar, than looking at the word poor definition is: \textit{having very little money and not many possessions}, we can build a definition graph and essentially join the two graphs together doing this for every word in the sentence resulting in a merged graph Figure \ref{fig:mypoorexpanded}. If we look at the graph, it is clear that the expanded graph gives us much more accurate context and definition. Our work was build around the expanded graph, and we will see that how better it actually performs on a real task. This will be the main topic of the next chapter.
 
 \begin{figure}
 	\centering
