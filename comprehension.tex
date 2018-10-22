@@ -63,13 +63,13 @@ that are also present in $G_1$:
 Two (directed) edges are identical iff their source
 and target nodes and their label are all identical. Based on early
 findings we used only \textit{expanded} \texttt{4lang} graphs (see
-Section~\ref{chap:4lang}) for measuring support. 
+Section~\ref{sec:4lang}) for measuring support. 
 To create a simple baseline solution for the Machine Comprehension task,
 we compare answer candidates to each question by comparing the degree of
 support for each in the passage, based on the \texttt{4lang} representations of
 each piece of text. For wh-questions we can create representations of
 each answer by merging the question graph's wh-node with the graph of
-each answer graph (see Figure~\ref{fig:merge}). Our baseline method will simply
+each answer graph (see Figure~\ref{fig:merge}), for this we use the \textbf{/rally} endpoint of our service defined in the previous chapter. Our baseline method will simply
 pick the answer candidate with the higher support score.
 
 \begin{figure}

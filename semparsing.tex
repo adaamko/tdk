@@ -202,19 +202,47 @@ Let us look at the example sentence \textit{"My poor wife"}, that results the gr
 	\label{fig:mypoorexpanded}
 \end{figure}
 
+
+\subsection{The service}
 The beginning of our research we put a high emphasis on generating graphs from text with a highly automated method, so besides being an open-source software library,
 the \texttt{4lang} we made the accessible via a public
-REST API at \url{http://hlt.bme.hu/4lang}. We can generate graphs with raw text by calling the service. Currently our service have multiple endpoints, with each of them representing different methods.
+REST API at \url{http://hlt.bme.hu/4lang}. We used the python language for implementing the service, and for the framework we used the flask\footnote{http://flask.pocoo.org/} package. The service generates input for the \texttt{text\_to\_4lang} module from the raw text input. The service returns a graph in a \textbf{networkx multigraph}\footnote{\url{https://networkx.github.io/documentation/networkx-1.9.1/reference/classes.multigraph.html}} format to make it easy to process it on the client side. The process is as easy as follows:
+\begin{center}
+	\begin{lstlisting}
+sentence = "I like micro-services." 
+data = {'sentence':   sentence}
+data_json = json.dumps(data)
+payload = {'json_payload': data_json}
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post("http://hlt.bme.hu/4lang/sendef", 
+data=data_json, headers=headers)
+s_machines = r.json()['sentence']
+\end{lstlisting}
+\end{center}
+
+
+The generated graph can be seen in Figure \ref{fig:service}. The code of the service is publicly available on Github\footnote{\url{https://github.com/adaamko/4lang}}. We can generate graphs with raw text by calling the service. Currently our service have multiple endpoints, with each of them representing different methods.
 If you interested in only processing a single sentence, you can call the following endpoints:
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{figures/service}
+	\caption{4lang definition of sentence \textit{"I like micro-services"}.}
+	\label{fig:service}
+\end{figure}
 
 \begin{itemize}
 	\item \textbf{/sendef} - Returns the graphs built from the sentence.
 	\item \textbf{/senexp} - Returns the graphs, where the word's definition has been added to the graph.
-	\item \textbf{/senabs} - Calling this function, we defined some rules, where we can build a more abstract graph using the definitions, this is more of a future work, I will talk about it  a bit in the last chapter.
+	\item \textbf{/senabs} - Calling this function, we defined some rules, where we can build a more abstract graph using the definitions, this is more of a future work, I will briefly mention the algorithms and ideas behind it in the last chapter.
 \end{itemize}
 You can get a word's definition by calling the defined endpoint:
 \begin{itemize}
 	\item \textbf{/definition} - Returns the graphs built from the word's definition.
+\end{itemize}
+For the machine comprehension task we defined a dedicated endpoint:
+\begin{itemize}
+	\item \textbf{/rally} - Returns a merged graph, where we merge a question sentence with an answer sentence. The main goal of this endpoint is that we can get a graph that can be explicitly compared with graph built from the passage text (it will be explained in the next chapter in details). 
 \end{itemize}
 
 
@@ -232,4 +260,4 @@ outperforms previous top systems by utilizing a simple similarity metric
 between \texttt{4lang} definitions of pairs of English words
 \cite{Recski:2016c}, this was the main idea of trying it in a different task with a different state-of-the-art system.
 
-In the next chapter, I will briefly discuss the machine comprehension challenge, and I will introduce our baseline method for solving it. After that We will present how it is applicable to an already working system.
+In the next chapter, I will briefly discuss the machine comprehension challenge, and I will introduce our baseline method for solving it using our micro-service for automatically build concept graphs. After that we will present how it is applicable to an already working system.
