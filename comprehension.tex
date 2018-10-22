@@ -1,5 +1,7 @@
 \chapter{Machine Comprehension}
 \label{chap:comprehension}
+In this chapter a brief introduction to the machine comprehension task is given, followed by the definition and application of our metric, that was defined for measuring similarity between concept graphs. After our baseline for the task presented.
+
 The 2018 Semeval Task \textit{Machine comprehension using commonsense
 	knowledge}\footnote{\url{https://competitions.codalab.org/competitions/17184}}
 requires participants to train systems that can choose the
@@ -60,7 +62,7 @@ that are also present in $G_1$:
 
 \[ S(G_1, G_2) =\frac{|E(G_1)\cap E(G_2)|}{|E(G_2)|}\]
 
-Two (directed) edges are identical iff their source
+Two (directed) edges are identical if their source
 and target nodes and their label are all identical. Based on early
 findings we used only \textit{expanded} \texttt{4lang} graphs (see
 Section~\ref{sec:4lang}) for measuring support. 
@@ -83,7 +85,7 @@ pick the answer candidate with the higher support score.
 \subsection{Experiments}
 \label{sec:exp}
 
-For example to demonstrate the algorithm behind our baseline, lets look at the example passage:
+Demonstrating the algorithm behind our baseline, lets look at the example passage:
 \begin{center}
 	\textit{ "I went into my bedroom and flipped the light switch. Oh, I see that the ceiling lamp is not turning on. It must be that the light bulb needs replacement. I go through my closet and find a new light bulb that will fit this lamp and place it in my pocket. I also get my stepladder and place it under the lamp. I make sure the light switch is in the off position. I climb up the ladder and unscrew the old light bulb. I place the old bulb in my pocket and take out the new one. I then screw in the new bulb. I climb down the stepladder and place it back into the closet. I then throw out the old bulb into the recycling bin. I go back to my bedroom and turn on the light switch. I am happy to see that there is again light in my room."}
 \end{center}
@@ -92,7 +94,7 @@ And a question related to the text: \textit{Why did they have to change the old 
 	\item \textit{"It shattered"}
 	\item \textit{"Worn"}
 \end{itemize}
-First we build the expanded graph from the text. After we build the merged graphs (for the demonstration, we now only build the graphs without expansion) seen in Figure \ref{fig:merge1} and Figure \ref{fig:merge2} compared to the graph without merge seen in Figure \ref{fig:merge3}. After the merging, we compare both of the graphs to the passage graph applying our metric.
+First we build the expanded graph from the text. After we build the merged graphs (for the demonstration, we now only build the graphs without expansion) seen in Figure \ref{fig:merge1} and Figure \ref{fig:merge2}. The graph without merging can be seen in Figure \ref{fig:merge3}. After the merging, we compare both of the graphs to the passage graph applying our defined metric.
 
 \begin{figure}
 	\centering
@@ -122,4 +124,6 @@ categorized as ``common-sense''. Of this subset of 5,375 questions (of a
 total of 9,731), our
 method correctly answers 3,671, achieving an accuracy score of $68.3\%$.
 We then proceeded to use the metric underlying our baseline as an
-additional feature in the \texttt{Yuanfudao} system. In the next chapter we will briefly give an introduction into the field of deep learning in general, and particularly in NLP applications, and after we will demonstrate the Yuanfudao system.
+additional feature in the \texttt{Yuanfudao} system. 
+
+In the next chapter we will briefly give an introduction into the field of deep learning in general, and particularly in NLP applications, and after we will demonstrate the Yuanfudao system.
