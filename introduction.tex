@@ -1,5 +1,6 @@
 \chapter{Introduction}
 \label{chap:Introdu}
+In this paper we present novel methods for recognizing entailment. In modern semantic parsing systems explicit representations are rarely present. We use graph based methods and apply it to the 2018 Semeval task on Machine Comprehension (MC). Our main goal was to build semantic concept graphs automatically. We built a REST-API around the \textbf{4lang}\cite{Recski:2016} to present a highly automated process constructing semantic models from raw input. We present a strong baseline for the task, followed by an enhancement of a state-of-the-art system \cite{Wang:2018}. In this chapter we discuss the history of the Natural Language Processing (NLP) applications, and briefly define the structure of this paper.
 %----------------------------------------------------------------------------
 \section{Natural Language Processing}
 While computers can be easily programmed to understand structured data, such as tables and spreadsheets, it can be rather challenging for them
@@ -7,7 +8,7 @@ to understand human communication. Because there is a vast difference in the mag
 for tools, that can deal with raw text. Thats where NLP comes in. It contains high variety of tools, that we have to use, when we need to deal with natural input.
 
 Every day, we come into contact with human communication, we say a lot of words to other people, and they try to interpret them even when the context of the saying 
-isn't necesseraily complete. The listeners can use their common knowledge to fill the needed information. We resolve ambiguities, misunderstanding, and can even understand words 
+isn't necessarily complete. The listeners can use their common knowledge to fill the needed information. We resolve ambiguities, misunderstanding, and can even understand words 
 we have never heard before just from the context of the communication.
 Even though these tasks are trivial for us, for a computer it can be really hard.
 
@@ -27,7 +28,7 @@ The typical pipeline structured as follows:
 \begin{itemize}
 	\item First we need to tokenize our input text, which means breaking up the text into meaningful elements, especially into words
 	\item After we tokenized our text, we need word analysis called \texttt{morphology}, which is concerned with the structure of words.
-	\item Part of speech explains how a word is used in a sentence, and tagging is a process marking words to its particular part of speech.
+	\item Part of speech assigns words to syntax behavior in a sentence.
 	\item The main task of syntactic parsing is to analyze the grammatical structure of a sentence. Given a set of words, a parser forms units (subjects, verbs, etc..) according to some grammatical formalism.
 	There are two main type of syntactic parsers:
 	\begin{itemize}
@@ -36,7 +37,6 @@ The typical pipeline structured as follows:
 	\end{itemize}
 	\item At this point we have various ways to analyze a text, but without modeling its \texttt{meaning}. Semantic is the study of meaning, and semantic parsing is a task to find a representation and assign it to the text. This task will be the main topic of my work.
 \end{itemize}
-
 %-------------------------------------------------------------
 \section{Objectives}
 The main focus of this study is computational semantics. Our research includes building explicit representations of natural language semantics, because in today's state of the art systems for popular semantics tasks such as measuring semantic similarity or machine comprehension they are rarely present. Virtually all systems
