@@ -5,23 +5,22 @@
 
 In this chapter we first introduce applications, that use semantic models as an essential knowledge for their process. After, the theory and problems of semantic representation is discussed, and we briefly present the upside and downside of such representations. After that we go into details about distributional and graph based models, introducing the semantic parsing system \textbf{4lang}, which is the main focus of our work, and our micro-services built around it to highly automate the process of building concept graphs from raw input.
 
-When we use the word semantics, we usually refer to the interpretation of a linguistics unit (e.g. words, phrases, sentences, or whole texts) within the boundaries of a certain context. The study of semantics is closely connected to many scientific fields such as philosophy, logic or biology. While many NLP task like syntactic parsing, part-of-speech tagging, or even machine translation can be ignorant of the meaning of units, of what information they hold, there are also many other tasks that rely heavily on semantics.
+When we use the word semantics, we usually refer to the interpretation of a linguistics unit (e.g. words, phrases, sentences, or whole texts) within the boundaries of a certain context. In many scientific fields e.g. philosophy, logic or biology the study of semantics is a highly researched task. While many NLP task like syntactic parsing, part-of-speech tagging, or even machine translation can be ignorant of the meaning of units, of what information they hold, there are also many other tasks that rely heavily on semantics.
 
 Some examples, where semantic analysis is unavoidable:
 \begin{itemize}
 	\item \textbf{Question answering} is the process of generating meaningful answers to the user's question, using some kind of knowledge. It might be considered one of the oldest tasks in NLP or in AI in general with machine translation. With the recent uprising products like Siri, Alexa, or Watson, it is still one of the most researched area.
 	\item \textbf{Recognizing entailment} is whether a statement implies another or not, it is closely connected to \textbf{machine comprehension}, which is the main focus of our work.
-	\item \textbf{Personal assistants} have been rapidly increasing in popularity. With the appearance of high quality personal assistants e.g. Apple Siri or Alexa, they inevitably became part of our everyday life.
 	\item \textbf{Chatbots} are systems, that somewhat can simulate the conversation of humans.
 	\item \textbf{Sentiment analysis} is the task of understanding the opinion about a subject. Usually can be considered as a classification problem, where in the simplest case two class, "\textit{negative}" and "\textit{positive}" is given. More complex version of the task is also present, where the detection of the target of the opinion is also the part of the problem. There are solutions for the problem with hand-crafted rules and machine learning algorithms as well.  
 \end{itemize}
 
-For modeling the meaning of linguistic units, choosing an appropriate representation of our model is needed. But while for syntactic analysis widely accepted concepts and ideas (e.g. dependency tree, phrase structure trees) of such representation are already in use, for a semantic model it still remained a challenging task. Even answering the question \textit{"What is a semantic representation?"} is not well defined, and mostly decided by the nature of our task. The units of a semantic model are also not globally decided. Is it a word? Or a phrase? Or a sentence?
+For modeling the meaning of linguistic units, choosing an appropriate representation of our model is needed. But while for syntactic analysis widely accepted concepts and ideas (e.g. dependency tree, phrase structure trees) of such representation are already in use, for a semantic model it still remained a challenging task. Even answering the question \textit{"What is a semantic representation?"} is not well defined, and mostly decided by the nature of our task. The units of a semantic model are also not globally decided (word, phrase or a sentence?).
 
 Finding an absolute representation of semantics knowledge is among the most difficult task in Artificial Intelligence (AI). While we are yet to find a representation that has no downside, various experimental models are present, that are applicable for certain domains, but are problematic in other scenarios. So before choosing one, we need to take into account the limitations of each choice. 
 
 
-Representation of semantic knowledge with logical expressions (e.g. zero-order logic, prepositional logic) exists, and although many companies still rely on hand-crafted rules as a knowledge representation, they are very unpractical and have serious problems with scalability and automation. Distributional models have risen in popularity in recent years, where we represent meaning with multi-dimensional vectors. While vector based models can give us a uniform representation, they mostly lack interpretability in a way that we never really know what happens inside these models. Another issue is the choice of the dimension. Many algorithms exist for reducing the dimension of such vectors to a fixed number, but determining the correct length can be difficult.
+Representation of semantic knowledge with logical expressions (e.g. zero-order logic, prepositional logic) exists, and although many companies still rely on hand-crafted rules as a knowledge representation, they are very unpractical and have serious problems with scalability and automation. Distributional models have risen in popularity in recent years, where meaning is represented with multi-dimensional vectors. While vector based models can give us a uniform representation, they mostly lack interpretability in a way that we never really know what happens inside these models. Another issue is the choice of the dimension. Many algorithms exist for reducing the dimension of such vectors to a fixed number, but determining the correct length can be difficult.
 
 Graph based solutions otherhand have high level of interpretability, but automating the process of building graphs is a challenging task, and using them as a sole solution for a semantic parsing task in most cases would come short, but in a hybrid systems they make up for the weaknesses other models have.
 
@@ -30,9 +29,9 @@ Graph based solutions otherhand have high level of interpretability, but automat
 \section{Distributional model}
 In the field of natural language processing one way of encoding semantic meaning is to use distributional models. In these models, two words are similar if they appear in the same context, and model semantic meaning as real-valued vectors. These vectors need to be constructed from a training data, and we can calculate similarity as cosine distance between the vectors.
 
-Lets have a look at these two sentences \textit{"The cat is walking in the bedroom"} and \textit{"A dog was running in a room"}. Words \textit{"dog"} and \textit{"cat"} have a similar semantic meaning, so if they are represented by vectors, and their cosine distance from each other is small, than we can vary the sentences \textit{"The dog is walking in the bedroom"} and \textit{"A cat was running in a room"} \cite{Bengio:2003}. These models take surrounding words into account and want to obtain the meaning from them\cite{Jurafsky:2018}, and because \textit{"dog"} and \textit{"cat"} are close in vector space, they most likely will appear in the same context. This intuition helps us generalize sentences. These meanings are represented by vectors, called embeddings. One of the first models build around these intuitions was introduced by Bengio \cite{Bengio:2003}. 
+Lets have a look at these two sentences \textit{"The cat is walking in the bedroom"} and \textit{"A dog was running in a room"}. Words \textit{"dog"} and \textit{"cat"} have a similar semantic meaning, so if they are represented by vectors, and their cosine distance from each other is small, then we can vary the sentences \textit{"The dog is walking in the bedroom"} and \textit{"A cat was running in a room"} \cite{Bengio:2003}. These models take surrounding words into account and want to obtain the meaning from them\cite{Jurafsky:2018}, and because \textit{"dog"} and \textit{"cat"} are close in vector space, they most likely will appear in the same context. This intuition helps us generalize sentences. These meanings are represented by vectors, called embeddings. One of the first models build around these intuitions was introduced by Bengio \cite{Bengio:2003}. 
 
-These word embeddings used in basically all state-of-the art systems related to natural language processing applications. Mikolov \cite{Mikolov:2013c} showed that words embeddings can be applied for vector operations, like addition or subtraction, and these operations often result in meaningful representation. If we have example words "\textit{King}", "\textit{Man}", "\textit{Woman}", then the vector("King") - vector("Man") + vector("Woman") \ref{fig:vecs} will most likely result in vector that is close to vector("Queen") in the embedding space.
+These word embeddings are used in basically all state-of-the art systems related to natural language processing applications. Mikolov \cite{Mikolov:2013c} showed that words embeddings can be applied for vector operations, like addition or subtraction, and these operations often result in meaningful representation. If we have example words "\textit{King}", "\textit{Man}", "\textit{Woman}", then the vector("King") - vector("Man") + vector("Woman") \ref{fig:vecs} will most likely result in vector that is close to vector("Queen") in the embedding space.
 
  While the usage of word embeddings brought an important breakthrough in modelling word meaning, applying them for bigger linguistics units like phrases, sentences or even whole text remained a difficult challenge even for nowadays. One of the biggest reasons for this is the additive aspect of these models: if we model A B C expression with vector v(A) + v(B) + v(C), then we represent "John killed Bill" and "Bill killed John" sentences in the same way. 
 
@@ -48,7 +47,7 @@ The other issue is that we know very little about the structure of a multi dimen
 In the majority of our work, we researched graph-based solutions, where we model the meaning of linguistics unit with graphs, and the whole process can be defined with graph transformations. Next I will briefly introduce graph based formalism starting with Abstract Meaning Representations (AMR) followed by the introduction of the \textbf{4lang} formalism, which will be the focus of the work, and I will go into the details in the next section.
 
 \section{Abstract Meaning Representations}
-Abstract Meaning Representation (AMR) was introduced by Banarescu\cite{Banarescu:2013} for representing the meaning of linguistic structures. They represent meaning as labeled, directed, acyclic graphs, that can be used to capture the meaning of whole sentences, so if two sentences are similar in meaning, they should be represented by similar graphs. In the past few years, we have seen multiple works related to AMR graphs, like an AMR-annotated corpus\cite{Banarescu:2013}, or multi-sentence AMR corpus \cite{OGorman2018AMRBT}, and various parsing applications \cite{DAC:2017} \cite{Vanderwende:2015}.
+Abstract Meaning Representation (AMR) was introduced by Banarescu\cite{Banarescu:2013} for representing the meaning of linguistic structures. They represent meaning as directed acyclic graphs (DAGs), that can be used to capture the meaning of whole sentences, so if two sentences are similar in meaning, they should be represented by similar graphs. In the past few years, we have seen multiple works related to AMR graphs, like an AMR-annotated corpus\cite{Banarescu:2013}, or multi-sentence AMR corpus \cite{OGorman2018AMRBT}, and various parsing applications \cite{DAC:2017} \cite{Vanderwende:2015}.
 
 Nodes of AMR graphs can be represented various ways. Each node in the graph represents a semantic concept \cite{AMR:2015}, that can be either an English word, or frameset from PropBank \cite{Palmer:2005}, essentially used for abstraction. The framesets are English verbs. The AMR introduced these variables for entities, events, properties, and states. An AMR can be converted to multiple formats:
 \begin{itemize}
@@ -67,7 +66,7 @@ Nodes of AMR graphs can be represented various ways. Each node in the graph repr
 	\label{fig:amr}
 \end{figure*}
 
-In this thesis we use the semantic parser 4lang \cite{Recski:2015b}, and unlike 4lang, AMR handles wider range of phenomenas, mostly typical of English, and AMR is not interlingua, it is heavily biased towards English \cite{Palmer:2005}, while 4lang can be configured to handle multiple language.
+In this thesis we use the semantic parser \textbf{4lang} \cite{Recski:2015b}, and unlike \textbf{4lang}, AMR handles wider range of phenomenas, mostly typical of English, and AMR is not interlingua, it is heavily biased towards English \cite{Palmer:2005}, while 4lang can be configured to handle multiple language.
 
 \begin{figure*}[h!]
 	\centering
@@ -76,13 +75,13 @@ In this thesis we use the semantic parser 4lang \cite{Recski:2015b}, and unlike 
 	\label{fig:4langboy}
 \end{figure*}
 
-In the next section, I will go into details about the 4lang formalism, and the parser itself. After I will describe our method of measuring similarities between semantic graphs, and its usage on semantic related tasks.
+In the next section, I will go into details about the 4lang formalism, and the parser itself. After I will describe our method of measuring similarities between semantic graphs, and it's usage on semantic related tasks.
 
 %----------------------------------------------------------------------------
 \section{4lang}
 \label{sec:4lang}
 %---
-The \textbf{4lang} system is in the main focus of our work, in this section we will discuss the formalism and possible applications. \textbf{4lang} also means the manually built dictionary of mapping more than 2000 words to graphs, this dictionary is described in \cite{Kornai:2013}. After discussing the main formalism of \textbf{4lang}, we will demonstrate our highly automated process of building concept graphs, that was achieved by wrapping \textbf{4lang} functionality in micro-services building a REST-API, followed by our baseline for the machine comprehension task.
+The \textbf{4lang} system is in the main focus of our work, in this section we will discuss the formalism and possible applications. \textbf{4lang} also means the manually built dictionary of mapping more than 2000 words to graphs, this is described in \cite{Kornai:2013}. After discussing the main formalism of \textbf{4lang}, we will demonstrate our highly automated process of building concept graphs, that was achieved by wrapping \textbf{4lang} functionality in micro-services building a REST-API, followed by our baseline for the machine comprehension task.
 
 \subsection{The formalism}
 The \texttt{4lang} system of semantic representation \cite{Kornai:2015a}
@@ -119,7 +118,7 @@ The open-source \textbf{4lang} pipeline\footnote{\url{https://github.com/kornai/
 contains tools for generating
 directed graphs from raw text by mapping dependency edges in the output of the
 Stanford parser \cite{deMarneffe:2006} to \texttt{4lang} subgraphs over
-concepts corresponding to each word of the original sentence. The Stanford parser builds a dependency tree from the raw text that captures the syntactical relations between the linguistics units. \textbf{4lang} graph construction involves mapping from these relations to \textbf{4lang} semantics graphs, assigning the dependencies to \textbf{4lang} subgraphs. The mapping is presented in Table \ref{table:mapping}, and an example is shown for sentence \textit{"I like swimming"} in Figure \ref{fig:swimmingdep}, where we can see the dependency tree coming out of the Standford parser, and the corresponding 4lang graph is present in Figure \ref{fig:swimming}, where the mapping from the dependency tree to \textbf{4lang} graph is done. 
+concepts corresponding to each word of the original sentence. The Stanford parser builds a dependency tree from the raw text that captures the syntactical relations between the linguistics units. \textbf{4lang} graph construction involves mapping from these relations to \textbf{4lang} semantics graphs, assigning the dependencies to \textbf{4lang} subgraphs. The mapping is presented in Table \ref{table:mapping}, and an example is shown for sentence \textit{"I like swimming"} in Figure \ref{fig:swimmingdep}, where we can see the dependency tree coming out of the Stanford parser, and the corresponding 4lang graph is present in Figure \ref{fig:swimming}, where the mapping from the dependency tree to \textbf{4lang} graph is done. 
 
 \begin{table}
 	\centering
@@ -176,7 +175,7 @@ concepts corresponding to each word of the original sentence. The Stanford parse
 \begin{figure*}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/swimmingdep}
-	\caption{Standford example of a sentence}
+	\caption{Stanford example of a sentence}
 	\label{fig:swimmingdep}
 \end{figure*}
 
@@ -184,9 +183,9 @@ concepts corresponding to each word of the original sentence. The Stanford parse
 \subsection{Expansion}
 Optionally, the \texttt{4lang} system allows us to \textit{expand}
 graphs, a process which unifies the graph with the definition graphs of
-each concept. The implementation is written in the \textbf{dict\_to\_4lang} module, that extends the functionality of the discussed \textbf{text\_to\_4lang} pipeline with dictionaries. \textbf{4lang} takes advantage of this, and implements the expansion step, which essentially is joining the definitions graphs to the main graph. This allow us to build a larger graph, that contains more information, and allow us to model the text better by simply adding the definition of words.
+each concept. The implementation is written in the \textbf{dict\_to\_4lang} module, that extends the functionality of the discussed \textbf{text\_to\_4lang} pipeline with dictionaries. \textbf{4lang} takes advantage of this, and implements the expansion step, which essentially is joining the definitions graphs to the main graph. This allows us to build a larger graph, that contains more information, and allows us to model the text better by simply adding the definition of words.
 
-Let us look at the example sentence \textit{"My poor wife"}, that results the graph shown in Figure \ref{fig:mypoor}. If we are ready to make an assumption that taking word definitions into account results us a better model, and with this method we can have higher similarites between graphs whose sentences are also similar, than looking at the word poor definition is: \textit{having very little money and not many possessions}, we can build a definition graph and essentially join the two graphs together doing this for every word in the sentence resulting in a merged graph Figure \ref{fig:mypoorexpanded}. If we look at the graph, it is clear that the expanded graph gives us much more accurate context and definition. Our work was build around the expanded graph, and we will see that how better it actually performs on a real task. This will be the main topic of the next chapter.
+Let us look at the example sentence \textit{"My poor wife"}, that results the graph shown in Figure \ref{fig:mypoor}. Looking at the definition of the word \textit{poor}: \textit{having very little money and not many possessions}, we can build a definition graph and essentially join the two graphs together. This can result us a better model if we are ready to take word definitions into account, and with this method we can have higher similarities between graphs whose sentences are also similar. Doing this for every word in the sentence resulting in a merged graph Figure \ref{fig:mypoorexpanded}. If we look at the graph, it is clear that the expanded graph gives us much more accurate context and definition. Our work was build around the expanded graph, and we will see that how better it actually performs on a real task. This will be the main topic of the next chapter.
 
 \begin{figure}
 	\centering
@@ -204,9 +203,9 @@ Let us look at the example sentence \textit{"My poor wife"}, that results the gr
 
 
 \subsection{The service}
-The beginning of our research we put a high emphasis on generating graphs from text with a highly automated method, so besides being an open-source software library,
+The beginning of our research we put a high emphasis on generating graphs from raw text with a highly automated method, so besides being an open-source software library,
 the \texttt{4lang} we made the accessible via a public
-REST API at \url{http://hlt.bme.hu/4lang}. We used the python language for implementing the service, and for the framework we used the flask\footnote{http://flask.pocoo.org/} package. The service generates input for the \texttt{text\_to\_4lang} module from the raw text input. The service returns a graph in a \textbf{networkx multigraph}\footnote{\url{https://networkx.github.io/documentation/networkx-1.9.1/reference/classes.multigraph.html}} format to make it easy to process it on the client side. The process is as easy as follows:
+REST API at \url{http://hlt.bme.hu/4lang}. We used the python language for implementing the service, and for the framework we used the flask\footnote{http://flask.pocoo.org/} package. The service generates input for the \texttt{text\_to\_4lang} module from the raw text input, then after processing it, returns a graph in \textbf{networkx multigraph}\footnote{\url{https://networkx.github.io/documentation/networkx-1.9.1/reference/classes.multigraph.html}} format to make it easy to visualize it on essentially any client side. The process is as easy as follows:
 \begin{center}
 	\begin{lstlisting}
 sentence = "I like micro-services." 
@@ -221,8 +220,8 @@ s_machines = r.json()['sentence']
 \end{center}
 
 
-The generated graph can be seen in Figure \ref{fig:service}. The code of the service is publicly available on Github\footnote{\url{https://github.com/adaamko/4lang}}. We can generate graphs with raw text by calling the service. Currently our service have multiple endpoints, with each of them representing different methods.
-If you interested in only processing a single sentence, you can call the following endpoints:
+The generated graph can be seen in Figure \ref{fig:service}. The code of the service is publicly available on Github\footnote{\url{https://github.com/adaamko/4lang}}. We can generate graphs with raw text by calling the service. Currently our service has multiple endpoints, with each of them representing different methods.
+If you are interested in only processing a single sentence, the following endpoints are available:
 
 \begin{figure}[!htb]
 	\centering
