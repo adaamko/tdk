@@ -7,7 +7,7 @@ On the 2018 Semeval Task \textit{Machine comprehension using commonsense knowled
 
 The \texttt{Yuanfudao} system implements a Three-way Attentive Network (TriAN), an ensemble of three LSTMs augmented with various attention mechanisms, to model for each question interactions between question, possible answers, and the passage that may or may not contain the correct answer to the question.
 
-The system was implemented using python programming language and the \texttt{pytorch} package for the implementation of the neural network.
+The system was implemented using python programming language and the \texttt{pytorch} package for the implementation of the neural network. The source code is available on Github\footnote{\url{https://github.com/intfloat/commonsense-rc}}.
 
 \subsection{Parameters}
 
@@ -50,7 +50,7 @@ The \textit{ConceptNet} is a major part of the \texttt{Yuanfudao} system, as it 
 An overview of the original system is reproduced in Figure~\ref{fig:dnn}.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.4]{TriAN.jpg}
+	\includegraphics[scale=0.5]{TriAN.jpg}
 	\caption{Structure of the original network \cite{Wang:2018}}
 	\label{fig:dnn}
 \end{figure}
@@ -148,6 +148,8 @@ With the recommended pretraining(Figure~\ref{fig:learning_curve2}):
 As you can see there is no significant difference between the learning curve with or without pretraining.
 
 \section{Modifications}
+Our modifications are available on Github\footnote{\url{https://github.com/GKingA/commonsense-rc}}.
+
 We modified the preprocessing part of the system to incorporate the similarity calculating method from Chapter ~\ref{chap:4lang}. The most straightforward way of incorporating our metric into the system is by creating vectors similar to those representing \textit{ConceptNet} relations between words of a passage and words in each answer candidate. Since these vectors represent
 word-to-word relationships, we measure the support between pairs of \texttt{4lang} definition graphs, and for each word in the passage we take the maximum support score over all words of the answer candidate. Elements of a vector for a passage $P$ and a possible answer $A$ are hence defined as:
 
@@ -180,6 +182,8 @@ The outputs of this layer is passed to the RNN layers. This is depicted at Figur
 \end{figure}
 
 Since we also wanted to see how the system changes if we replace \textit{ConceptNet} relations with our metric, we also trained systems without \textit{ConceptNet} rel embeddings.
+
+\FloatBarrier
 
 \section{The results}
 The original \texttt{Yuanfudao} \cite{Wang:2018} publication said its system was able to reach $83.95\%$ accuracy on the test data. We were only able to reproduce a $80.3\%$ accuracy on the test set and $82.5\%$ on the development set with the recommended pretraining on the \texttt{RACE} \cite{Lai:2017} dataset. We will take these results as our bases of the comparison.

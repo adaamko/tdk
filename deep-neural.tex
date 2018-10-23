@@ -10,12 +10,14 @@ The most common structures of these experimental neural networks include recurre
 In this chapter we will introduce the deep learning mechanisms that are the essential building blocks of the Yuanfudao system described in Chapter \ref{chap:yuanfudao}.
 
 \section{Basics}
+\begin{minipage}{\textwidth}
 Some arbitrary definitions we will use in this chapter:
 \begin{itemize}
 	\item \textbf{Batch}: The chunks of training data that we use for training in one iteration. It's size can be a crucial parameter to set.
 	\item \textbf{Epoch}: One training iteration is called an epoch. The number of epochs determines how long we want to train our network.
 	\item \textbf{Learning rate}: \(\eta\) the velocity of the learning process. Setting it too low could result in slow learning and getting stuck in a local minimum, but setting it too high could result in jumping over the optimum and bouncing.
 \end{itemize}
+\end{minipage}
 
 People usually use supervised learning in the field of natural language processing to achieve the desired structure, but we might face multiple challenges while training. That's reason why we have to use optimization and regularization methods.
 

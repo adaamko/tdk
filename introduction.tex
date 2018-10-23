@@ -16,31 +16,31 @@ Even though these tasks are trivial for us, for a computer it can be really hard
 % egyszer� multtol jelenig bevezeto
 The interest in NLP research began in the 1950s, the early phase was mainly focused on MT (Machine Translation), because after the World War II, people
 recognized the importance of the translation from one language to another, and hoped to do it automatically.
-However MT is still a very difficult nowadays, so these researches discovered early the main challenges of the syntactic and semantic parsing.
+However MT is still very difficult nowadays, so these researches discovered the main challenges of the syntactic and semantic parsing early.
 As time passed, researches embraced new areas of NLP as more advanced technology and knowledge became available. Now that we live in a world where
-computers and smartphones, collecting data became incredibly easy, as a result, statistical NLP drew attention because these models thrive off big data, but one cannot ignore 
-simple rule based methods, which can also be a very powerful method, especially using them as a hybrid model with statistical methods.
+computers and smartphones are widely accessible, collecting data became incredibly easy, as a result, statistical NLP drew attention because these models thrive off big data, but one cannot ignore 
+simple rule based methods which can also be very powerful, especially using them as a hybrid model with statistical methods.
 %--------------------------------------------------------------------------------------
 % r�vid nlp pipeline
 
 Building NLP applications requires many levels of analysis.
-The typical pipeline structured as follows:
+The typical pipeline is structured as follows:
 \begin{itemize}
 	\item First we need to tokenize our input text, which means breaking up the text into meaningful elements, especially into words
-	\item After we tokenized our text, we need word analysis called \texttt{morphology}, which is concerned with the structure of words.
+	\item After we tokenized our text, we need to perform word analysis called \texttt{morphology}, which is concerned with the structure of words.
 	\item Part of speech assigns words to syntax behavior in a sentence.
 	\item The main task of syntactic parsing is to analyze the grammatical structure of a sentence. Given a set of words, a parser forms units (subjects, verbs, etc..) according to some grammatical formalism.
-	There are two main type of syntactic parsers:
+	There are two main types of syntactic parsers:
 	\begin{itemize}
-		\item Consituency parsers produce trees, that represents the grammatical structure.
-		\item Dependency parsers are the more popular nowadays. They represent the structure of a sentence as a dependency tree.
+		\item \textit{Constituency parsers} produce trees, that represent the grammatical structure.
+		\item \textit{Dependency parsers} are the more popular nowadays. They represent the structure of a sentence as a dependency tree.
 	\end{itemize}
-	\item At this point we have various ways to analyze a text, but without modeling its \texttt{meaning}. Semantic is the study of meaning, and semantic parsing is a task to find a representation and assign it to the text. This task will be the main topic of our work.
+	\item At this point we have various ways to analyze a text, but without modeling its \texttt{meaning}. Semantics is the study of meaning, and semantic parsing is a task to find a representation and assign it to the text. This task will be the main topic of our work.
 \end{itemize}
 %-------------------------------------------------------------
 \section{Objectives}
-The main focus of this study is computational semantics. Our research includes building explicit representations of natural language semantics, because in today's state of the art systems for popular semantics tasks such as measuring semantic similarity or machine comprehension, they are rarely present. Virtually all systems
-competing at popular challenges (e.g. \cite{Cer:2017,Collados:2017}) rely on word embeddings as the sole representation of word meaning. Recently \cite{Recski:2016c} has presented a method using graphical representations of natural language text that improved over the state of the art on the task of
+The main focus of this study is computational semantics. Our research includes building explicit representations of natural language semantics, because in today's state-of-the art systems for popular semantics tasks such as measuring semantic similarity or machine comprehension, they are rarely present. Virtually all systems
+competing at popular challenges (e.g. \cite{Cer:2017,Collados:2017}) rely on word embeddings as the sole representation of word meaning. Recently \cite{Recski:2016c} has presented a method using graphical representations of natural language text that improved over the state-of-the art on the task of
 measuring semantic similarity of pairs of English words. In this paper
 we use similar graphs as simple but powerful tools for measuring textual
 entailment. Our task includes defining new methods for measuring graph similarities, and building an online available service for building graphs highly automatically, giving us a tool for building strong baseline methods. Our work was based upon measuring our models through state-of-the art systems on the 2018 Semeval Task \textit{Machine comprehension using commonsense knowledge}.
@@ -51,12 +51,9 @@ graphs and apply it to the 2018 Semeval task on Machine
 Comprehension (MC).
 Concept graphs are built automatically from MC texts, questions, and answers,
 using the semantic parsing system \texttt{4lang} \cite{Recski:2016d}.
-First we present a highly automated process of building concept graphs from raw text, after
-a strong baseline method using only these graphs is presented achieving an accuracy score of $68.3\%$,
-followed by an enhancement of a state-of-the-art system
-\cite{Wang:2018}, where we then proceeded to use the metric underlying our baseline as an
-additional feature. Preliminary results suggest that these features
-achieve a .5 percentage point improvement over the original system.
+First we present a highly automated process of building concept graphs from raw text, then a strong baseline method is presented using only these graphs achieving an accuracy score of $68.3\%$,
+followed by an enhancement of a state-of-the art system
+\cite{Wang:2018}, where we proceeded to use the metric underlying our baseline as an additional feature. Preliminary results suggest that these features achieve a .5 percentage point improvement over the original system.
 
 \section{References}
 The code of our system is available on Github\footnote{\url{https://github.com/adaamko/4lang}}. The code was implemented by the authors of this thesis based upon the \textbf{4lang} system.
@@ -64,9 +61,10 @@ The code of our system is available on Github\footnote{\url{https://github.com/a
 \section{Structure}
 The structure of the thesis is the following:
 \begin{itemize}
-	\item \textbf{Chapter 1} describes the short history and motivation of the NLP applications, it also gives a short summary about the objectives of the thesis, and our results.
-	\item \textbf{Chapter 2} gives a short introduction into the field of semantic parsing, and semantic models in general. After it briefly explains the semantic parsing system \textbf{4lang}, and our process of automating the building of concept graphs, and the baseline approach, which achieved an accuracy score of $68.3\%$.
-	\item \textbf{Chapter 3} gives an introduction into deep learning, focusing on the NLP tasks.
-	\item \textbf{Chapter 4} presents our experiments with the state-of-the art system \textbf{Yuanfudao}. Our preliminary results show a .5 percent improvement over the original system.
-	\item \textbf{Chapter 5} summarizes our contributions and describes our ongoing/future work. It briefly discusses our plans for the follow-up, that was beyond the scope of this work.
+	\item \textbf{Chapter \ref{chap:Introdu}} describes the short history and motivation of the NLP applications, it also gives a short summary about the objectives of the thesis, and our results.
+	\item \textbf{Chapter \ref{chap:semanticparsing}} gives a short introduction into the field of semantic parsing, and semantic models in general. It briefly explains the semantic parsing system \textbf{4lang}, and our process of automating the building of concept graphs
+	\item \textbf{Chapter \ref{chap:comprehension}} describes the baseline approach, which achieved an accuracy score of $68.3\%$.
+	\item \textbf{Chapter \ref{chap:deep}} gives an introduction into deep learning, focusing on the NLP tasks.
+	\item \textbf{Chapter \ref{chap:yuanfudao}} presents our experiments with the state-of-the art system \textbf{Yuanfudao}. Our preliminary results show a .5 percent improvement over the original system.
+	\item \textbf{Chapter \ref{chap:future}} summarizes our contributions and describes our ongoing/future work. It briefly discusses our plans for the follow-up, that was beyond the scope of this work.
 \end{itemize}
