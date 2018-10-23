@@ -3,7 +3,7 @@
 \label{chap:semanticparsing}
 %----------------------------------------------------------------------------
 
-In this chapter we first introduce applications, that use semantic models as an essential knowledge for their process. After, the theory and problems of semantic representation are discussed, and we briefly present the upsides and downsides of such representations. After that we go into details about distributional and graph based models, introducing the semantic parsing system \textbf{4lang}, which is the main focus of our work, and our micro-services built around it to highly automate the process of building concept graphs from raw input.
+In this chapter we first introduce applications, that use semantic models as an essential knowledge for their process. After, the theory and problems of semantic representation are discussed, and we briefly present the upsides and downsides of such representations. After that we go into details about distributional and graph based models, introducing the semantic parsing system \textbf{4lang}, which is the main focus of our work. Finally, our micro-services are discussed, built around the parser to highly automate the process of building concept graphs from raw input. An easy example of their usage is shown as well.
 
 When we use the word semantics, we usually refer to the interpretation of a linguistics unit (e.g. words, phrases, sentences, or whole texts) within the boundaries of a certain context. In many scientific fields e.g. philosophy, logic or biology the study of semantics is a highly researched task. While many NLP tasks like syntactic parsing, part-of-speech tagging, or even machine translation can be ignorant of the meaning of units, of what information they hold, there are also many other tasks that rely heavily on semantics.
 
@@ -20,9 +20,9 @@ For modeling the meaning of linguistic units, choosing an appropriate representa
 Finding an absolute representation of semantics knowledge is among the most difficult task in Artificial Intelligence (AI). While we are yet to find a representation that has no downside, various experimental models are present, that are applicable for certain domains, but are problematic in other scenarios. So before choosing one, we need to take into account the limitations of each choice. 
 
 
-Representation of semantic knowledge with logical expressions (e.g. zero-order logic, prepositional logic) exists, and although many companies still rely on hand-crafted rules as a knowledge representation, they are very unpractical and have serious problems with scalability and automation. Distributional models have risen in popularity in recent years, where meaning is represented with multi-dimensional vectors. While vector based models can give us a uniform representation, they mostly lack interpretability in a way that we never really know what happens inside these models. Another issue is the choice of the dimension. Many algorithms exist for reducing the dimension of such vectors to a fixed number, but determining the correct length can be difficult.
+Representation of semantic knowledge with logical expressions (e.g. zero-order logic, prepositional logic) exists, and although many companies still rely on hand-crafted rules as a knowledge representation, they are very unpractical and have serious problems with scalability and automation. Distributional models have risen in popularity in recent years, where meaning is represented with multi-dimensional vectors. While vector based models can give us a uniform representation, they mostly lack interpretability in a way that we never really know what happens inside these models. Another issue is the choice of the dimension. Many algorithms exist for reducing the dimension of such vectors to a fixed number, but determining the correct length can be difficult. Rare words are a big issue as well, if a word in the training data is rarely present, distributional models will fail to handle them correctly.
 
-On the other hand graph based solutions have high level of interpretability, but automating the process of building graphs is a challenging task, and using them as a sole solution for a semantic parsing task in most cases would come short, but in hybrid systems they make up for the weaknesses other models have.
+On the other hand graph based solutions have high level of interpretability, and handling rare words is one of their biggest advantage. But automating the process of building graphs is a challenging task, and using them as a sole solution for a semantic parsing task in most cases would come short, but in hybrid systems they make up for the weaknesses other models have.
 
  In the next sections we will briefly discuss graph based models and distributional models, and because both of them have their merits, it is necessary to know the strengths and weaknesses of each one. Our work focuses around graph based solutions.
 
@@ -47,7 +47,7 @@ The other issue is that we know very little about the structure of a multi-dimen
 In the majority of our work, we researched graph-based solutions, where we model the meaning of linguistics unit with graphs, and the whole process can be defined with graph transformations. Next I will briefly introduce graph based formalism starting with Abstract Meaning Representations (AMR) followed by the introduction of the \textbf{4lang} formalism, which will be the focus of the work, and I will go into details in the next section.
 
 \section{Abstract Meaning Representations}
-Abstract Meaning Representation (AMR) was introduced by Banarescu\cite{Banarescu:2013} for representing the meaning of linguistic structures. They represent meaning as directed acyclic graphs (DAGs), that can be used to capture the meaning of whole sentences, so if two sentences are similar in meaning, they should be represented by similar graphs. In the past few years, we have seen multiple works related to AMR graphs, like an AMR-annotated corpus\cite{Banarescu:2013}, or multi-sentence AMR corpus \cite{OGorman2018AMRBT}, and various parsing applications \cite{DAC:2017} \cite{Vanderwende:2015}.
+Abstract Meaning Representation (AMR) was introduced by Banarescu\cite{Banarescu:2013} for representing the meaning of linguistic structures. They represent meaning as directed acyclic graphs (DAGs), that can be used to capture the meaning of whole sentences, so if two sentences are similar in meaning, they should be represented by similar graphs. In the past few years, AMR related works have appeared e.g. parsing applications, or annotated corpuses \cite{Banarescu:2013, OGorman2018AMRBT, DAC:2017}.
 
 Nodes of AMR graphs can be represented various ways. Each node in the graph represents a semantic concept \cite{AMR:2015}, that can be either an English word, or frameset from PropBank \cite{Palmer:2005}, essentially used for abstraction. The framesets are English verbs. The AMR introduced these variables for entities, events, properties, and states. An AMR can be converted to multiple formats:
 \begin{itemize}
@@ -66,7 +66,7 @@ Nodes of AMR graphs can be represented various ways. Each node in the graph repr
 	\label{fig:amr}
 \end{figure*}
 
-In this thesis we use the semantic parser \textbf{4lang} \cite{Recski:2015b}, and unlike \textbf{4lang}, AMR handles wider range of phenomenas, mostly typical of English, and AMR is not interlingua, it is heavily biased towards English \cite{Palmer:2005}, while 4lang can be configured to handle multiple language.
+In this thesis we use the semantic parser \textbf{4lang} \cite{Recski:2015b}, and unlike \textbf{4lang}, AMR handles wider range of phenomenas, mostly typical of English. AMR's usage is mostly biased towards English \cite{Palmer:2005}, while 4lang can be configured to handle multiple languages.
 
 \begin{figure*}[h!]
 	\centering
@@ -75,7 +75,7 @@ In this thesis we use the semantic parser \textbf{4lang} \cite{Recski:2015b}, an
 	\label{fig:4langboy}
 \end{figure*}
 
-In the next section, I will go into details about the 4lang formalism, and the parser itself. After that I will describe our method of measuring similarities between semantic graphs, and it's usage on semantic related tasks.
+In the next section, I will go into details about the \textbf{4lang} formalism, and the parser itself. After that I will describe our method of measuring similarities between semantic graphs, and it's usage on semantic related tasks.
 
 %----------------------------------------------------------------------------
 \section{4lang}
