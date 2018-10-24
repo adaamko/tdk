@@ -157,7 +157,7 @@ As you can see there is no significant difference between the learning curve wit
 \section{Modifications}
 Our modifications are available on Github\footnote{\url{https://github.com/GKingA/commonsense-rc}}.
 
-We modified the preprocessing part of the system to incorporate the similarity calculating method from Chapter ~\ref{chap:4lang}. The most straightforward way of incorporating our metric into the system is by creating vectors similar to those representing \textit{ConceptNet} relations between words of a passage and words in each answer candidate. Since these vectors represent
+We modified the preprocessing part of the system to incorporate the similarity calculating method from Chapter ~\ref{chap:comprehension}. The most straightforward way of incorporating our metric into the system is by creating vectors similar to those representing \textit{ConceptNet} relations between words of a passage and words in each answer candidate. Since these vectors represent
 word-to-word relationships, we measure the support between pairs of \texttt{4lang} definition graphs, and for each word in the passage we take the maximum support score over all words of the answer candidate. Elements of a vector for a passage $P$ and a possible answer $A$ are hence defined as:
 
 \[S^{(P, A)}_i = \max_{A_j \in A} S(P_i, A_j)\]
