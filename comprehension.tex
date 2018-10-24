@@ -89,24 +89,24 @@ Demonstrating the algorithm behind our baseline, lets look at the example passag
 \begin{center}
 	\textit{ "I went into my bedroom and flipped the light switch. Oh, I see that the ceiling lamp is not turning on. It must be that the light bulb needs replacement. I go through my closet and find a new light bulb that will fit this lamp and place it in my pocket. I also get my stepladder and place it under the lamp. I make sure the light switch is in the off position. I climb up the ladder and unscrew the old light bulb. I place the old bulb in my pocket and take out the new one. I then screw in the new bulb. I climb down the stepladder and place it back into the closet. I then throw out the old bulb into the recycling bin. I go back to my bedroom and turn on the light switch. I am happy to see that there is again light in my room."}
 \end{center}
-And a question related to the text: \textit{Why did they have to change the old light bulb?} and the answers:
+And a question related to the text: \textit{Which room did the light go out in?} and the answers:
 \begin{itemize}
-	\item \textit{"It shattered"}
-	\item \textit{"Worn"}
+	\item \textit{"Kitchen."}
+	\item \textit{"Bedroom."}
 \end{itemize}
 First we build the expanded graph from the text. After we build the merged graphs (for the demonstration, we now only build the graphs without expansion) seen in Figure \ref{fig:merge1} and Figure \ref{fig:merge2}. The graph without merging can be seen in Figure \ref{fig:merge3}. After the merging, we compare both of the graphs to the passage graph applying our defined metric.
 
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.3]{figures/comp}
-	\caption{Merged graph of answer candidate \textit{"It shattered"}}
+	\caption{Merged graph of answer candidate \textit{"Kitchen."}}
 	\label{fig:merge1}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.3]{figures/comp2}
-	\caption{Merged graph of answer candidate \textit{"Worn"}}
+	\caption{Merged graph of answer candidate \textit{"Bedroom."}}
 	\label{fig:merge2}
 \end{figure}
 

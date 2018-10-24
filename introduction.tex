@@ -1,6 +1,6 @@
 \chapter{Introduction}
 \label{chap:Introdu}
-In modern systems distributional models are dominant for a semantic parser. We use graph based methods and apply it to the 2018 Semeval task on Machine Comprehension (MC). We built a REST-API around the \textbf{4lang}\cite{Recski:2016} to present a highly automated process constructing semantic models from raw input. We introduced a strong baseline for the task, followed by an enhancement of a state-of-the-art system \cite{Wang:2018}. In this chapter we discuss the history of the Natural Language Processing (NLP) applications, and briefly define the structure of this paper.
+In modern systems distributional models are dominant for a semantic parser. We use graph based methods and apply it to the \textit{2018 Semeval task on Machine Comprehension} (MC). We built a REST-API (available at \url{http://hlt.bme.hu/4lang}) around the \textbf{4lang}\cite{Recski:2016} (described in Chapter \ref{chap:semanticparsing}) to present a highly automated process constructing semantic models from raw input. Online demo of the service is available at \url{http://4lang.hlt.bme.hu}. In Chapter \ref{chap:comprehension} we introduce a strong baseline for the task, followed by an enhancement of a state-of-the-art system \cite{Wang:2018} (Chapter \ref{chap:yuanfudao}). In this chapter we discuss the history of the Natural Language Processing (NLP) applications, and briefly define the structure of this paper.
 %----------------------------------------------------------------------------
 \section{Natural Language Processing}
 While computers can be easily programmed to understand structured data, such as tables and spreadsheets, it can be rather challenging for them
@@ -33,10 +33,19 @@ The typical pipeline is structured as follows:
 	There are two main types of syntactic parsers:
 	\begin{itemize}
 		\item \textit{Constituency parsers} produce trees, that represent the grammatical structure.
-		\item \textit{Dependency parsers} are the more popular nowadays. They represent the structure of a sentence as a dependency tree.
+		\item \textit{Dependency parsers} are the more popular nowadays. They represent the structure of a sentence as a dependency tree, which instead of grammatical relations, tries to model the dependencies between words.
 	\end{itemize}
+	A parse of the example sentence: \textit{"John has finished the work"} can be seen in Figure \ref{fig:johnfinished}.
+	
 	\item At this point we have various ways to analyze a text, but without modeling its \texttt{meaning}. Semantics is the study of meaning, and semantic parsing is a task to find a representation and assign it to the text. This task will be the main topic of our work.
 \end{itemize}
+
+\begin{figure*}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/Johnhasfinishedthework}
+	\caption{Parses of the sentence \textit{"John has finished the work"} \cite{parsers}}
+	\label{fig:johnfinished}
+\end{figure*}
 %-------------------------------------------------------------
 \section{Objectives}
 The main focus of this study is computational semantics. Our research includes building explicit representations of natural language semantics, because in today's state-of-the art systems for popular semantics tasks such as measuring semantic similarity or machine comprehension, they are rarely present. Virtually all systems
@@ -56,15 +65,18 @@ followed by an enhancement of a state-of-the art system
 \cite{Wang:2018}, where we proceeded to use the metric underlying our baseline as an additional feature. Preliminary results suggest that these features achieve a .5 percentage point improvement over the original system.
 
 \section{References}
-The code of our system is available on Github\footnote{\url{https://github.com/adaamko/4lang}}. The code was implemented by the authors of this thesis based upon the \textbf{4lang} system.
+The code of our system is available on Github\footnote{\url{https://github.com/adaamko/4lang}}. The code was implemented by the authors of this paper based upon the \textbf{4lang} system.
 
 \section{Structure}
-The structure of the thesis is the following:
+The structure of the paper is the following:
 \begin{itemize}
-	\item \textbf{Chapter \ref{chap:Introdu}} describes the short history and motivation of the NLP applications, it also gives a short summary about the objectives of the thesis, and our results.
+	\item \textbf{Chapter \ref{chap:Introdu}} describes the short history and motivation of the NLP applications, it also gives a short summary about the objectives of the paper, and our results.
 	\item \textbf{Chapter \ref{chap:semanticparsing}} gives a short introduction into the field of semantic parsing, and semantic models in general. It briefly explains the semantic parsing system \textbf{4lang}, and our process of automating the building of concept graphs
-	\item \textbf{Chapter \ref{chap:comprehension}} describes the baseline approach, which achieved an accuracy score of $68.3\%$.
+	\item \textbf{Chapter \ref{chap:comprehension}} describes the baseline approach to the Machine Comprehension task, which achieved an accuracy score of $68.3\%$.
 	\item \textbf{Chapter \ref{chap:deep}} gives an introduction into deep learning, focusing on the NLP tasks.
 	\item \textbf{Chapter \ref{chap:yuanfudao}} presents our experiments with the state-of-the art system \textbf{Yuanfudao}. Our preliminary results show a .5 percent improvement over the original system.
 	\item \textbf{Chapter \ref{chap:future}} summarizes our contributions and describes our ongoing/future work. It briefly discusses our plans for the follow-up, that was beyond the scope of this work.
 \end{itemize}
+
+\section{Division of labour}
+This project was a product of the combined work of \vikszerzo and \vikszerzos. \vikszerzo was responsible for building the service to automate the process of building concept graphs (online demo available at \url{http://4lang.hlt.bme.hu}), and was mostly working on the baseline methods and metrics. \vikszerzos main work involved around applying the baseline to the state-of-the-art system Yuanfudao \cite{Wang:2018}.
