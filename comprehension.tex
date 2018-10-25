@@ -63,7 +63,7 @@ that are also present in $G_1$:
 \[ S(G_1, G_2) =\frac{|E(G_1)\cap E(G_2)|}{|E(G_2)|}\]
 
 Two (directed) edges are identical if their source
-and target nodes and their label are all identical. Based on early
+and target nodes and their labels are all identical. Based on early
 findings we used only \textit{expanded} \texttt{4lang} graphs (see
 Section~\ref{sec:4lang}) for measuring support. 
 To create a simple baseline solution for the Machine Comprehension task,
@@ -85,7 +85,7 @@ pick the answer candidate with the higher support score.
 \subsection{Experiments}
 \label{sec:exp}
 
-Demonstrating the algorithm behind our baseline, lets look at the example passage:
+Demonstrating the algorithm behind our baseline, let's look at the example passage:
 \begin{center}
 	\textit{ "I went into my bedroom and flipped the light switch. Oh, I see that the ceiling lamp is not turning on. It must be that the light bulb needs replacement. I go through my closet and find a new light bulb that will fit this lamp and place it in my pocket. I also get my stepladder and place it under the lamp. I make sure the light switch is in the off position. I climb up the ladder and unscrew the old light bulb. I place the old bulb in my pocket and take out the new one. I then screw in the new bulb. I climb down the stepladder and place it back into the closet. I then throw out the old bulb into the recycling bin. I go back to my bedroom and turn on the light switch. I am happy to see that there is again light in my room."}
 \end{center}
@@ -120,10 +120,10 @@ First we build the expanded graph from the text. After we build the merged graph
 We tested the baseline method described in the previous section on a
 subset of all questions in the train section of the MC dataset:
 wh-questions that were not
-categorized as ``common-sense''. Of this subset of 5,375 questions (of a
+categorized as "common-sense". Of this subset of 5,375 questions (of a
 total of 9,731), our
 method correctly answers 3,671, achieving an accuracy score of $68.3\%$.
 We then proceeded to use the metric underlying our baseline as an
 additional feature in the \texttt{Yuanfudao} system. 
 
-In the next chapter we will briefly give an introduction into the field of deep learning in general, and particularly in NLP applications, and after we will demonstrate the Yuanfudao system.
+In the next chapter we will briefly give an introduction into the field of deep learning in general, and particularly in NLP applications, and then we will demonstrate the Yuanfudao system.

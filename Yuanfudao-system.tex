@@ -88,7 +88,7 @@ The two linear sequence attention layer's and the bilinear sequence attention la
 	\label{fig:sequence_attention}
 \end{figure}
 
-The averaged passage output is passed though a \textit{linear feed forward layer} than multiplied by the answer's averaged output. The question's averaged output is passed though an other linear feed forward layer than multiplied by the answer's averaged output. At the end its all summed and sigmoid function used at its output. The output in this case is whether the answer was correct to the given question or not. This last section is at Figure~\ref{fig:output}.
+The averaged passage output is passed through a \textit{linear feed forward layer} then multiplied by the answer's averaged output. The question's averaged output is passed through an other linear feed forward layer than multiplied by the answer's averaged output. At the end its all summed and sigmoid function used at its output. The output in this case is whether the answer was correct to the given question or not. This last section is at Figure~\ref{fig:output}.
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=0.5]{TriAN_output.jpg}
@@ -179,7 +179,7 @@ We used these new input vectors as the input of a new \texttt{4lang} embedding l
 	\label{fig:4lang_embedding}
 \end{figure}
 
-The outputs of this layer is passed to the RNN layers. This is depicted at Figure~\ref{fig:rnn_4lang}.
+The outputs of this layer are passed to the RNN layers. This is depicted at Figure~\ref{fig:rnn_4lang}.
 
 \begin{figure}[h!]
 	\centering
@@ -216,4 +216,4 @@ We tested our model by turning on and off the usage of \textit{ConceptNet} and \
 \end{table}
 
 It is evident that without pretraining the Yuanfudao system performs best if we use the relation scores calculated from \texttt{4lang} graphs instead of the \textit{ConceptNet} relationships.
-After pretraining the network on the \texttt{RACE} dataset the results show that using both of the relation metric is most beneficial.
+After pretraining the network on the \texttt{RACE} dataset the results show that using both of the relation metric is the most beneficial.

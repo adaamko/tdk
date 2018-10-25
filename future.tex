@@ -29,7 +29,11 @@ baseline.
 We also have some experiments with defining new additional rules added to the \textbf{4lang} parser, that could potentially be giving us a more abstract and simpler definitions than the \textit{expansion} method. Let us look back the sentence "My poor wife" and the expanded graph shown in Figure \ref{fig:mypoorexpanded}. In this example if we look at the edge \textbf{wife $\xrightarrow0$ woman} we can make an assumption that within the boundaries of the sentence we can use the concept \textbf{woman} instead of the concept \textbf{wife}. Using this simple rule we can reduce our graph to a simpler definition shown in Figure \ref{fig:mypoorabs}.
 
 \subsection{Interpreted Regular Tree Grammar}
-We recently started experimenting with Interpreted Regular Tree Grammars \cite{Koller:2011} (IRTG for short) that we could also use to construct \textbf{4lang} graphs and depending on the grammatic rules we define we can also accomplish the \textit{expand} and \textit{abstract} functionalities. These experiments are not yet perfect, but this approach shows great potential. See the phrase "Ordinary email" represented on the Figure~\ref{fig:irtg}.
+We recently started experimenting with Interpreted Regular Tree Grammars \cite{Koller:2011} (IRTG for short) that we could also use to construct \textbf{4lang} graphs and by modifying the grammatic rules we can also accomplish the \textit{expand} and \textit{abstract} functionalities. These experiments are not yet perfect, but this approach shows great potential. See the phrase "Ordinary email" represented on the Figure~\ref{fig:irtg}.
+
+The base of this approach is to define grammar files where we describe the rules for multiple graph, tree or string grammars. This allows us to 
+
+We used an already functioning grammar that defined the relationships between universal dependencies and \texttt{4lang} graphs and modified it to incorporate the definition of the words also.
 
 \begin{figure*}[h]
 	\centering

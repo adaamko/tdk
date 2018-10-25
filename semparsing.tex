@@ -75,7 +75,7 @@ In this paper we use the semantic parser \textbf{4lang} \cite{Recski:2018}, and 
 	\label{fig:4langboy}
 \end{figure*}
 
-In the next section, we will go into details about the \textbf{4lang} formalism, and the parser itself. After that we will describe our method of measuring similarities between semantic graphs, and it's usage on semantic related tasks.
+In the next section, we will go into details about the \textbf{4lang} formalism, and the parser itself. After that we will describe our method of measuring similarities between semantic graphs, and its usage on semantic related tasks.
 
 %----------------------------------------------------------------------------
 \section{4lang}
@@ -183,9 +183,9 @@ concepts corresponding to each word of the original sentence. The Stanford parse
 \subsection{Expansion}
 Optionally, the \texttt{4lang} system allows us to \textit{expand}
 graphs, a process which unifies the graph with the definition graphs of
-each concept. The implementation is written in the \textbf{dict\_to\_4lang} module, that extends the functionality of the discussed \textbf{text\_to\_4lang} pipeline with dictionaries. \textbf{4lang} takes advantage of this, and implements the expansion step, which essentially is joining the definitions graphs to the main graph. This allows us to build a larger graph, that contains more information, and allows us to model the text better by simply adding the definition of words.
+each concept. The implementation is written in the \textbf{dict\_to\_4lang} module, that extends the functionality of the discussed \textbf{text\_to\_4lang} pipeline with dictionaries. \textbf{4lang} takes advantage of this, and implements the expansion step, which is essentially joining the definitions graphs to the main graph. This allows us to build a larger graph, that contains more information, and allows us to model the text better by simply adding the definition of words.
 
-Let us look at the example sentence \textit{"My poor wife"}, that results the graph shown in Figure \ref{fig:mypoor}. Looking at the definition of the word \textit{poor}: \textit{having very little money and not many possessions}, we can build a definition graph and essentially join the two graphs together. This can result us a better model if we are ready to take word definitions into account, and with this method we can have higher similarities between graphs whose sentences are also similar \footnote{Of course not every interpretation of \textit{"poor"} is related to money. It requires a higher level mechanism to handle these kind of occurrences, see more in \cite{Kornai:2018}.}. Doing this for every word in the sentence resulting in a merged graph Figure \ref{fig:mypoorexpanded}. If we look at the graph, it is clear that the expanded graph gives us much more accurate context and definition. Our work was build around the expanded graph, and we will see that how better it actually performs on a real task. This will be the main topic of the next chapter.
+Let us look at the example sentence \textit{"My poor wife"}, that results the graph shown in Figure \ref{fig:mypoor}. Looking at the definition of the word \textit{poor}: \textit{having very little money and not many possessions}, we can build a definition graph and essentially join the two graphs together. This can result us a better model if we are ready to take word definitions into account, and with this method we can have higher similarities between graphs whose sentences are also similar \footnote{Of course not every interpretation of \textit{"poor"} is related to money. It requires a higher level mechanism to handle these kind of occurrences, see more in \cite{Kornai:2018}.}. Doing this for every word in the sentence resulting in a merged graph Figure \ref{fig:mypoorexpanded}. If we look at the graph, it is clear that the expanded graph gives us much more accurate context and definition. Our work was built around the expanded graph, and we will see that how better it actually performs on a real task. This will be the main topic of the next chapter.
 
 \begin{figure}
 	\centering
@@ -203,8 +203,7 @@ Let us look at the example sentence \textit{"My poor wife"}, that results the gr
 
 
 \subsection{The service}
-The beginning of our research we put a high emphasis on generating graphs from raw text with a highly automated method, so besides being an open-source software library,
-the \texttt{4lang} we made the accessible via a public
+At the beginning of our research we put a high emphasis on generating graphs from raw text with a highly automated method, so besides being an open-source software library, we made \texttt{4lang} accessible via a public
 REST API at \url{http://hlt.bme.hu/4lang}. We used the python language for implementing the service, and for the framework we used the flask\footnote{http://flask.pocoo.org/} package. The service generates input for the \texttt{text\_to\_4lang} module from the raw text input, then after processing it, returns a graph in \textbf{networkx multigraph}\footnote{\url{https://networkx.github.io/documentation/networkx-1.9.1/reference/classes.multigraph.html}} format to make it easy to visualize it on essentially any client side. Online demo of the service is available at \url{http://4lang.hlt.bme.hu}. 
 The process is presented in Example \ref{lst:code}.
 \begin{center}
@@ -222,7 +221,7 @@ s_machines = r.json()['sentence']
 
 
 The generated graph can be seen in Figure \ref{fig:service}. The code of the service is publicly available on Github\footnote{\url{https://github.com/adaamko/4lang}}. We can generate graphs with raw text by calling the service. Currently our service has multiple endpoints, with each of them representing different methods.
-If you are interested in only processing a single sentence, the following endpoints are available:
+If you are only interested in processing a single sentence, the following endpoints are available:
 
 \begin{figure}[!htb]
 	\centering
@@ -260,4 +259,4 @@ outperforms previous top systems by utilizing a simple similarity metric
 between \texttt{4lang} definitions of pairs of English words
 \cite{Recski:2016c}, this was the main idea of trying it in a different task with a different state-of-the-art system.
 
-In the next chapter, we will briefly discuss the machine comprehension challenge, and we will introduce our baseline method for solving it using our micro-service for automatically build concept graphs. After that we will present how it is applicable to an already working system.
+In the next chapter, we will briefly discuss the machine comprehension challenge, and we will introduce our baseline method for solving it using our micro-service for automatically building concept graphs. After that we will present how it is applicable to an already working system.

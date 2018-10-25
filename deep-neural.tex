@@ -1,5 +1,8 @@
 \chapter{Deep learning neural networks}
 \label{chap:deep}
+
+In this chapter we will introduce the basic deep learning related concepts necessary to understand the model described in the next chapter.
+
 \section{Context}
 Deep learning neural networks gained popularity again in recent years, after the AI winter ended. Since then neural networks became part of the everyday life, we hear about artificial intelligence being used in smart phones to enhance images quality or recognize certain settings and take a picture accordingly. AI is also being used in cancer research and other fields of bioinformatics, and personal assistants became extremely popular as well.
 
@@ -13,10 +16,10 @@ In this chapter we will introduce the deep learning mechanisms that are the esse
 \begin{minipage}{\textwidth}
 Some arbitrary definitions we will use in this chapter:
 \begin{itemize}
-	\item \textbf{Batch}: The chunks of training data that we use for training in one iteration. It's size can be a crucial parameter to set.
+	\item \textbf{Batch}: The chunks of training data that we use for training in one iteration. Its size can be a crucial parameter to set.
 	\item \textbf{Epoch}: One training iteration is called an epoch. The number of epochs determines how long we want to train our network.
 	\item \textbf{Learning rate}: \(\eta\) the velocity of the learning process. Setting it too low could result in slow learning and getting stuck in a local minimum, but setting it too high could result in jumping over the optimum and bouncing.
-	\item \textbf{Accuracy}: The ratio of the correct predictions and the all prediction. Our goal is to achieve a high accuracy with our neural network on the test set.
+	\item \textbf{Accuracy}: The ratio of the correct predictions from all of the predictions. Our goal is to achieve a high accuracy with our neural network on the test set.
 	\item \textbf{Test set}: The part of the dataset that we don't use during the training of our neural network. This determines the actual accuracy of the network.
 	\item \textbf{Training set}: The data we could use for training our network is usually split into two parts in 80:20 ratio. We use the bigger set of data to train our network and we call this the training set.
 	\item \textbf{Development set or Validation set}: The smaller portion of the data. We use this section to validate the network during its training. We do not use this section of the data to train the network.
@@ -24,7 +27,7 @@ Some arbitrary definitions we will use in this chapter:
 \end{minipage}
 \\
 \\
-People usually use supervised learning in the field of natural language processing to achieve the desired structure, but we might face multiple challenges while training. That's reason why we have to use optimization and regularization methods.
+People usually use supervised learning in the field of natural language processing to achieve the desired structure, but we might face multiple challenges while training. That's the reason why we have to use optimization and regularization methods.
 
 \subsection{Optimization}
 The goal of optimization is to overcome the following problems:
@@ -34,7 +37,7 @@ The goal of optimization is to overcome the following problems:
 	\item Setting the batch size
 \end{itemize}
 
-We have touched on the first two briefly before, but setting the batch size is also very important. We give the training data to the network in batch-es, and we iterate through them multiple times (depending on the epoch). The loops length is the number of epochs we take.
+We have touched on the first two briefly before, but setting the batch size is also very important. We give the training data to the network in batches, and we iterate through them multiple times (depending on the epoch).
 
 Methods used for optimizing:
 \begin{itemize}
@@ -81,7 +84,7 @@ The goal of regularization is to avoid over-fitting. Over-fitting happens when o
 \begin{itemize}
 	\item \textbf{Weight decay}: Also known as L2 regularization. It uses a parameter to make sure that the previously learned weight won't influence the new one too much. \[w \leftarrow (1 - \eta \alpha)w - \eta \Delta_w Loss\]
 	\item \textbf{L1 regularization}: This is a normalization method that modifies the cost function similarly to the L2 regularization. The difference is, that in this case the weights might get reduced to zero.
-	\item \textbf{Dropout}: It randomly disables weights for an epoch, so they won't used in that iteration
+	\item \textbf{Dropout}: It randomly disables weights for an epoch, so they won't be used in that iteration.
 	\item \textbf{Early stopping}: It stops the learning if the results on the development set haven't shown any progress in the last couple of epochs.
 	\item \textbf{Noise injection}: It injects noise into the training set.
 \end{itemize}
@@ -115,7 +118,7 @@ They work mostly like a lookup table that can be trained. A lot of the times we 
 
 In a simple feed forward neural network, the information only moves in one direction: from the input layer to the output layer. On the other hand recurrent neural networks take into account their immediate past, the output of the network with the previous timestamp. This internal "memory" like functionality allows the network to remember what it had calculated before. This is illustrated at Figure~\ref{fig:recurrent_net}.
 
-At every timestamp the network gets two set of inputs: the actual input at the timestamp and the hidden state of the network for the previous input. In one iteration it calculates its output using the calculated hidden state in the timestamp. It all could be imagined like the same feed forward network being repeated after one other.
+At every timestamp the network gets two sets of inputs: the actual input at the timestamp and the hidden state of the network for the previous input. In one iteration it calculates its output using the calculated hidden state in the timestamp. It all could be imagined like the same feed forward network being repeated after one other.
 
 The hidden state mentioned above is the "memory" of the network that is calculated with the previous hidden state and the input.
 
@@ -138,13 +141,13 @@ The gradient vanishing or explosion can be a problem with this RNN.
 
 There is a multitude of solutions for the exploding gradients, one of which is called gradient clipping. This is one of the method the state-of-the art system, Yuanfudao uses.
 
-This technique is a very simple yet powerful way of dealing with exploding gradients. All it does is that it limits the size of the gradient, if it norm is higher than a set threshold.
+This technique is a very simple yet powerful way of dealing with exploding gradients. All it does is that it limits the size of the gradient, if its norm is higher than a set threshold.
 
 RNNs can be used in supervised and also unsupervised learning. They are used when the data is sequential, like text, audio, etc.
 
 \subsubsection{Long-Short Term Memory}
 The system we worked with uses LSTM layers as its default RNN type.
-Long-short term memory networks ar the extension of the previously discussed recurrent neural network. The main difference is that it also has an internal long term memory. Usually these type of networks are more reluctant to have the exploding gradient problem.
+Long-short term memory networks are the extension of the previously discussed recurrent neural network. The main difference is that it also has an internal long term memory. Usually these type of networks are more reluctant to have the exploding gradient problem.
 
 Like the simple RNN, LSTMs also have hidden states, that are calculated slightly differently.
 \\
@@ -158,7 +161,7 @@ The LSTMs hidden states are calculated using three gates:
 \end{itemize}
 \end{minipage}
 
-These gates are analog and their value ranges from 0 to 1 with the sigmoid function. A simplified depiction can be seen at Figure~\ref{fig:lstm}\footnote{\url{https://en.wikipedia.org/wiki/Long_short-term_memory}}.
+These gates are analog and their values ranges from 0 to 1 with the sigmoid function. A simplified depiction can be seen at Figure~\ref{fig:lstm}\footnote{\url{https://en.wikipedia.org/wiki/Long_short-term_memory}}.
 \begin{figure*}[!htb]
 	\centering
 	\includegraphics[scale=0.2]{lstm.jpg}
@@ -172,7 +175,7 @@ The sigmoid function allows this structure to be able to learn, meaning that we 
 Long-short term memory networks are used in natural language processing, but also in generative networks, like video or image description generation, text generation and so on.
 
 \paragraph*{Bidirectional long-short term memory} also known as BiLSTM\\
-BiLSTM networks are a variant of long-short term memory that read the input from the beginning to the end than also from the end to the beginning. The main idea behind this is that we may need not just the previous output, but also the next one too. These networks usually outperform simple LSTM systems in their predictions and the learning velocity too.
+BiLSTM networks are a variant of long-short term memory that read the input from the beginning to the end then also from the end to the beginning. The main idea behind this is that we may need not just the previous output, but also the next one too. These networks usually outperform simple LSTM systems in their predictions and the learning velocity too.
 
 \subsubsection{Gated recurrent unit}
 The system we worked with can use GRU layers as its RNN type, but it's not its default setting and it did not perform as good.
@@ -197,7 +200,7 @@ It has four main building blocks:
 Gated recurrent units are mostly used on the field of speech recognition and music modeling while the LSTM is more relevant on the field of natural language processing.
 
 \subsection{Attention}
-The Attention mechanism was first described in \cite{Bahdanau:2015} and was used for machine translation. Since then it became a widely used tool in natural language processing. The idea behind this mechanism is that when the neural network predicts the output, it only uses parts of the given input instead of the full input. That is where the most relevant informations are concentrated and this mechanism only pays \textit{attention} to these parts and the network has to learn what to pay attention to.
+The Attention mechanism was first described in \cite{Bahdanau:2015} and was used for machine translation. Since then it became a widely used tool in natural language processing. The idea behind this mechanism is that when the neural network predicts the output, it only uses parts of the given input instead of the full input. That is where the most relevant information is concentrated and this mechanism only pays \textit{attention} to these parts and the network has to learn what to pay attention to.
 
 Usually in the "sequence-to-sequence" tasks like MT there are two main parts of the model an encoder and a decoder. The encoder and the decoder are usually some type of RNN, mostly LSTM. The encoder is responsible for creating a so called context-vector from the input sequence. This context-vector has a fixed length and it serves as the representation of the sequence inside the model. The decoder then decodes this context-vector to a sequence again, in the case of the machine translation this sequence is in a different language. A depiction can be seen at Figure~\ref{fig:seq_to_seq}.
 \begin{figure*}[!htb]
