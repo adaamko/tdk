@@ -31,7 +31,7 @@ We also have some experiments with defining new additional rules added to the \t
 \subsection{Interpreted Regular Tree Grammar}
 We recently started experimenting with Interpreted Regular Tree Grammars \cite{Koller:2011} (IRTG for short) that we could also use to construct \textbf{4lang} graphs and by modifying the grammatic rules we can also accomplish the \textit{expand} and \textit{abstract} functionalities. These experiments are not yet perfect, but this approach shows great potential. See the phrase "Ordinary email" represented on the Figure~\ref{fig:irtg}.
 
-The base of this approach is to define grammar files where we describe the rules for multiple graph, tree or string grammars. This allows us to 
+The base of this approach is to define grammar files where we describe the rules using multiple graph, tree or string algebras. This allows us to use it as a graph rewriting grammar file which we can use to transcribe for example a universal dependency graph to a \texttt{4lang} graph.
 
 We used an already functioning grammar that defined the relationships between universal dependencies and \texttt{4lang} graphs and modified it to incorporate the definition of the words also.
 
