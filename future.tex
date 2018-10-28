@@ -21,12 +21,12 @@ baseline.
 
 \begin{figure*}[h]
 	\centering
-	\includegraphics[scale=0.75]{figures/mypoorabs}
+	\includegraphics[scale=0.4]{figures/mypoorabs}
 	\caption{Example of the \textit{"abstract"} method}
 	\label{fig:mypoorabs}
 \end{figure*}
 
-We also have some experiments with defining new additional rules added to the \textbf{4lang} parser, that could potentially be giving us a more abstract and simpler definitions than the \textit{expansion} method. Let us look back the sentence "My poor wife" and the expanded graph shown in Figure \ref{fig:mypoorexpanded}. In this example if we look at the edge \textbf{wife $\xrightarrow0$ woman} we can make an assumption that within the boundaries of the sentence we can use the concept \textbf{woman} instead of the concept \textbf{wife}. Using this simple rule we can reduce our graph to a simpler definition shown in Figure \ref{fig:mypoorabs}.
+We also have some experiments with defining new additional rules added to the \textbf{4lang} parser, that could potentially be giving us a more abstract and simpler definitions than the \textit{expansion} method. Let us look back the sentence "My poor wife" and the expanded graph shown in Figure \ref{fig:mypoorexpanded}. In this example if we look at the edge \textbf{wife $\xrightarrow0$ woman} we can make an assumptions, that native speakers can easily make using simple inference rules \cite{Kovacs:2018}. In our example, within the boundaries of the sentence we can use the concept \textbf{woman} instead of the concept \textbf{wife}. Using this simple rule we can reduce our graph to a simpler definition shown in Figure \ref{fig:mypoorabs}.
 
 \subsection{Interpreted Regular Tree Grammar}
 We recently started experimenting with Interpreted Regular Tree Grammars \cite{Koller:2011} (IRTG for short) that we could also use to construct \textbf{4lang} graphs and by modifying the grammatic rules we can also accomplish the \textit{expand} and \textit{abstract} functionalities. These experiments are not yet perfect, but this approach shows great potential. See the phrase "Ordinary email" represented on the Figure~\ref{fig:irtg}.
@@ -37,7 +37,7 @@ We used an already functioning grammar that defined the relationships between un
 
 \begin{figure*}[h]
 	\centering
-	\includegraphics[scale=0.75]{irtg.jpg}
+	\includegraphics[scale=0.4]{irtg.jpg}
 	\caption{Example of the \textit{"expand"} method using IRTG}
 	\label{fig:irtg}
 \end{figure*}
