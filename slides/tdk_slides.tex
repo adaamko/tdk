@@ -61,16 +61,13 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 
 \begin{frame} 
 
-    \frametitle{KBP \citep{HengJi:2011}} 
+    \frametitle{Kontribúciónk} 
     \begin{itemize}
-        \pause \item Goal: discover facts about entities and augment a knowledge base with these facts
-        \pause \item General systems diverge from our solution
-        \begin{itemize}
-            \pause \item Unstructured data
-            \pause \item We use inference
-        \end{itemize}
-        \pause \item Knowledge base: WikiData
-        \pause \item Semantic graphs: 4lang
+        \pause \item Gráf alapú szemantikai modellek definiálása
+        \pause \item Automatizált metódus nyers szöveg szemantikai elemzésére
+        \pause \item Modelleink kiértékelése a gépi szövegértés feladaton
+        \pause \item Modellünk beépítése egy state-of-the-art rendszerbe
+        \pause \item Előzetes eredmények szerint a rendszeren javulást hozva
     \end{itemize}
 
 \end{frame} 
@@ -83,16 +80,16 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \setbeamerfont{frametitle}{size=\small}
 
 \begin{frame}
-    \frametitle{\fl: the formalism \citep{Kornai:2010,Kornai:2015a}}
-\pause Directed graphs of concepts, with 3 types of edges:
+    \frametitle{\fl: a formalizmus \citep{Kornai:2010,Kornai:2015a}}
+\pause Irányított fogalmi gráfok, 3 típusú él:
 \begin{itemize}
-    \pause \item 0-edges
+    \pause \item 0 típusú él
         \begin{itemize}
-            \pause \item attribution: \texttt{dog}~$\xrightarrow0$~\texttt{large}
-            \pause \item \texttt{IS\_A} relation (hypernymy): \texttt{dog}~$\xrightarrow0$~\texttt{mammal}
-            \pause \item unary predication: \texttt{dog}~$\xrightarrow0$~\texttt{bark}
+            \pause \item tulajdonság: \texttt{dog}~$\xrightarrow0$~\texttt{large}
+            \pause \item \texttt{IS\_A} reláció (hipernima): \texttt{dog}~$\xrightarrow0$~\texttt{mammal}
+            \pause \item állítmány: \texttt{dog}~$\xrightarrow0$~\texttt{bark}
         \end{itemize}
-    \pause \item 1- and 2-edges connect binary predicates to their arguments.
+    \pause \item 1- és 2-es él bináris állítmányt köt össze az argumentumokkal.
 \end{itemize}
 \pause \begin{figure}
 \centering
@@ -101,161 +98,106 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \end{frame}
 }
 %-----------------------
-
 \begin{frame}
-    \frametitle{The \difl module \citep{Recski:2016d}}
-    \pause \begin{figure}
-    \centering
-    \small
-        Job is \textit{the regular paid work that you do for an employer}
-        \pause \[\Downarrow\]
-        \includegraphics[scale=0.4]{pics/job.jpg}
-    \label{fig:job}
-    \end{figure}
-    
-    \end{frame}
+\frametitle{A 4lang szolgáltatás}
+		\begin{itemize}
+			\pause \item Éles service a \tefl modulra építve
+			\pause \item Magasan automatizált gráfgenerálás
+			\pause \item Online demo
+			\begin{itemize}
+				 \item \url{http://4lang.hlt.bme.hu}
+			\end{itemize}
+			\pause \item Github
+			\begin{itemize}
+				\item \url{https://github.com/adaamko/4lang}
+			\end{itemize}
+		\end{itemize}
+
+\end{frame}
+%-----------------------
 %-----------------------
 \begin{frame}
-    \frametitle{\fl: WikiData}
+\frametitle{A 4lang szolgáltatás}
+\begin{columns}
+	\begin{column}{0.4\textwidth}
+		I feel bad for my wife!
+		\pause \includegraphics[scale=0.4]{pics/feelbad.png}
+	\end{column}
+	\begin{column}{0.3\textwidth}
+		\pause My poor wife!
+		\pause \includegraphics[scale=0.4]{pics/wifepoor.png}
+	\end{column}
+\end{columns}
+
+\end{frame}
+%-----------------------
+\begin{frame}
+\frametitle{Definiált metrikáink}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+			\pause \item \textbf{Cél}
+			\begin{itemize}
+				\item egy állítás következik-e egy feltevésből?
+			\end{itemize}
+			\pause \item \textbf{Megvalósítás}
+			\begin{itemize}
+				\item Gráfok hasonlósága
+				\item Mikor hasonló két gráf?
+			\end{itemize}
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+			\pause \item My poor wife! (G1)
+			\pause \item I feel bad for my wife! (G2)
+			\pause \item \[\frac{|E(G_1)\cap E(G_2)|}{|E(G_2)|}\]			
+		\end{itemize}
+	\end{column}
+\end{columns}
+
+\end{frame}
+%-----------------------
+\begin{frame}
+\frametitle{Kiterjesztett gráfok, az "expand" funkció}
+\begin{columns}
+	\begin{column}{0.1\textwidth}
+		\pause \includegraphics[scale=0.4]{pics/wife.png}
+	\end{column}
+	\begin{column}{0.1\textwidth}
+	\pause \[\Rightarrow\]
+	\end{column}
+	\begin{column}{0.2\textwidth}
+		\pause \includegraphics[scale=0.4]{pics/wifepoor.png}
+	\end{column}
+	\begin{column}{0.1\textwidth}
+		\pause \[\Rightarrow\]
+	\end{column}
+	\begin{column}{0.3\textwidth}
+	\pause \includegraphics[scale=0.4]{pics/wifeexp.png}
+	\end{column}
+\end{columns}
+
+\end{frame}
+
+
+%-----------------------
+
+\begin{frame}
+\frametitle{Összefoglalás}
 \begin{itemize}
-    \pause \item Public domain knowledge base
-    \pause \item 30 million entities
-    \pause \item Structured (Json dump)
-    \pause \item For each entity pairs of \texttt{properties} and \texttt{values}
-    \pause \item Relation triplets
-        \begin{itemize}
-            \pause \item author(George Orwell, 1984)
-        \end{itemize}
-\end{itemize}
-
-\end{frame}
-%-----------------------
-\begin{frame}
-    \frametitle{\fl: Method}
-    \centering
-    \pause author(George Orwell, 1984)
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \pause \includegraphics[scale=0.6]{pics/author.jpg}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            \begin{itemize}
-                \pause \item R(X, Y)
-                \pause \item If \texttt{R}~$\xrightarrow0$~\texttt{Z} then \texttt{X}~$\xrightarrow0$~\texttt{Z}
-                \begin{itemize}
-                    \pause \item \texttt{Orwell}~$\xrightarrow0$~\texttt{write}
-                \end{itemize}
-                \pause \item If \texttt{R}~$\xrightarrow0$~\texttt{Z}~$\xrightarrow2$~\texttt{W} then \texttt{Y}~$\xrightarrow0$~\texttt{W}
-                    \begin{itemize}
-                        \pause \item \texttt{1984}~$\xrightarrow0$~\texttt{book}
-                    \end{itemize}
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-%-----------------------
-\begin{frame}
-    \frametitle{\fl: Method}
-    \begin{figure}
-        \centering
-        \small
-            author(George Orwell, 1984)
-            \[\Downarrow\]
-            \includegraphics[scale=0.6]{pics/orwell_inf.jpg}
-        \label{fig:method}
-        \end{figure}
-\end{frame}
-%-----------------------
-\begin{frame}
-    \frametitle{\fl: Errors}
-    \begin{itemize}
-        \pause \item employer (CIA, Mike Pompeo)
-            \begin{itemize}
-                \pause \item is a person, company, or organization that employs people
-                \pause \item \texttt{CIA}~$\xrightarrow0$~\texttt{Person}
-            \end{itemize}
-        \pause \item Meaningless
-            \begin{itemize}
-                \pause \item \texttt{flag}~$\xrightarrow0$~\texttt{piece}
-            \end{itemize}
-        \pause \item WikiData errors
-    \end{itemize}
-\end{frame}
-%-----------------------
-
-\begin{frame}
-    \frametitle{\fl: Evaluation}
-    \begin{figure}
-        \centering
-        \small
-            WikiData(86.3m triplets and 893 unique predicates)
-            \pause \[\Downarrow\]
-            Preprocessing
-            \pause \[\Downarrow\]
-            Keep graphs with exactly one outgoing 0- or 2-edge or no incoming edges
-            \pause \[\Downarrow\]
-            Apply our each pattern
-            \pause \[\Downarrow\]
-            Manual inspection
-         \label{fig:eval}
-        \end{figure}
-
-\end{frame}
-
-%-----------------------
-\begin{frame}
-    \frametitle{\fl: Manual inspection}
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \pause \includegraphics[scale=0.6]{pics/father.jpg}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            \begin{figure}
-                \centering
-                \small
-                If \texttt{X}~$\xrightarrow0$~\texttt{Father} implies \texttt{X}~$\xrightarrow0$~\texttt{Parent} 
-                \pause \[\Downarrow\] Each inferred fact is correct
-                \label{fig:manual}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
-%-----------------------
-
-\begin{frame}
-\frametitle{Results}
-\begin{table}
-    \centering
-    \begin{tabular}{lrrr}
-                    & 1-pattern & 2-pattern & total\\
-        predicates  & 84 & 25 & 109 \\
-        correct     & 55 & 17 & 72 \\
-        new facts   & 8.2 million & 0.83 million & 9 million \\
-        correct     & 7.6 million & 0.74 million & 8.3 million \\ 
-        accuracy    & 0.92 & 0.89 & 0.92
-    \end{tabular}
-    \caption{Evaluation results}
-    \label{table:results}
-\end{table}
-\end{frame}
-
-%-----------------------
-
-\begin{frame}
-\frametitle{Conclusion}
-\begin{itemize}
-    \pause \item We used simple pattern-based methods for a KBP task
-    \pause \item High-quality facts for augmenting a KB
-    \pause \item Powerful method for enriching any natural language data
-    \pause \item Full pipeline avaliable \url{https://github.com/adaamko/4lang}
-    \pause \item Available Rest API and online demo \url{http://4lang.hlt.bme.hu}
+    \pause \item Automatizált módszer és metrikák hasonlóság mérésére.
+    \pause \item Erős baseline a gépi szövegértés feladatra
+    \pause \item Baseline módszerunk alkalmazása state-of-the-art rendszerben, kis javulást hozva
+    \pause \item A kód elérhető \url{https://github.com/adaamko/4lang}
+    \pause \item Éles Rest API és online demo \url{http://4lang.hlt.bme.hu}
 \end{itemize}
 
 \end{frame}
 %-----------------------
 %-----------------------
 \begin{frame}
-    \frametitle{Thank you!}
+    \frametitle{Köszönjük!}
     \AtNextBibliography{\tiny}
     \printbibliography
 \end{frame}
