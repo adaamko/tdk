@@ -182,6 +182,66 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 
 
 %-----------------------
+\begin{frame}
+	\frametitle{A gépi szövegértés feladat \citep{Chen:2018, Wang:2018}}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\pause \item \textbf{2018-as Semeval Task}
+				\begin{itemize}
+					\item \textit{Machine comprehension using commonsense knowledge}
+				\end{itemize}
+				\pause \item Rövid szövegekből egyszerű feleletválasztós kérdések
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\pause \item Két legjobb rendszer
+			\begin{itemize}
+				\item \texttt{HFL-RC}
+				\item \texttt{Yuanfudao}
+			\end{itemize}
+			\pause \item \textbf{MCScript}
+			\begin{itemize}
+				\item tanító és teszt adat
+			\end{itemize}
+		\end{itemize}
+		\end{column}
+	\end{columns}
+	
+	\end{frame}
+%-----------------------
+\begin{frame}
+    \frametitle{Baseline}
+    \begin{figure}
+        \centering
+        \small
+            \begin{itemize}
+				\item Minden kérdés válasz párhoz mergelt gráf
+				\item A "jobban" hasonló lesz a helyes válasz
+				\item \textbf{68,3} accuracy score
+			\end{itemize}
+            \begin{columns}
+				\begin{column}{0.2\textwidth}
+					\pause \includegraphics[scale=0.5]{pics/didit.png}
+				\end{column}
+				\begin{column}{0.2\textwidth}
+				\pause \[\Rightarrow\]
+				\end{column}
+				\begin{column}{0.2\textwidth}
+					\pause \includegraphics[scale=0.5]{pics/jon.png}
+				\end{column}
+				\begin{column}{0.2\textwidth}
+					\pause \[\Rightarrow\]
+				\end{column}
+				\begin{column}{0.3\textwidth}
+				\pause \includegraphics[scale=0.5]{pics/jondid.png}
+				\end{column}
+			\end{columns}
+        \label{fig:method}
+        \end{figure}
+\end{frame}
+%-----------------------
 
 \begin{frame}
 \frametitle{Összefoglalás}
