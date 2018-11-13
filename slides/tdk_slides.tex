@@ -42,9 +42,7 @@
 
 \title{Szemantikai elemz\'es gr\'af-transzform\'aci\'okkal}
 \author{Kov\'acs \'Ad\'am \\ G\'emes Kinga}
-\institute{Automatizálási és Alkalmazott Informatikai Tanszék \\
-Budapesti Műszaki és Gazdaságtudományi Egyetem \\
-\texttt{adaam.ko@gmail.com}, \texttt{kinga.andrea.gemes@gmail.com}}
+\institute{\texttt{adaam.ko@gmail.com}, \texttt{kinga.andrea.gemes@gmail.com}}
 
 \date{Tudományos Diákköri Konferencia\\2018.11.14.}
 
@@ -64,7 +62,6 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
     \frametitle{Kontribúciónk} 
     \begin{itemize}
         \pause \item Gráf alapú szemantikai modellek definiálása
-        \pause \item Automatizált metódus nyers szöveg szemantikai elemzésére
         \pause \item Modelleink kiértékelése a gépi szövegértés feladaton
         \pause \item Modellünk beépítése egy state-of-the-art rendszerbe
         \pause \item Előzetes eredmények szerint a rendszeren javulást hozva
@@ -73,7 +70,44 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \end{frame} 
 
 %-----------------------
+\begin{frame}
+	\frametitle{A gépi szövegértés feladat \citep{Chen:2018, Wang:2018}}
+	\textbf{Sz\"oveg:} "Today we decided to paint the extra room in our house. Were going to have visitor coming next month so hopefully the painting ain't that smelly anymore. I made sure that the wall is clean and clear of all the nuisance. We already bought the pain and we decided the new wall pain is sky blue. My husband is putting newspaper on the floor to avoid any spill on our floor/carpet....." \\
+	\textbf{K\'erdes:} "Did anyone help him?" \\
+	\textbf{1. v\'alaszlehet\H{o}s\'eg:} "It was the narrator and their husband" \\
+	\textbf{2. v\'alaszlehet\H{o}s\'eg:} "No, they worked alone."
+\end{frame}
 
+%---------------------
+
+\begin{frame}
+	\frametitle{A gépi szövegértés feladat \citep{Chen:2018, Wang:2018}}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\pause \item \textbf{2018-as Semeval Task}
+				\begin{itemize}
+					\item \textit{Machine comprehension using commonsense knowledge}
+				\end{itemize}
+				\pause \item Rövid szövegekből egyszerű feleletválasztós kérdések
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\pause \item Két legjobb rendszer
+				\begin{itemize}
+					\item \texttt{HFL-RC}
+					\item \texttt{Yuanfudao}
+				\end{itemize}
+				\pause \item \textbf{MCScript}
+				\begin{itemize}
+					\item tanító és teszt adat
+				\end{itemize}
+			\end{itemize}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
 
 %-----------------------
 {
@@ -179,36 +213,7 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \end{columns}
 \end{frame}
 
-%-----------------------
-\begin{frame}
-	\frametitle{A gépi szövegértés feladat \citep{Chen:2018, Wang:2018}}
-	\begin{columns}
-		\begin{column}{0.6\textwidth}
-			\begin{itemize}
-				\pause \item \textbf{2018-as Semeval Task}
-				\begin{itemize}
-					\item \textit{Machine comprehension using commonsense knowledge}
-				\end{itemize}
-				\pause \item Rövid szövegekből egyszerű feleletválasztós kérdések
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-			\pause \item Két legjobb rendszer
-			\begin{itemize}
-				\item \texttt{HFL-RC}
-				\item \texttt{Yuanfudao}
-			\end{itemize}
-			\pause \item \textbf{MCScript}
-			\begin{itemize}
-				\item tanító és teszt adat
-			\end{itemize}
-		\end{itemize}
-		\end{column}
-	\end{columns}
-	
-	\end{frame}
-%-----------------------
+%--------------------------------------------
 
 \begin{frame}
     \frametitle{Baseline}
@@ -248,7 +253,7 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 	\begin{itemize}
 		\pause \item Elterjedt m\'odszer
 		\pause \item Term\'eszetes nyelvfeldolgoz\'asban \'elenj\'ar\'o
-		\pause \item RNN a sorozatok eset\'en a leghat\'ekonyabb
+		\pause \item RNN a szekvenci\'akat eset\'en a leghat\'ekonyabb
 		\begin{itemize}
 			\pause \item LSTM
 			\pause \item Attention
