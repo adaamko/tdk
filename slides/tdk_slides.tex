@@ -55,8 +55,8 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \titlepage 
 
 \end{frame} 
+%----------------------
 
-%-----------------------
 %-----------------------
 
 \begin{frame} 
@@ -177,9 +177,67 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 	\pause \includegraphics[scale=0.4]{pics/wifeexp.png}
 	\end{column}
 \end{columns}
-
 \end{frame}
 
+%-----------------------
+
+\begin{frame}
+	\frametitle{M\'ely tanul\'as}
+	\begin{itemize}
+		\pause \item Elterjedt m\'odszer
+		\pause \item Term\'eszetes nyelvfeldolgoz\'asban \'elenj\'ar\'o
+		\pause \item RNN a sorozatok eset\'en a leghat\'ekonyabb
+		\begin{itemize}
+			\pause \item LSTM
+			\pause \item Attention
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%-----------------------
+
+\begin{frame}
+	\frametitle{Yuanfudao rendszer}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.4]{pics/TriAN.jpg}
+		\caption{A rendszer strukt\'ur\'aja}
+		\label{fig:dnn}
+	\end{figure}
+\end{frame}
+%-----------------------
+\begin{frame}
+	\frametitle{M\'odos\'it\'asok}
+	\begin{itemize}
+		\pause \item 4lang hasonl\'os\'ag sz\'am\'it\'as a szavak k\"oz\"ot az el\H{o}feldolgoz\'as sor\'an
+		\pause \item \'Uj embedding r\'eteg a 4lang hasonl\'os\'agokhoz
+		\pause \item Az RNN r\'eteg b\H{o}v\'it\'ese, hogy a megfelel\H{o} RNN-ek megkapj\'ak a 4lang embedding kimenet\'et
+	\end{itemize}
+\end{frame}
+
+
+%-----------------------
+
+\begin{frame}
+	\frametitle{Eredm\'enyek}
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{ | l | c | r | }
+			\hline
+			modell & dev adat & teszt adat \\ \hline \hline
+			\pause el\H{o}tan\'itott TriAN, ConceptNet n\'elk\"ul & 83.7\% & 81.9\% \pause \\ \hline
+			el\H{o}tan\'itott TriAN, ConceptNettel & 82.5\% & 80.3\% \pause \\ \hline
+			el\H{o}tan\'itott TriAN, 4langgal & 84.2\% & 81.5\% \pause \\ \hline
+			\textbf{el\H{o}tan\'itott TriAN, mindkett\H{o}vel} & \textbf{83.4\%} & \textbf{82.9\%} \pause \\ \hline
+			TriAN, ConceptNet n\'elk\"ul & 82.8\% & 80.2\% \pause \\ \hline
+			TriAN, ConceptNettel & 82.7\% & 80.5\% \pause \\ \hline
+			TriAN, 4langgal & 83.2\% & 80.9\% \pause \\ \hline
+			TriAN, mindkett\H{o}vel & 83.1\% & 80.8\% \\ \hline
+		\end{tabular}
+		\caption{A \texttt{4lang} \'es a \texttt{ConceptNet} hat\'asa az eredm\'enyeken}
+		\label{tabl:res}
+	\end{table}
+\end{frame}
 
 %-----------------------
 \begin{frame}
@@ -243,26 +301,26 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \end{frame}
 %-----------------------
 
+%-----------------------
 \begin{frame}
 \frametitle{Összefoglalás}
-\begin{itemize}
-    \pause \item Automatizált módszer és metrikák hasonlóság mérésére.
-    \pause \item Erős baseline a gépi szövegértés feladatra
-    \pause \item Baseline módszerunk alkalmazása state-of-the-art rendszerben, kis javulást hozva
-    \pause \item A kód elérhető \url{https://github.com/adaamko/4lang}
-    \pause \item Éles Rest API és online demo \url{http://4lang.hlt.bme.hu}
-\end{itemize}
+	\begin{itemize}
+	    \pause \item Automatizált módszer és metrikák hasonlóság mérésére.
+	    \pause \item Erős baseline a gépi szövegértés feladatra
+	    \pause \item Baseline módszerunk alkalmazása state-of-the-art rendszerben, kis javulást hozva
+	    \pause \item A kód elérhető \url{https://github.com/adaamko/4lang}
+	    \pause \item Éles Rest API és online demo \url{http://4lang.hlt.bme.hu}
+	\end{itemize}
 
 \end{frame}
 %-----------------------
 %-----------------------
 \begin{frame}
-    \frametitle{Köszönjük!}
+    \frametitle{K\"osz\"onj\"uk a figyelmet!}
     \AtNextBibliography{\tiny}
     \printbibliography
 \end{frame}
 %-----------------------
-
 
 
 \end{document}
