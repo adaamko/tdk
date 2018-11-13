@@ -55,212 +55,70 @@ Budapesti Műszaki és Gazdaságtudományi Egyetem \\
 \titlepage 
 
 \end{frame} 
-
-%-----------------------
-%-----------------------
-
-\begin{frame} 
-
-    \frametitle{KBP \citep{HengJi:2011}} 
-    \begin{itemize}
-        \pause \item Goal: discover facts about entities and augment a knowledge base with these facts
-        \pause \item General systems diverge from our solution
-        \begin{itemize}
-            \pause \item Unstructured data
-            \pause \item We use inference
-        \end{itemize}
-        \pause \item Knowledge base: WikiData
-        \pause \item Semantic graphs: 4lang
-    \end{itemize}
-
-\end{frame} 
-
-%-----------------------
-
-
-%-----------------------
-{
-\setbeamerfont{frametitle}{size=\small}
-
+%----------------------
 \begin{frame}
-    \frametitle{\fl: the formalism \citep{Kornai:2010,Kornai:2015a}}
-\pause Directed graphs of concepts, with 3 types of edges:
-\begin{itemize}
-    \pause \item 0-edges
-        \begin{itemize}
-            \pause \item attribution: \texttt{dog}~$\xrightarrow0$~\texttt{large}
-            \pause \item \texttt{IS\_A} relation (hypernymy): \texttt{dog}~$\xrightarrow0$~\texttt{mammal}
-            \pause \item unary predication: \texttt{dog}~$\xrightarrow0$~\texttt{bark}
-        \end{itemize}
-    \pause \item 1- and 2-edges connect binary predicates to their arguments.
-\end{itemize}
-\pause \begin{figure}
-\centering
-    \includegraphics[scale=0.4]{pics/bird.jpg}
-\end{figure}
-\end{frame}
-}
-%-----------------------
-
-\begin{frame}
-    \frametitle{The \difl module \citep{Recski:2016d}}
-    \pause \begin{figure}
-    \centering
-    \small
-        Job is \textit{the regular paid work that you do for an employer}
-        \pause \[\Downarrow\]
-        \includegraphics[scale=0.4]{pics/job.jpg}
-    \label{fig:job}
-    \end{figure}
-    
-    \end{frame}
-%-----------------------
-\begin{frame}
-    \frametitle{\fl: WikiData}
-\begin{itemize}
-    \pause \item Public domain knowledge base
-    \pause \item 30 million entities
-    \pause \item Structured (Json dump)
-    \pause \item For each entity pairs of \texttt{properties} and \texttt{values}
-    \pause \item Relation triplets
-        \begin{itemize}
-            \pause \item author(George Orwell, 1984)
-        \end{itemize}
-\end{itemize}
-
+	\frametitle{M\'ely tanul\'as}
+	\begin{itemize}
+		\item Elterjedt modell
+		\item Term\'eszetes nyelvfeldolgoz\'asban \'elenj\'ar\'o
+		\item RNN a sorozatok eset\'en a leghat\'ekonyabb
+		\begin{itemize}
+			\item LSTM
+			\item GRU
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 %-----------------------
 \begin{frame}
-    \frametitle{\fl: Method}
-    \centering
-    \pause author(George Orwell, 1984)
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \pause \includegraphics[scale=0.6]{pics/author.jpg}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            \begin{itemize}
-                \pause \item R(X, Y)
-                \pause \item If \texttt{R}~$\xrightarrow0$~\texttt{Z} then \texttt{X}~$\xrightarrow0$~\texttt{Z}
-                \begin{itemize}
-                    \pause \item \texttt{Orwell}~$\xrightarrow0$~\texttt{write}
-                \end{itemize}
-                \pause \item If \texttt{R}~$\xrightarrow0$~\texttt{Z}~$\xrightarrow2$~\texttt{W} then \texttt{Y}~$\xrightarrow0$~\texttt{W}
-                    \begin{itemize}
-                        \pause \item \texttt{1984}~$\xrightarrow0$~\texttt{book}
-                    \end{itemize}
-            \end{itemize}
-        \end{column}
-    \end{columns}
+	\frametitle{Yuanfudao rendszer}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.4]{pics/TriAN.jpg}
+		\caption{A rendszer strukt\'ur\'aja}
+		\label{fig:dnn}
+	\end{figure}
 \end{frame}
 %-----------------------
 \begin{frame}
-    \frametitle{\fl: Method}
-    \begin{figure}
-        \centering
-        \small
-            author(George Orwell, 1984)
-            \[\Downarrow\]
-            \includegraphics[scale=0.6]{pics/orwell_inf.jpg}
-        \label{fig:method}
-        \end{figure}
+	\frametitle{M\'odos\'it\'asok}
+	\begin{itemize}
+		\item 4lang hasonl\'os\'ag sz\'am\'it\'as a szavak k\"oz\"ot az el\H{o}feldolgoz\'as sor\'an
+		\item \'Uj embedding r\'eteg a 4lang hasonl\'os\'agokhoz
+		\item Az RNN r\'eteg b\H{o}v\'it\'ese, hogy a megfelel\H{o} RNN-ek megkapj\'ak a 4lang embedding kimenet\'et
+	\end{itemize}
 \end{frame}
-%-----------------------
-\begin{frame}
-    \frametitle{\fl: Errors}
-    \begin{itemize}
-        \pause \item employer (CIA, Mike Pompeo)
-            \begin{itemize}
-                \pause \item is a person, company, or organization that employs people
-                \pause \item \texttt{CIA}~$\xrightarrow0$~\texttt{Person}
-            \end{itemize}
-        \pause \item Meaningless
-            \begin{itemize}
-                \pause \item \texttt{flag}~$\xrightarrow0$~\texttt{piece}
-            \end{itemize}
-        \pause \item WikiData errors
-    \end{itemize}
-\end{frame}
+
+
 %-----------------------
 
 \begin{frame}
-    \frametitle{\fl: Evaluation}
-    \begin{figure}
-        \centering
-        \small
-            WikiData(86.3m triplets and 893 unique predicates)
-            \pause \[\Downarrow\]
-            Preprocessing
-            \pause \[\Downarrow\]
-            Keep graphs with exactly one outgoing 0- or 2-edge or no incoming edges
-            \pause \[\Downarrow\]
-            Apply our each pattern
-            \pause \[\Downarrow\]
-            Manual inspection
-         \label{fig:eval}
-        \end{figure}
-
+	\frametitle{Eredm\'enyek}
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{ | l | c | r | }
+			\hline
+			modell & dev adat & teszt adat \\ \hline \hline
+			el\H{o}tan\'itott TriAN, ConceptNet n\'elk\"ul & 83.7\% & 81.9\% \\ \hline
+			el\H{o}tan\'itott TriAN, ConceptNettel & 82.5\% & 80.3\% \\ \hline
+			el\H{o}tan\'itott TriAN, 4langgal & 84.2\% & 81.5\% \\ \hline
+			\textbf{el\H{o}tan\'itott TriAN, mindkett\H{o}vel} & \textbf{83.4\%} & \textbf{82.9\%} \\ \hline
+			TriAN, ConceptNet n\'elk\"ul & 82.8\% & 80.2\% \\ \hline
+			TriAN, ConceptNettel & 82.7\% & 80.5\% \\ \hline
+			TriAN, 4langgal & 83.2\% & 80.9\% \\ \hline
+			TriAN, mindkett\H{o}vel & 83.1\% & 80.8\% \\ \hline
+		\end{tabular}
+		\caption{A \texttt{4lang} \'es a \texttt{ConceptNet} hat\'asa az eredm\'enyeken}
+		\label{tabl:res}
+	\end{table}
 \end{frame}
 
 %-----------------------
 \begin{frame}
-    \frametitle{\fl: Manual inspection}
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \pause \includegraphics[scale=0.6]{pics/father.jpg}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            \begin{figure}
-                \centering
-                \small
-                If \texttt{X}~$\xrightarrow0$~\texttt{Father} implies \texttt{X}~$\xrightarrow0$~\texttt{Parent} 
-                \pause \[\Downarrow\] Each inferred fact is correct
-                \label{fig:manual}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
-%-----------------------
-
-\begin{frame}
-\frametitle{Results}
-\begin{table}
-    \centering
-    \begin{tabular}{lrrr}
-                    & 1-pattern & 2-pattern & total\\
-        predicates  & 84 & 25 & 109 \\
-        correct     & 55 & 17 & 72 \\
-        new facts   & 8.2 million & 0.83 million & 9 million \\
-        correct     & 7.6 million & 0.74 million & 8.3 million \\ 
-        accuracy    & 0.92 & 0.89 & 0.92
-    \end{tabular}
-    \caption{Evaluation results}
-    \label{table:results}
-\end{table}
-\end{frame}
-
-%-----------------------
-
-\begin{frame}
-\frametitle{Conclusion}
-\begin{itemize}
-    \pause \item We used simple pattern-based methods for a KBP task
-    \pause \item High-quality facts for augmenting a KB
-    \pause \item Powerful method for enriching any natural language data
-    \pause \item Full pipeline avaliable \url{https://github.com/adaamko/4lang}
-    \pause \item Available Rest API and online demo \url{http://4lang.hlt.bme.hu}
-\end{itemize}
-
-\end{frame}
-%-----------------------
-%-----------------------
-\begin{frame}
-    \frametitle{Thank you!}
+    \frametitle{K\"osz\"onj\"uk a figyelmet!}
     \AtNextBibliography{\tiny}
     \printbibliography
 \end{frame}
 %-----------------------
-
 
 
 \end{document}
