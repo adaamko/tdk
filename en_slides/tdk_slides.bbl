@@ -1,0 +1,228 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nyt/global//global/global}
+  \entry{Chen:2018}{article}{}
+    \name{author}{6}{}{%
+      {{hash=CZ}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Zhipeng},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=CY}{%
+         family={Cui},
+         familyi={C\bibinitperiod},
+         given={Yiming},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MW}{%
+         family={Ma},
+         familyi={M\bibinitperiod},
+         given={Wentao},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=WS}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Shijin},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LT}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Ting},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=HG}{%
+         family={Hu},
+         familyi={H\bibinitperiod},
+         given={Guoping},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CZ+1}
+    \strng{fullhash}{CZCYMWWSLTHG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{labeldatesource}{year}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{HFL-RC System at SemEval-2018 Task 11: Hybrid Multi-Aspects
+  Model for Commonsense Reading Comprehension}
+    \field{journaltitle}{arXiv preprint arXiv:1803.05655}
+    \field{year}{2018}
+  \endentry
+
+  \entry{Kornai:2010}{incollection}{}
+    \name{author}{1}{}{%
+      {{hash=KA}{%
+         family={Kornai},
+         familyi={K\bibinitperiod},
+         given={Andr\'as},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \name{editor}{3}{}{%
+      {{hash=EC}{%
+         family={Ebert},
+         familyi={E\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=JG}{%
+         family={J\"ager},
+         familyi={J\bibinitperiod},
+         given={Gerhard},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=MJ}{%
+         family={Michaelis},
+         familyi={M\bibinitperiod},
+         given={Jens},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KA1}
+    \strng{fullhash}{KA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2010}
+    \field{labeldatesource}{year}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{booktitle}{{Proceedings of the 11th Mathematics of Language
+  Workshop}}
+    \field{pages}{174\bibrangedash 199}
+    \field{series}{LNAI 6149}
+    \field{title}{The algebra of lexical semantics}
+    \field{year}{2010}
+  \endentry
+
+  \entry{Kornai:2015a}{inproceedings}{}
+    \name{author}{6}{}{%
+      {{hash=KA}{%
+         family={Kornai},
+         familyi={K\bibinitperiod},
+         given={Andr\'as},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AJ}{%
+         family={\'{A}cs},
+         familyi={A\bibinitperiod},
+         given={Judit},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Makrai},
+         familyi={M\bibinitperiod},
+         given={M\'{a}rton},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=NDM}{%
+         family={Nemeskey},
+         familyi={N\bibinitperiod},
+         given={D\'{a}vid\bibnamedelima M\'{a}rk},
+         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=PK}{%
+         family={Pajkossy},
+         familyi={P\bibinitperiod},
+         given={Katalin},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=RG}{%
+         family={Recski},
+         familyi={R\bibinitperiod},
+         given={G\'{a}bor},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computational Linguistics}%
+    }
+    \strng{namehash}{KA+1}
+    \strng{fullhash}{KAAJMMNDMPKRG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{labeldatesource}{year}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{booktitle}{{Proceedings of the Fourth Joint Conference on Lexical
+  and Computational Semantics (*SEM 2015)}}
+    \field{pages}{165\bibrangedash 175}
+    \field{title}{Competence in lexical semantics}
+    \list{location}{1}{%
+      {Denver, Colorado}%
+    }
+    \field{year}{2015}
+  \endentry
+
+  \entry{Wang:2018}{article}{}
+    \name{author}{5}{}{%
+      {{hash=WL}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Liang},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Meng},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=ZW}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=SK}{%
+         family={Shen},
+         familyi={S\bibinitperiod},
+         given={Kewei},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Jingming},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WL+1}
+    \strng{fullhash}{WLSMZWSKLJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{labeldatesource}{year}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{Yuanfudao at SemEval-2018 Task 11: Three-way Attention and
+  Relational Knowledge for Commonsense Machine Comprehension}
+    \field{journaltitle}{arXiv preprint arXiv:1803.00191}
+    \field{year}{2018}
+  \endentry
+\enddatalist
+\endinput
