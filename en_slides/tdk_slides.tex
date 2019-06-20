@@ -40,9 +40,9 @@
 %\let\citeA\shortciteA
 \begin{document}
 
-\title{Semantic parsing with graph transformations}
+\title{Machine Comprehension using semantic graphs}
 \author{\'Ad\'am Kov\'acs \\ Kinga G\'emes \\ G\'abor Recski}
-\institute{\texttt{adaam.ko@gmail.com}, \texttt{kinga.andrea.gemes@gmail.com}, \texttt{recski@apollo.ai}}
+\institute{\texttt{kovacs.adam@aut.bme.hu}, \texttt{kinga.andrea.gemes@gmail.com}, \texttt{recski@aut.bme.hu}}
 
 \date{AACS19\\21.06.2019.}
 
@@ -89,7 +89,7 @@
 				\begin{itemize}
 					\item \textit{Machine comprehension using commonsense knowledge}
 				\end{itemize}
-				\pause \item Simple multi choice questions based on short stories
+				\pause \item Simple multi-choice questions based on short stories
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
@@ -115,7 +115,7 @@
 
 \begin{frame}
     \frametitle{\fl: the formalism \citep{Kornai:2010,Kornai:2015a}}
-\pause Directed meaning graphs with 3 edge type
+\pause Directed concept graphs with 3 types of edges 
 \begin{itemize}
     \pause \item type 0 edge
         \begin{itemize}
@@ -123,7 +123,7 @@
             \pause \item \texttt{IS\_A} relation (hypernym): \texttt{dog}~$\xrightarrow0$~\texttt{mammal}
             \pause \item predicate: \texttt{dog}~$\xrightarrow0$~\texttt{bark}
         \end{itemize}
-    \pause \item type 1 and type 2 edges connect a binary predicate with the arguments.
+    \pause \item type 1 and type 2 edges connect binary predicates with their arguments.
 \end{itemize}
 \pause \begin{figure}
 \centering
@@ -135,7 +135,7 @@
 \begin{frame}
 \frametitle{The \fl service}
 		\begin{itemize}
-			\pause \item Live service built on the \tefl module
+			\pause \item Service built on the \tefl module
 			\pause \item Highly automated graph generation
 			\pause \item Online demo
 			\begin{itemize}
